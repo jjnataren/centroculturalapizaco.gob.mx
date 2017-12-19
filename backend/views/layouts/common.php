@@ -12,8 +12,67 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\log\Logger;
 use yii\widgets\Breadcrumbs;
+use backend\models\Taller;
 
 $bundle = BackendAsset::register($this);
+
+
+$talleres   = Taller::findAll(['disponible'=>1]);
+
+/*['label' => Yii::t('backend', 'Piano'),
+'url' => ['/taller'],
+'icon' => '<i class="fa fa-angle-double-right"></i>',
+'active' => (\Yii::$app->controller->id == 'widget-carousel'),
+'items' => [
+		['label' => 'Cuotas', 'url' => ['/i18n/i18n-source-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+		['label' => 'Instancias', 'url' => ['/i18n/i18n-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')],
+		['label' => 'Editar', 'url' => ['/i18n/i18n-source-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+]
+],*/
+
+
+/*
+ *
+ * ['label'=>Yii::t('backend', 'Crear'), 'url'=>['/taller/create'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                				['label'=>Yii::t('backend', 'Ver totos'), 'url'=>['/taller'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                		
+ * 
+*/
+
+$menuTalleres = [];
+
+$i= 0;
+	$menuTalleres[$i]['label'] = 'Crear';
+	$menuTalleres[$i]['url'] = ['/taller/create'];
+	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	$menuTalleres[$i++]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	
+	
+	$menuTalleres[$i]['label'] = 'Ver todos';
+	$menuTalleres[$i]['url'] = ['/taller/index'];
+	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	$menuTalleres[$i++]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+
+
+foreach ($talleres as $taller){
+	
+	$menuTalleres[$i]['label'] = $taller->nombre;
+	$menuTalleres[$i]['url'] = '/taller/update?id='.$taller->id;
+	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	$menuTalleres[$i]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	$menuTalleres[$i++]['items'] = [
+									['label' => 'Editar', 'url' => ['/taller/update','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+									['label' => 'Cuotas', 'url' => ['/taller/cuota','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+									['label' => 'Instancias', 'url' => ['/taller/index-imp','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')],
+								
+								];
+	
+	
+}
+
+
+
+
 ?>
 <?php $this->beginContent('@backend/views/layouts/base.php'); ?>
 <div class="wrapper">
@@ -145,6 +204,14 @@ $bundle = BackendAsset::register($this);
                         'badge' => TimelineEvent::find()->today()->count(),
                         'badgeBgClass' => 'label-success',
                     ],
+                		
+                		[
+                		'label'=>Yii::t('backend', 'Talleres'),
+                		'url' => '#',
+                		'icon'=>'<i class="fa fa-edit"></i>',
+                		'options'=>['class'=>'treeview'],
+                		'items'=>$menuTalleres,
+                		],
                     [
                         'label' => Yii::t('backend', 'Content'),
                         'url' => '#',
@@ -157,7 +224,15 @@ $bundle = BackendAsset::register($this);
                             ['label' => Yii::t('backend', 'Article Categories'), 'url' => ['/article-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article-category')],
                             ['label' => Yii::t('backend', 'Text Widgets'), 'url' => ['/widget-text/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'widget-text')],
                             ['label' => Yii::t('backend', 'Menu Widgets'), 'url' => ['/widget-menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'widget-menu')],
-                            ['label' => Yii::t('backend', 'Carousel Widgets'), 'url' => ['/widget-carousel/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'widget-carousel')],
+                            [	'label' => Yii::t('backend', 'Carousel Widgets'), 
+                            	'url' => ['/widget-carousel/index'], 
+                            	'icon' => '<i class="fa fa-angle-double-right"></i>', 
+                            	'active' => (\Yii::$app->controller->id == 'widget-carousel'),
+                            	'items' => [
+                                    ['label' => Yii::t('backend', 'i18n Source Message'), 'url' => ['/i18n/i18n-source-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+                                    ['label' => Yii::t('backend', 'i18n Message'), 'url' => ['/i18n/i18n-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')],
+                                ]
+                            ],
                         ]
                     ],
                     [
