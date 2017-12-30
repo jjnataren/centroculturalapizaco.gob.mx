@@ -13,6 +13,8 @@ use trntv\filekit\actions\UploadAction;
 use trntv\filekit\actions\DeleteAction;
 use Intervention\Image\ImageManagerStatic;
 use backend\models\CuotaTaller;
+use backend\models\TallerImp;
+use backend\models\CuotaTallerImp;
 
 /**
  * TallerController implements the CRUD actions for Taller model.
@@ -84,6 +86,133 @@ class TallerController extends Controller
         ]);
     }
     
+    
+    
+    /**
+     * Generates Taller implementation.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionImplement($id)
+    {
+        
+        $model = $this->findModel($id);
+        
+        
+        $sModel = new TallerImp();
+        
+        
+        
+        if ($sModel->load(Yii::$app->request->post())) {
+            
+            
+            if ($sModel->save()) { 
+
+                
+                foreach ($model->cuotaTallers as $cuota){
+                    
+                    $cuotaImp = new CuotaTallerImp();
+                    $cuotaImp->id_taller_imp = $sModel->id;
+                    $cuotaImp->id_cuota = $cuota->id_cuota;
+                    $cuotaImp->concepto_imp = isset($cuota->nombre)?$cuota->nombre:isset($cuota->idCuota->concepto_impresion)?$cuota->idCuota->concepto_impresion:'';
+                    $cuotaImp->obligatoria = $cuota->obligatoria;
+                    $cuotaImp->tipo_periodo = $cuota->tipo_periodo;
+                    $cuotaImp->monto = isset( $cuota->idCuota->monto)? $cuota->idCuota->monto: 0 ;
+                    $cuotaImp->comentario = $cuota->comentario;
+                    $cuotaImp->save(false);
+                    
+                }
+                
+                return $this->redirect(['taller-imp/view', 'id' => $sModel->id]); 
+            
+            }            
+                else   return $this->render('implementation', ['model' => $sModel,  ]);
+            
+        }else{
+        
+        
+        $sModel->id_curso_base = $id;
+        
+        $sModel->id_instructor = $model->id_instructor;
+        
+        $sModel->nombre = $model->nombre;
+        
+        
+        //Calcular
+        $sModel->fecha_inicio = date('Y-m-d');
+        
+        $sModel->fecha_fin = date('Y-m-d');
+        
+        $sModel->descripcion = $model->descripcion;
+        
+        $sModel->numero_max_personas = $model->numero_personas;
+        
+        
+        if($model->idAula){
+            $sModel->id_aula_lunes = $model->id_aula;
+            $sModel->id_aula_martes = $model->id_aula;
+            $sModel->id_aula_miercoles = $model->id_aula;
+            $sModel->id_aula_jueves = $model->id_aula;
+            $sModel->id_aula_viernes = $model->id_aula;
+            $sModel->id_aula_sabado = $model->id_aula;
+            $sModel->id_aula_domingo = $model->id_aula;
+            
+            
+        
+        }
+        
+        if($model->lunes){
+            
+            $sModel->lunes = $model->hora_inicio;
+            $sModel->lunes_fin = 12;
+        }
+        
+        if($model->martes){
+            
+            $sModel->martes = $model->hora_inicio;
+            $sModel->martes_fin = 12;
+        }
+        
+        
+        if($model->miercoles){
+            
+            $sModel->miercoles = $model->hora_inicio;
+            $sModel->miercoles_fin = 12;
+        }
+        
+        if($model->jueves){
+            
+            $sModel->jueves = $model->hora_inicio;
+            $sModel->jueves_fin = 12;
+        }
+        
+        
+        if($model->viernes){
+            
+            $sModel->viernes = $model->hora_inicio;
+            $sModel->viernes_fin = 12;
+        }
+        
+        if($model->sabado){
+            
+            $sModel->sabado = $model->hora_inicio;
+            $sModel->sabado_fin = 12;
+        }
+        
+        if($model->domingo){
+            
+            $sModel->domingo = $model->hora_inicio;
+            $sModel->domingo_fin = 12;
+        }
+        
+        
+        
+        }
+        
+        return $this->render('implementation', [
+            'model' => $sModel,
+        ]);
+    }
     
     
     /**

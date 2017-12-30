@@ -44,9 +44,20 @@ $cuotaList=ArrayHelper::map
                 },
                 'filter'=>ArrayHelper::map(Cuota::findAll([ 'disponible'=>1]), 'id','concepto'),
               ],
+              
+              
+              [
+                'header'=>'Monto',
+                'content'=>function($data){
+                    
+                return  Yii::$app->formatter->asCurrency($data->idCuota->monto);
+                },
+               
+              ],
+              
             'nombre',
            
-            [
+                [
                 'attribute'=>'obligatoria',
                 
                 'content'=>function($data){

@@ -17,6 +17,7 @@ use Yii;
  * @property integer $disponible
  *
  * @property CuotaTaller[] $cuotaTallers
+ * @property CuotaTallerImp[] $cuotaTallerImps
  */
 class Cuota extends \yii\db\ActiveRecord
 {
@@ -65,5 +66,13 @@ class Cuota extends \yii\db\ActiveRecord
     public function getCuotaTallers()
     {
         return $this->hasMany(CuotaTaller::className(), ['id_cuota' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuotaTallerImps()
+    {
+        return $this->hasMany(CuotaTallerImp::className(), ['id_cuota' => 'id']);
     }
 }

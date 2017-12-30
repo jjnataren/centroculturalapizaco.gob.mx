@@ -19,11 +19,21 @@ use Yii;
  * @property string $fecha_creacion
  * @property integer $creado_por
  * @property integer $duracion_mes
+ * @property integer $duracion_hora
+ * @property integer $lunes
+ * @property integer $martes
+ * @property integer $miercoles
+ * @property integer $jueves
+ * @property integer $viernes
+ * @property integer $sabado
+ * @property integer $domingo
+ * @property string $hora_inicio
  * @property integer $disponible
  *
  * @property CuotaTaller[] $cuotaTallers
  * @property Aula $idAula
  * @property Instructor $idInstructor
+ * @property TallerImp[] $tallerImps
  */
 class Taller extends \yii\db\ActiveRecord
 {
@@ -41,8 +51,8 @@ class Taller extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_instructor', 'id_aula', 'creado_por', 'duracion_mes', 'disponible'], 'integer'],
-            [['fecha_creacion'], 'safe'],
+            [['id_instructor', 'id_aula', 'creado_por', 'duracion_mes', 'duracion_hora', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo', 'disponible'], 'integer'],
+            [['fecha_creacion', 'hora_inicio'], 'safe'],
             [['nombre', 'descripcion', 'descripcion_temario', 'numero_personas'], 'string', 'max' => 45],
             [['imagen_url', 'temario_url'], 'string', 'max' => 300],
             [['id_aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['id_aula' => 'id']],
@@ -68,6 +78,15 @@ class Taller extends \yii\db\ActiveRecord
             'fecha_creacion' => 'Fecha Creacion',
             'creado_por' => 'Creado Por',
             'duracion_mes' => 'Duracion Mes',
+            'duracion_hora' => 'Duracion Hora',
+            'lunes' => 'Lunes',
+            'martes' => 'Martes',
+            'miercoles' => 'Miercoles',
+            'jueves' => 'Jueves',
+            'viernes' => 'Viernes',
+            'sabado' => 'Sabado',
+            'domingo' => 'Domingo',
+            'hora_inicio' => 'Hora Inicio',
             'disponible' => 'Disponible',
         ];
     }
@@ -94,5 +113,13 @@ class Taller extends \yii\db\ActiveRecord
     public function getIdInstructor()
     {
         return $this->hasOne(Instructor::className(), ['id' => 'id_instructor']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTallerImps()
+    {
+        return $this->hasMany(TallerImp::className(), ['id_curso_base' => 'id']);
     }
 }
