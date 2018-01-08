@@ -161,7 +161,7 @@ class TallerImpController extends Controller
      * Prints new  instription 
      * @param unknown $id
      */
-    public function actionImprimirComprobante($id){
+    public function actionImprimirComprobante($id){  
         
         //	Yii::$app->response->format = 'pdf';
         
