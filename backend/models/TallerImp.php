@@ -7,15 +7,15 @@ use Yii;
 /**
  * This is the model class for table "tbl_taller_imp".
  *
- * @property integer $id
- * @property integer $id_curso_base
- * @property integer $id_instructor
+ * @property int $id
+ * @property int $id_curso_base
+ * @property int $id_instructor
  * @property string $clave_unica_curso
  * @property string $nombre
  * @property string $fecha_inicio
  * @property string $fecha_fin
  * @property string $descripcion
- * @property integer $numero_max_personas
+ * @property int $numero_max_personas
  * @property string $comentarios
  * @property string $url_img_publicitaria
  * @property string $lunes
@@ -25,7 +25,7 @@ use Yii;
  * @property string $viernes
  * @property string $sabado
  * @property string $domingo
- * @property integer $duracion_hora
+ * @property int $duracion_hora
  * @property string $lunes_fin
  * @property string $martes_fin
  * @property string $miercoles_fin
@@ -33,27 +33,29 @@ use Yii;
  * @property string $viernes_fin
  * @property string $sabado_fin
  * @property string $domingo_fin
- * @property integer $estatus
- * @property integer $duracion_mes
- * @property integer $disponible
- * @property integer $id_aula_lunes
- * @property integer $id_aula_martes
- * @property integer $id_aula_miercoles
- * @property integer $id_aula_jueves
- * @property integer $id_aula_viernes
- * @property integer $id_aula_sabado
- * @property integer $id_aula_domingo
+ * @property int $estatus
+ * @property int $duracion_mes
+ * @property int $disponible
+ * @property int $id_aula_lunes
+ * @property int $id_aula_martes
+ * @property int $id_aula_miercoles
+ * @property int $id_aula_jueves
+ * @property int $id_aula_viernes
+ * @property int $id_aula_sabado
+ * @property int $id_aula_domingo
  *
  * @property CuotaTallerImp[] $cuotaTallerImps
- * @property Aula $idAulaDomingo
- * @property Aula $idAulaJueves
- * @property Aula $idAulaLunes
- * @property Aula $idAulaMartes
- * @property Aula $idAulaMiercoles
- * @property Aula $idAulaSabado
- * @property Aula $idAulaViernes
- * @property Instructor $idInstructor
- * @property Taller $idCursoBase
+ * @property Inscripcion[] $inscripcions
+ * @property PagoTallerCuota[] $pagoTallerCuotas
+ * @property Aula $aulaDomingo
+ * @property Aula $aulaJueves
+ * @property Aula $aulaLunes
+ * @property Aula $aulaMartes
+ * @property Aula $aulaMiercoles
+ * @property Aula $aulaSabado
+ * @property Aula $aulaViernes
+ * @property Instructor $instructor
+ * @property Taller $cursoBase
  */
 class TallerImp extends \yii\db\ActiveRecord
 {
@@ -143,7 +145,23 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaDomingo()
+    public function getInscripcions()
+    {
+        return $this->hasMany(Inscripcion::className(), ['id_taller_imp' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagoTallerCuotas()
+    {
+        return $this->hasMany(PagoTallerCuota::className(), ['id_taller_imp' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAulaDomingo()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_domingo']);
     }
@@ -151,7 +169,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaJueves()
+    public function getAulaJueves()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_jueves']);
     }
@@ -159,7 +177,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaLunes()
+    public function getAulaLunes()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_lunes']);
     }
@@ -167,7 +185,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaMartes()
+    public function getAulaMartes()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_martes']);
     }
@@ -175,7 +193,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaMiercoles()
+    public function getAulaMiercoles()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_miercoles']);
     }
@@ -183,7 +201,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaSabado()
+    public function getAulaSabado()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_sabado']);
     }
@@ -191,7 +209,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAulaViernes()
+    public function getAulaViernes()
     {
         return $this->hasOne(Aula::className(), ['id' => 'id_aula_viernes']);
     }
@@ -199,7 +217,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdInstructor()
+    public function getInstructor()
     {
         return $this->hasOne(Instructor::className(), ['id' => 'id_instructor']);
     }
@@ -207,7 +225,7 @@ class TallerImp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCursoBase()
+    public function getCursoBase()
     {
         return $this->hasOne(Taller::className(), ['id' => 'id_curso_base']);
     }

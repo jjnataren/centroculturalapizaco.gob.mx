@@ -38,6 +38,9 @@ use Yii;
  * @property string $afiliacion_seguro
  * @property string $curp
  * @property string $taller_inscribe
+ *
+ * @property Inscripcion[] $inscripcions
+ * @property PagoTallerCuota[] $pagoTallerCuotas
  */
 class Alumno extends \yii\db\ActiveRecord
 {
@@ -57,7 +60,6 @@ class Alumno extends \yii\db\ActiveRecord
         return [
             [['fecha_nacimiento', 'fecha_alta', 'fecha_ingreso'], 'safe'],
             [['sexo', 'edad_padre', 'tel_padre', 'edad_madre', 'tel_madre', 'tel_emergencia'], 'integer'],
-            [['nombre_padre', 'edad_padre', 'ocupacion_padre', 'tel_padre', 'nombre_madre', 'edad_madre', 'ocupacion_madre', 'tel_madre', 'fecha_ingreso', 'lugar_nacimiento', 'tel_emergencia', 'escuela_procedencia', 'alergia_enfermedad', 'tipo_sangineo', 'afiliacion_seguro', 'curp', 'taller_inscribe'], 'required'],
             [['numero_registro', 'nombre', 'tipo_sangineo'], 'string', 'max' => 100],
             [['direccion', 'correo_electronico'], 'string', 'max' => 300],
             [['nacionalidad', 'estado', 'codigo_postal', 'fecha_baja', 'telefono_movil', 'telefono_casa'], 'string', 'max' => 45],
@@ -76,34 +78,50 @@ class Alumno extends \yii\db\ActiveRecord
             'id' => 'ID',
             'numero_registro' => 'Numero Registro',
             'nombre' => 'Nombre',
-            'fecha_nacimiento' => 'Fecha de nacimiento',
+            'fecha_nacimiento' => 'Fecha Nacimiento',
             'fecha_alta' => 'Fecha Alta',
             'sexo' => 'Sexo',
-            'direccion' => 'Domicilio',
+            'direccion' => 'Direccion',
             'nacionalidad' => 'Nacionalidad',
             'estado' => 'Estado',
             'codigo_postal' => 'Codigo Postal',
             'fecha_baja' => 'Fecha Baja',
             'correo_electronico' => 'Correo Electronico',
             'telefono_movil' => 'Telefono Movil',
-            'telefono_casa' => 'Telefono de casa',
-            'nombre_padre' => 'Nombre del Padre',
-            'edad_padre' => 'Edad',
-            'ocupacion_padre' => 'Ocupacion',
-            'tel_padre' => 'Telefono',
-            'nombre_madre' => 'Nombre de la Madre',
-            'edad_madre' => 'Edad',
-            'ocupacion_madre' => 'Ocupacion',
-            'tel_madre' => 'Telefono',
-            'fecha_ingreso' => 'Fecha de ingreso',
-            'lugar_nacimiento' => 'Lugar de nacimiento',
-            'tel_emergencia' => 'En caso de Emergencia llamar a:',
-            'escuela_procedencia' => 'Nombre de la escuela donde estudia actualmente',
-            'alergia_enfermedad' => 'Alergia o enfermedad cronica',
+            'telefono_casa' => 'Telefono Casa',
+            'nombre_padre' => 'Nombre Padre',
+            'edad_padre' => 'Edad Padre',
+            'ocupacion_padre' => 'Ocupacion Padre',
+            'tel_padre' => 'Tel Padre',
+            'nombre_madre' => 'Nombre Madre',
+            'edad_madre' => 'Edad Madre',
+            'ocupacion_madre' => 'Ocupacion Madre',
+            'tel_madre' => 'Tel Madre',
+            'fecha_ingreso' => 'Fecha Ingreso',
+            'lugar_nacimiento' => 'Lugar Nacimiento',
+            'tel_emergencia' => 'Tel Emergencia',
+            'escuela_procedencia' => 'Escuela Procedencia',
+            'alergia_enfermedad' => 'Alergia Enfermedad',
             'tipo_sangineo' => 'Tipo Sangineo',
-            'afiliacion_seguro' => 'Esta afiliado a:',
+            'afiliacion_seguro' => 'Afiliacion Seguro',
             'curp' => 'Curp',
-            'taller_inscribe' => 'Taller al que se inscribe o reinscribe el alumno(A)',
+            'taller_inscribe' => 'Taller Inscribe',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInscripcions()
+    {
+        return $this->hasMany(Inscripcion::className(), ['id_alumno' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagoTallerCuotas()
+    {
+        return $this->hasMany(PagoTallerCuota::className(), ['id_alumno' => 'id']);
     }
 }

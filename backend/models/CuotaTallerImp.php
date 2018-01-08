@@ -16,9 +16,11 @@ use Yii;
  * @property integer $tipo_periodo
  * @property string $concepto_imp
  * @property double $monto
+ * @property integer $estatus
  *
  * @property Cuota $idCuota
  * @property TallerImp $idTallerImp
+ * @property PagoTallerCuota[] $pagoTallerCuotas
  */
 class CuotaTallerImp extends \yii\db\ActiveRecord
 {
@@ -36,7 +38,7 @@ class CuotaTallerImp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_taller_imp', 'id_cuota', 'obligatoria', 'tipo_periodo'], 'integer'],
+            [['id_taller_imp', 'id_cuota', 'obligatoria', 'tipo_periodo', 'estatus'], 'integer'],
             [['fecha_max_pago'], 'safe'],
             [['monto'], 'number'],
             [['comentario', 'concepto_imp'], 'string', 'max' => 200],
@@ -60,6 +62,7 @@ class CuotaTallerImp extends \yii\db\ActiveRecord
             'tipo_periodo' => 'Tipo Periodo',
             'concepto_imp' => 'Concepto Imp',
             'monto' => 'Monto',
+            'estatus' => 'Estatus',
         ];
     }
 
@@ -77,5 +80,13 @@ class CuotaTallerImp extends \yii\db\ActiveRecord
     public function getIdTallerImp()
     {
         return $this->hasOne(TallerImp::className(), ['id' => 'id_taller_imp']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagoTallerCuotas()
+    {
+        return $this->hasMany(PagoTallerCuota::className(), ['id_cuota_taller_imp' => 'id']);
     }
 }
