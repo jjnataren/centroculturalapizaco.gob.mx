@@ -165,9 +165,14 @@ class TallerImpController extends Controller
         
         //	Yii::$app->response->format = 'pdf';
         
-      //  $model = Inscripcion::findOne($id);
-        
-        $content = $this->renderPartial('reporte-inscripcion');
+       $model = Inscripcion::findOne($id);
+       
+       
+       if ($model  === null) {
+           throw new NotFoundHttpException('The requested page does not exist.');
+       }
+         
+       $content = $this->renderPartial('reporte-inscripcion',['model'=>$model]);
         
         
         $pdf = new Pdf([
@@ -223,6 +228,27 @@ class TallerImpController extends Controller
     
     
     /**
+     *
+     * @param integer $id
+     */
+    public function actionAlumnos($id){
+        
+        
+        $model = $this->findModel($id);
+        
+        
+        $alumnoSearchModel = new AlumnoSearch();
+        $alumnoDataProvider = $alumnoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
+        
+        return $this->render('alumnos',
+            ['model'=>$model,
+                'alumnoSearchModel'=>$alumnoSearchModel,
+                'alumnoDataProvider'=>$alumnoDataProvider,]);
+        
+    }
+    
+    
+    /**
      * 
      * @param integer $id
      */
@@ -233,10 +259,10 @@ class TallerImpController extends Controller
         $modelInscripcion = new Inscripcion();
         
         $alumnoSearchModel = new AlumnoSearch();
-        $alumnoDataProvider = $alumnoSearchModel->search(Yii::$app->request->queryParams);
+        $alumnoDataProvider = $alumnoSearchModel->searchInscripcion(Yii::$app->request->queryParams,$id);
         
         $pagoSearchModel = new PagoTallerCuotaSearch();
-        $pagoDataProvider = $pagoSearchModel->search(Yii::$app->request->queryParams);
+        $pagoDataProvider = $pagoSearchModel->searchInscripcion(Yii::$app->request->queryParams,$id);
         
         
         

@@ -12,11 +12,11 @@
 		<tr>
 			<td align="left" rowspan="3"><img alt="" src="/img/mc.jpg"></td>
 			<th align="left">Multicode SA de CV</th>
-			<th align="right"  style="background: #d4d6d8;">No. de orden</th>			
+			<th align="right"  style="background: #d4d6d8;">Folio inscripción</th>			
 		</tr>
 		<tr>
 			<td align="left"><small><font  color="blue">http://www.multicode.com.mx/</font></small></td>
-			<th align="right" rowspan="2"  style="background: #d4d6d8;">$model->numero_orden; ?></th>
+			<th align="right" rowspan="2"  style="background: #d4d6d8;"><?= $model->id; ?></th>
 						
 		</tr>
 		<tr>
@@ -47,7 +47,7 @@
 		</tr>
 		<tr>
 			<th align="left" style="background: #d4d6d8" >Dirección</th>
-			<td align="left">isset( $model->claveProveedor)?$model->claveProveedor->direccion : 'Sin cliente' ;?></td>
+			<td align="left"><?= isset( $model->alumno)?$model->alumno->nombre : '?' ;?></td>
 			<th align="right" style="background: #d4d6d8" >Fecha elaboración</th>
 			<td align="right">$model->fecha_venta;?></td>
 	
