@@ -17,7 +17,7 @@ use Yii;
  *
  * @property Alumno $alumno
  * @property PagoTallerCuota $pago
- * @property CuotaTallerImp $tallerImp
+ * @property TallerImp $tallerImp
  */
 class Inscripcion extends \yii\db\ActiveRecord
 {
@@ -40,7 +40,7 @@ class Inscripcion extends \yii\db\ActiveRecord
             [['folio_inscripcion'], 'string', 'max' => 15],
             [['id_alumno'], 'exist', 'skipOnError' => true, 'targetClass' => Alumno::className(), 'targetAttribute' => ['id_alumno' => 'id']],
             [['id_pago'], 'exist', 'skipOnError' => true, 'targetClass' => PagoTallerCuota::className(), 'targetAttribute' => ['id_pago' => 'id']],
-            [['id_taller_imp'], 'exist', 'skipOnError' => true, 'targetClass' => CuotaTallerImp::className(), 'targetAttribute' => ['id_taller_imp' => 'id']],
+            [['id_taller_imp'], 'exist', 'skipOnError' => true, 'targetClass' => TallerImp::className(), 'targetAttribute' => ['id_taller_imp' => 'id']],
         ];
     }
 
@@ -81,6 +81,6 @@ class Inscripcion extends \yii\db\ActiveRecord
      */
     public function getTallerImp()
     {
-        return $this->hasOne(CuotaTallerImp::className(), ['id' => 'id_taller_imp']);
+        return $this->hasOne(TallerImp::className(), ['id' => 'id_taller_imp']);
     }
 }
