@@ -38,6 +38,9 @@ $config = [
         'i18n' => [
             'class' => backend\modules\i18n\Module::class,
             'defaultRoute' => 'i18n-message/index'
+        ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
         ]
     ],
     'as globalAccess' => [

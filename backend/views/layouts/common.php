@@ -74,7 +74,7 @@ foreach ($talleres as $taller){
                                                 ['label' => 'Editar', 'url' => ['/taller-imp/update','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Cuotas', 'url' => ['/taller-imp/cuota','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Horarios', 'url' => ['/taller-imp/horario','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
-                                                ['label' => 'Alumnos', 'url' => ['/taller-imp/horario','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')]
+                                                ['label' => 'Alumnos', 'url' => ['/taller-imp/alumnos','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')]
                                            ];
         
     }

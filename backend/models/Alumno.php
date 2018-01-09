@@ -7,12 +7,12 @@ use Yii;
 /**
  * This is the model class for table "tbl_alumno".
  *
- * @property integer $id
+ * @property int $id
  * @property string $numero_registro
  * @property string $nombre
  * @property string $fecha_nacimiento
  * @property string $fecha_alta
- * @property integer $sexo
+ * @property int $sexo
  * @property string $direccion
  * @property string $nacionalidad
  * @property string $estado
@@ -22,16 +22,16 @@ use Yii;
  * @property string $telefono_movil
  * @property string $telefono_casa
  * @property string $nombre_padre
- * @property integer $edad_padre
+ * @property int $edad_padre
  * @property string $ocupacion_padre
- * @property integer $tel_padre
+ * @property int $tel_padre
  * @property string $nombre_madre
- * @property integer $edad_madre
+ * @property int $edad_madre
  * @property string $ocupacion_madre
- * @property integer $tel_madre
+ * @property int $tel_madre
  * @property string $fecha_ingreso
  * @property string $lugar_nacimiento
- * @property integer $tel_emergencia
+ * @property int $tel_emergencia
  * @property string $escuela_procedencia
  * @property string $alergia_enfermedad
  * @property string $tipo_sangineo
