@@ -36,7 +36,7 @@ class TallerImpController extends Controller
     }
 
     /**
-     * Lists all TallerImp models.
+     * Lists all TallerImp models .
      * @return mixed
      */
     public function actionIndex()
