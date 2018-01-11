@@ -4,7 +4,7 @@
 ?>
 
 
-<div style="width:21cm;height:29.7cm;margin:0;" >
+<div style="width:21cm;height:29.7cm;margin:0; " >
 
 <table style="width: 100%; font-size: 15px;  font-family:times new roman; font-style:bold;">
 
