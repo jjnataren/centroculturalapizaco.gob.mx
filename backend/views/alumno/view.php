@@ -14,7 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('PDf', ['gen-pdf', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('Credencial', ['imprimir-credencial', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('fFicha personal', ['imprimir-comprobante', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+      
         <?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
