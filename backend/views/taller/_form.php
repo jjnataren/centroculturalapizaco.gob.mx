@@ -50,7 +50,7 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
       <?=$form->field($model, 'id_instructor', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa-user-secret"></span>
 		          </span>
 		              {input}		     		
 		          </div>
@@ -77,7 +77,7 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
       <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-building-o"></span>
 		          </span>
 		          {input}
 		     		
@@ -105,7 +105,7 @@ echo $form->field($model, 'nombre', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-pencil"></span>
+		             <span class="fa fa-cog"></span>
 		          </span>
 		          {input}
 		     		
@@ -177,7 +177,7 @@ echo $form->field($model, 'descripcion_temario', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-pencil"></span>
+		             <span class="fa fa-file-text"></span>
 		          </span>
 		          {input}
 		     		
@@ -215,7 +215,7 @@ echo $form->field($model, 'numero_personas', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-pencil"></span>
+		             <span class="fa fa-users"></span>
 		          </span>
 		          {input}
 		     		
@@ -261,7 +261,7 @@ echo $form->field($model, 'numero_personas', [
       <?=$form->field($model, 'disponible', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-info"></span>
 		          </span>
 		          {input}
 		     		
@@ -337,7 +337,7 @@ echo $form->field($model, 'numero_personas', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-pencil"></span>
+		             <span class="fa fa-hourglass"></span>
 		          </span>
 		          {input}
 		     		

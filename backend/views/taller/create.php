@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
 
-$this->title = 'Create Taller';
+$this->title = 'Crear Taller';
 $this->params['breadcrumbs'][] = ['label' => 'Tallers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

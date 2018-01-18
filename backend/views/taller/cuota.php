@@ -117,7 +117,7 @@ echo 'Say hello...'; ?>
 		     		'<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-sticky-note"></span>
 		          </span>
 		          {input}
 		     		
@@ -141,7 +141,7 @@ echo 'Say hello...'; ?>
 		     		'<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-calendar-o"></span>
 		          </span>
 		          {input}
 		     		

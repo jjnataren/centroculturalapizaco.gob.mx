@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
 		     		'<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-pencil"></span>
+		             <span class="fa fa-cog"></span>
 		          </span>
 		          {input}
 		     		
