@@ -70,7 +70,7 @@ foreach ($talleres as $taller){
         $menuTalleresImp[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
         $menuTalleresImp[$j++]['items'] =  [    
                                                 ['label' => 'Ver', 'url' => ['/taller-imp/view','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
-                                                ['label' => 'Inscribir', 'url' => ['/taller-imp/inscripciones','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
+                                                ['label' => 'Pagos', 'url' => ['/taller-imp/pagos','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Editar', 'url' => ['/taller-imp/update','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Cuotas', 'url' => ['/taller-imp/cuota','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Horarios', 'url' => ['/taller-imp/horario','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
@@ -81,6 +81,7 @@ foreach ($talleres as $taller){
 	
     
     $menuTalleresItems = [];
+    $menuTalleresItems[] = ['label' => 'Inicio', 'url' => ['/taller/view','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     $menuTalleresItems[] = ['label' => 'Editar', 'url' => ['/taller/update','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     $menuTalleresItems[] = ['label' => 'Cuotas', 'url' => ['/taller/cuota','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     $menuTalleresItems[] = ['label' => 'Impartir', 'url' => ['/taller/implement','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')];
@@ -247,10 +248,24 @@ foreach ($talleres as $taller){
                 		[
                 		'label'=>Yii::t('backend', 'Talleres'),
                 		'url' => '#',
-                		'icon'=>'<i class="fa fa-edit"></i>',
+                		'icon'=>'<i class="fa fa-cogs"></i>',
                 		'options'=>['class'=>'treeview'],
                 		'items'=>$menuTalleres,
                 		],
+                    
+                    [
+                        'label' => Yii::t('backend', 'Ingresos'),
+                        'url' => '#',
+                        'icon' => '<i class="fa fa-usd"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'items' => [
+                            ['label' => Yii::t('backend', 'Pagos cuotas'), 'url' => ['/pagos/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'page')],
+                            ['label' => Yii::t('backend', 'Pagos renta'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
+                            ]
+                        
+                    ],
+                    
                     [
                         'label' => Yii::t('backend', 'Content'),
                         'url' => '#',
@@ -278,7 +293,7 @@ foreach ($talleres as $taller){
                     [
                         'label' => Yii::t('backend', 'Alumnos'),
                         'url' =>  ['/alumno/index'],
-                        'icon' => '<i class="fa fa-edit"></i>',
+                        'icon' => '<i class="fa fa-graduation-cap"></i>',
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                       
