@@ -38,7 +38,7 @@ $talleres   = Taller::findAll(['disponible'=>1]);
  * ['label'=>Yii::t('backend', 'Crear'), 'url'=>['/taller/create'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 				['label'=>Yii::t('backend', 'Ver totos'), 'url'=>['/taller'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 		
- * 
+ * tedtsss
 */
 
 $menuTalleres = [];
