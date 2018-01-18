@@ -257,6 +257,7 @@ foreach ($talleres as $taller){
                         'label' => Yii::t('backend', 'Ingresos'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-usd"></i>',
+
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                         'items' => [

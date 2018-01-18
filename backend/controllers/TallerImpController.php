@@ -249,6 +249,28 @@ class TallerImpController extends Controller
     
     
     /**
+     *
+     * @param integer $id
+     */
+    public function actionPagos($id){
+        
+        
+        $model = $this->findModel($id);
+        
+        $pagoSearchModel = new PagoTallerCuotaSearch();
+        $pagoDataProvider = $pagoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
+        
+        return $this->render('pagos',
+            ['model'=>$model,
+                'pagoSearchModel'=>$pagoSearchModel,
+                'pagoDataProvider'=>$pagoDataProvider,]);
+            
+    }
+    
+    
+    
+    
+    /**
      * 
      * @param integer $id
      */

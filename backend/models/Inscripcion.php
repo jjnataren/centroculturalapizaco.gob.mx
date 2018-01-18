@@ -38,6 +38,7 @@ class Inscripcion extends \yii\db\ActiveRecord
             [['id_alumno', 'id_taller_imp', 'id_pago'], 'integer'],
             [['fecha_inscripcion', 'fecha_operacion'], 'safe'],
             [['folio_inscripcion'], 'string', 'max' => 15],
+            [['id_pago'], 'unique'],
             [['id_alumno'], 'exist', 'skipOnError' => true, 'targetClass' => Alumno::className(), 'targetAttribute' => ['id_alumno' => 'id']],
             [['id_pago'], 'exist', 'skipOnError' => true, 'targetClass' => PagoTallerCuota::className(), 'targetAttribute' => ['id_pago' => 'id']],
             [['id_taller_imp'], 'exist', 'skipOnError' => true, 'targetClass' => TallerImp::className(), 'targetAttribute' => ['id_taller_imp' => 'id']],

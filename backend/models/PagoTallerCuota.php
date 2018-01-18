@@ -7,22 +7,22 @@ use Yii;
 /**
  * This is the model class for table "tbl_pago_taller_cuota".
  *
- * @property integer $id
- * @property integer $id_taller_imp
- * @property integer $id_cuota_taller_imp
- * @property integer $id_cuota
+ * @property int $id
+ * @property int $id_taller_imp
+ * @property int $id_cuota_taller_imp
+ * @property int $id_cuota
  * @property string $monto
- * @property integer $id_alumno
+ * @property int $id_alumno
  * @property string $concepto
  * @property string $fecha_pago
  * @property string $metodo_pago
  * @property string $comentario
  *
- * @property Inscripcion[] $inscripcions
- * @property Alumno $idAlumno
- * @property Cuota $idCuota
- * @property CuotaTallerImp $idCuotaTallerImp
- * @property TallerImp $idTallerImp
+ * @property Inscripcion $inscripcion
+ * @property Alumno $alumno
+ * @property Cuota $cuota
+ * @property CuotaTallerImp $cuotaTallerImp
+ * @property TallerImp $tallerImp
  */
 class PagoTallerCuota extends \yii\db\ActiveRecord
 {
@@ -72,15 +72,15 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripcions()
+    public function getInscripcion()
     {
-        return $this->hasMany(Inscripcion::className(), ['id_pago' => 'id']);
+        return $this->hasOne(Inscripcion::className(), ['id_pago' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAlumno()
+    public function getAlumno()
     {
         return $this->hasOne(Alumno::className(), ['id' => 'id_alumno']);
     }
@@ -88,7 +88,7 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCuota()
+    public function getCuota()
     {
         return $this->hasOne(Cuota::className(), ['id' => 'id_cuota']);
     }
@@ -96,7 +96,7 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCuotaTallerImp()
+    public function getCuotaTallerImp()
     {
         return $this->hasOne(CuotaTallerImp::className(), ['id' => 'id_cuota_taller_imp']);
     }
@@ -104,7 +104,7 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdTallerImp()
+    public function getTallerImp()
     {
         return $this->hasOne(TallerImp::className(), ['id' => 'id_taller_imp']);
     }
