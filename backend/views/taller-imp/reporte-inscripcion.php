@@ -100,7 +100,7 @@
 
 <br />
 
-<table border="0.5"  style="width:100%; font-size: 12px; border: 1px dotted gray; font-family:times new roman;">
+<table border="1"  style="width:100%; font-size: 12px; border: 1px dotted gray; font-family:times new roman;">
 		<tr>
 			<th align="left" style="background: #d4d6d8;" >Item</th>
 			<th align="left" style="background: #d4d6d8;">Numero serie</th>

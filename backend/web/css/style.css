@@ -17,4 +17,18 @@ body .user-panel > .info {
   padding-left: 10px;
 }
 
+body test {
+				border-top-color: #CC0000;
+              border-right-color: blue;
+              border-bottom-color: #00FF00;
+              border-left-color: #CCC;
+}
+body div.ex1 {
+    width:500px;
+    margin: auto;
+    border: 3px solid #73AD21;
+
+	
+}
+
 /*# sourceMappingURL=style.map *//*# sourceMappingURL=style.map */
