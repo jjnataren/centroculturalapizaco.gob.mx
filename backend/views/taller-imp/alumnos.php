@@ -9,23 +9,21 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
-$this->title = $model->id;
+$this->title = $model->id . ' -  ' .  $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Taller Imps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+ <h2>Alumnos incritos al taller</h2>
+	
+</div>
 
 <div class="col-md-12 col-sm-12 col-xs-12">
 
     <p>
-        <?php echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php echo Html::a('Inscribir alumno', ['inscripciones', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        
     </p>
 
 
@@ -105,7 +103,7 @@ echo GridView::widget([
 
     'toolbar' =>  [
         ['content'=>
-            Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Add Book'), 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
+            Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Inscribir alumno'), 'class'=>'btn btn-success', ]) . ' '.
             Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
         ],
         '{export}',
@@ -129,5 +127,4 @@ echo GridView::widget([
 ?>
 
 
-</div>
 </div>
