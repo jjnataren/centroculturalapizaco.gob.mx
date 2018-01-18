@@ -16,7 +16,7 @@ use yii\bootstrap\ActiveForm;
 
 
 
-    
+ 
     <div class="col-md-12">
 		<div class="col-md-4">
 				<small> Nombre del alumno</small>
@@ -26,7 +26,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-graduation-cap"></span>
 		          </span>
 		          {input}
 		     		
@@ -41,7 +41,7 @@ use yii\bootstrap\ActiveForm;
         'maxlength' => '200'
     ])
         ->label(false);?>
-     </div>
+    	 </div>
      </div>
      
     <div class="col-md-12">
@@ -53,7 +53,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-cogs"></span>
 		          </span>
 		          {input}
 		     		
@@ -69,8 +69,8 @@ use yii\bootstrap\ActiveForm;
     ])
         ->label(false);?>
      </div>
-    
-    
+     </div>
+     
     <?php echo $form->field($model, 'fecha_ingreso')->textInput() ?>
       
     <?php echo $form->field($model, 'fecha_nacimiento')->textInput() ?>
@@ -85,7 +85,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-globe"></span>
 		          </span>
 		          {input}
 		     		
@@ -112,7 +112,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-map-marker"></span>
 		          </span>
 		          {input}
 		     		
@@ -168,7 +168,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-mobile"></span>
 		          </span>
 		          {input}
 		     		
@@ -195,7 +195,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-phone"></span>
 		          </span>
 		          {input}
 		     		
@@ -218,9 +218,7 @@ use yii\bootstrap\ActiveForm;
     
     
     
-    <div class="panel panel-default">
-			
-			<div class="panel-body">
+    
     
     <div class="col-md-12">
     <div class="col-md-4">
@@ -231,7 +229,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-male"></span>
 		          </span>
 		          {input}
 		     		
@@ -258,7 +256,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-card-o"></span>
 		          </span>
 		          {input}
 		     		
@@ -285,7 +283,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-briefcase"></span>
 		          </span>
 		          {input}
 		     		
@@ -312,7 +310,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-mobile"></span>
 		          </span>
 		          {input}
 		     		
@@ -330,14 +328,10 @@ use yii\bootstrap\ActiveForm;
      </div>
      </div>
      
-    </div>
-     </div> 
+ 
      
      
-      <div class="panel panel-default">
-			
-			<div class="panel-body">
-    
+  
     <div class="col-md-12">
     <div class="col-md-4">
 				<small> Nombre de la madre. </small>
@@ -347,7 +341,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-female"></span>
 		          </span>
 		          {input}
 		     		
@@ -374,7 +368,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-card"></span>
 		          </span>
 		          {input}
 		     		
@@ -401,7 +395,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-briefcase"></span>
 		          </span>
 		          {input}
 		     		
@@ -428,7 +422,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-mobile"></span>
 		          </span>
 		          {input}
 		     		
@@ -445,9 +439,7 @@ use yii\bootstrap\ActiveForm;
         ->label(false);?>
      </div>
      </div>
-     
-    </div>
-     </div> 
+
      
       <div class="col-md-12">
 		<div class="col-md-4">
@@ -458,7 +450,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-phone"></span>
 		          </span>
 		          {input}
 		     		
@@ -486,7 +478,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-university"></span>
 		          </span>
 		          {input}
 		     		
@@ -514,7 +506,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-heartbeat"></span>
 		          </span>
 		          {input}
 		     		
@@ -543,7 +535,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-tint"></span>
 		          </span>
 		          {input}
 		     		
@@ -574,7 +566,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-ambulance"></span>
 		          </span>
 		          {input}
 		     		
@@ -631,7 +623,7 @@ use yii\bootstrap\ActiveForm;
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa fa-cube"></span>
+		             <span class="fa fa-venus-mars"></span>
 		          </span>
 		          {input}
 		     		
@@ -679,5 +671,5 @@ use yii\bootstrap\ActiveForm;
 
 		
 
-	</div>
+
 </div>
