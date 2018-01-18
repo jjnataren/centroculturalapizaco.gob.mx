@@ -56,9 +56,17 @@ class PagoTallerCuotaSearch extends PagoTallerCuota
             'id_taller_imp' => $this->id_taller_imp,
             'id_cuota' => $this->id_cuota,
             'id_alumno' => $this->id_alumno,
-            'fecha_pago' => $this->fecha_pago,
         ]);
 
+        
+        if(isset($this->fecha_pago) && $this->fecha_pago!=''){
+            $date_explode = explode("a", $this->fecha_pago);
+            $date1 = trim($date_explode[0]);
+            $date2= trim($date_explode[1]);
+            $query->andFilterWhere(['between', 'fecha_pago', $date1,$date2]);
+        }
+        
+        
         $query->andFilterWhere(['like', 'monto', $this->monto])
             ->andFilterWhere(['like', 'concepto', $this->concepto])
             ->andFilterWhere(['like', 'metodo_pago', $this->metodo_pago])
@@ -92,8 +100,9 @@ class PagoTallerCuotaSearch extends PagoTallerCuota
             'id_taller_imp' => $this->id_taller_imp,
             'id_cuota' => $this->id_cuota,
             'id_alumno' => $this->id_alumno,
-            'fecha_pago' => $this->fecha_pago,
         ]);
+        
+ 
         
         $query->andFilterWhere(['like', 'monto', $this->monto])
         ->andFilterWhere(['like', 'concepto', $this->concepto])

@@ -65,17 +65,17 @@ $this->registerJs("
 
 						<dt><?= 'Nombre' ?></dt>
 						<dd>
-							<label id="alumno_nombre"> <?= isset($model->idAlumno->nombre)?$model->idAlumno->nombre:'?' ?></label>
+							<label id="alumno_nombre"> <?= isset($model->alumno->nombre)?$model->alumno->nombre:'?' ?></label>
 						</dd>
 
 						<dt><?= 'CURP' ?></dt>
 						<dd>
-							<label id="alumno_curp"> <?= isset($model->idAlumno->curp)?$model->idAlumno->curp:'?' ?></label>
+							<label id="alumno_curp"> <?= isset($model->alumno->curp)?$model->alumno->curp:'?' ?></label>
 						</dd>
 
 						<dt><?= 'Edad' ?></dt>
 						<dd>
-							<label id="alumno_fecha_nacimiento"> <?= isset($model->idAlumno->fecha_nacimiento)?$model->idAlumno->fecha_nacimiento:'?' ?></label>
+							<label id="alumno_fecha_nacimiento"> <?= isset($model->alumno->fecha_nacimiento)?$model->alumno->fecha_nacimiento:'?' ?></label>
 						</dd>
 
 					</dl>
@@ -219,22 +219,22 @@ Modal::end();
 
 						<dt><?= 'Nombre' ?></dt>
 						<dd>
-							<label id="taller_nombre"> <?= isset($model->idTallerImp->nombre)?$model->idTallerImp->nombre:'?' ?></label>
+							<label id="taller_nombre"> <?= isset($model->tallerImp->nombre)?$model->tallerImp->nombre:'?' ?></label>
 						</dd>
 
 						<dt><?= 'Fecha inicio' ?></dt>
 						<dd>
-							<label id="taller_fecha_inicio"> <?= isset($model->idTallerImp->fecha_inicio)?$model->idTallerImp->fecha_inicio:'?' ?></label>
+							<label id="taller_fecha_inicio"> <?= isset($model->tallerImp->fecha_inicio)?$model->tallerImp->fecha_inicio:'?' ?></label>
 						</dd>
 
 						<dt><?= 'Fecha fin' ?></dt>
 						<dd>
-							<label id="taller_fecha_fin"> <?= isset($model->idTallerImp->fecha_fin)?$model->idTallerImp->fecha_fin:'?' ?></label>
+							<label id="taller_fecha_fin"> <?= isset($model->tallerImp->fecha_fin)?$model->tallerImp->fecha_fin:'?' ?></label>
 						</dd>
 
 						<dt><?= 'Instructor' ?></dt>
 						<dd>
-							<label id="taller_instructor"> <?= isset($model->idTallerImp->idInstructor)?$model->idTallerImp->idInstructor->nombre:'?' ?></label>
+							<label id="taller_instructor"> <?= isset($model->tallerImp->instructor)?$model->tallerImp->instructor->nombre:'?' ?></label>
 						</dd>
 
 
@@ -282,7 +282,7 @@ echo GridView::widget([
             [
                 'attribute' => 'id_instructor',
                 'content' => function ($data) {
-                    return ($data->idInstructor) ? $data->idInstructor->nombre : '';
+                    return ($data->instructor) ? $data->instructor->nombre : '';
                 }
             
             ],
@@ -293,7 +293,7 @@ echo GridView::widget([
                 'buttons' => [
                     'select' => function ($url, $data, $id) { // Boton actualizar
                         
-                        $instructor = isset($data->idInstructor) ? $data->idInstructor->nombre : '?';
+                        $instructor = isset($data->instructor) ? $data->instructor->nombre : '?';
                         
                         return Html::a('<span class="fa fa-check-circle  fa-2x"></span>', '#', [
                             'title' => 'Seleccionar',
