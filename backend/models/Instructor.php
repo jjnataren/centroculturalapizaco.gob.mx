@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "tbl_instructor".
  *
- * @property integer $id
+ * @property int $id
  * @property string $nombre
  * @property string $fecha_nacimiento
  * @property string $direccion
@@ -19,11 +19,12 @@ use Yii;
  * @property string $url_fb
  * @property string $url_tw
  * @property string $url_cv
- * @property integer $sexo
- * @property integer $disponible
- * @property integer $localidad
+ * @property int $sexo
+ * @property int $disponible
+ * @property int $localidad
  *
  * @property Taller[] $tallers
+ * @property TallerImp[] $tallerImps
  */
 class Instructor extends \yii\db\ActiveRecord
 {
@@ -79,5 +80,13 @@ class Instructor extends \yii\db\ActiveRecord
     public function getTallers()
     {
         return $this->hasMany(Taller::className(), ['id_instructor' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTallerImps()
+    {
+        return $this->hasMany(TallerImp::className(), ['id_instructor' => 'id']);
     }
 }
