@@ -14,13 +14,119 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->errorSummary($model); ?>
 
-    <?php echo $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+ <div class="col-md-12">
+		<div class="col-md-4">
+				<small> Nombre del aula</small>
+			</div>
+			<div class="col-md-8">
+    <?php echo $form->field($model, 'nombre', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textInput([
+        'placeholder' => 'AULA',
+        'class' => 'form-control input-lg',
+        'maxlength' => '200'
+    ])
+        ->label(false);?>
+    	 </div>
+     </div>
+ 
+ 
+  <div class="col-md-12">
+		<div class="col-md-4">
+				<small> Descripcion</small>
+			</div>
+			<div class="col-md-8">
+    <?php echo $form->field($model, 'nombre', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa  fa-pencil"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textarea([
+        'placeholder' => 'DESCRIPCION Y DETALLES DEL AULA',
+        'class' => 'form-control input-lg',
+        'maxlength' => '200'
+    ])
+        ->label(false);?>
+    	 </div>
+     </div>
 
-    <?php echo $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
+     <div class="col-md-12">
+		<div class="col-md-4">
+				<small> NUMERO MAXIMO DE PERSONAS</small>
+			</div>
+			<div class="col-md-8">
+    <?php echo $form->field($model, 'numero_max_personas', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-users"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textInput([
+        'placeholder' => 'NO.DE PERSONAS',
+        'class' => 'form-control input-lg',
+        'maxlength' => '200'
+    ])
+        ->label(false);?>
+    	 </div>
+     </div>
+   
+   
+   	<div class="col-md-12">
+		<div class="col-md-4">
+				<small>DISPONIBLE</small>
+			</div>
+			<div class="col-md-8">
+    <?php
+    $var = [ 0 => 'NO', 1 => 'SI'];
+    echo $form->field($model, 'disponible', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-check"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->dropDownList($var,[
+        'placeholder' => 'disponible',
+        'class' => 'form-control input-lg',
+        'maxlength' => '200'
+    ])
+        ->label(false);?>
+     </div>
+     </div>
+     
 
-    <?php echo $form->field($model, 'numero_max_personas')->textInput() ?>
-
-    <?php echo $form->field($model, 'disponible')->textInput() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
