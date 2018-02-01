@@ -248,10 +248,18 @@ foreach ($talleres as $taller){
                 		[
                 		'label'=>Yii::t('backend', 'Talleres'),
                 		'url' => '#',
-                		'icon'=>'<i class="fa fa-cogs"></i>',
+                		'icon'=>'<i class="fa fa-pencil-square-o"></i>',
                 		'options'=>['class'=>'treeview'],
                 		'items'=>$menuTalleres,
                 		],
+                    
+                    [
+                        'label'=>Yii::t('backend', 'Instructores'),
+                        'url' =>  ['/instructor/index'],
+                        'icon'=>'<i class="fa fa-coffee"></i>',
+                        'options'=>['class'=>'treeview'],
+                        
+                    ],
                     
                     [
                         'label' => Yii::t('backend', 'Ingresos'),
@@ -298,6 +306,14 @@ foreach ($talleres as $taller){
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                       
+                    ],
+                    [
+                        'label' => Yii::t('backend', 'Aulas'),
+                        'url' =>  ['/aulas/index'],
+                        'icon' => '<i class="fa fa-graduation-cap"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        
                     ],
                     [
                         'label' => Yii::t('backend', 'System'),
