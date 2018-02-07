@@ -99,6 +99,7 @@
 
 
 <br />
+<!-- 
 
 <table border="1"  style="width:100%; font-size: 12px; border: 1px dotted gray; font-family:times new roman;">
 		<tr>
@@ -148,5 +149,5 @@
 			</tfoot>
 		
 	</table>
-
+ -->
 </div>

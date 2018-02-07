@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-12 col-sm-12 col-xs-12">
 
     <p>
-        <?php echo Html::a('Nuevo pago', ['pagos', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('Nuevo pago', ['pago', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         
     </p>
 
