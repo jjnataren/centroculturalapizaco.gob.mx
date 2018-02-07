@@ -87,6 +87,19 @@ class TallerController extends Controller
     }
     
     
+    /**
+     * Displays a single Taller model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDashboard($id)
+    {
+        return $this->render('dashboard', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+    
+    
     
     /**
      * Generates Taller implementation.
@@ -298,7 +311,10 @@ class TallerController extends Controller
     {
         $model = $this->findModel($id);
 
+      
+         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
