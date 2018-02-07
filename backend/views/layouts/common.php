@@ -309,8 +309,8 @@ foreach ($talleres as $taller){
                     ],
                     [
                         'label' => Yii::t('backend', 'Aulas'),
-                        'url' =>  ['/aulas/index'],
-                        'icon' => '<i class="fa fa-graduation-cap"></i>',
+                        'url' =>  ['/aula/index'],
+                        'icon' => '<i class="fa fa-building"></i>',
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                         
