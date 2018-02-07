@@ -1,11 +1,15 @@
 <?php
 
+use backend\models\Categoria;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
 /* @var $form yii\bootstrap\ActiveForm */
+
+$categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_categoria where disponible = 1')->all(), 'id', 'nombre');
 ?>
 
 <div class="col-md-12 col-sm-12 col-xs-12" >
@@ -55,13 +59,37 @@ use yii\bootstrap\ActiveForm;
     
 	</div>
 	
-		<div class="col-md-4">
+	<div class="col-md-4">
 		<small>
 			Agregue  una descripción del curso para que se pueda identificar de mejor manera.
 		</small>
 	</div>
 	
+	
+	
 	</div>
+	
+			<div class="col-md-12">
+			
+
+			<div class="col-md-7">
+      <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($categoriaList, ['prompt' => '-- Categoría  --'])?>
+    
+    </div>
+		<div class="col-md-4">
+				<small>Categoría del curso.</small>
+			</div>
+		</div>
 
     
 

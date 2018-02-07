@@ -4,6 +4,7 @@ use yii\bootstrap\ActiveForm;
 use backend\models\Aula;
 use backend\models\Instructor;
 use yii\helpers\ArrayHelper;
+use backend\models\Categoria;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
@@ -12,6 +13,8 @@ use yii\helpers\ArrayHelper;
 $instructorList = ArrayHelper::map(Instructor::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_instructor where disponible = 1')->all(), 'id', 'nombre');
 
 $aulaList = ArrayHelper::map(Aula::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_aula where disponible = 1')->all(), 'id', 'nombre');
+
+$categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_categoria where disponible = 1')->all(), 'id', 'nombre');
 
 ?>
 
@@ -33,7 +36,8 @@ $aulaList = ArrayHelper::map(Aula::findBySql('select id,  CONCAT(id, \' - \',nom
 echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
     'url' => [
         'avatar-upload'
-    ]
+    ],
+    'maxNumberOfFiles' => 1
 ])?>
 
 
@@ -65,6 +69,29 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
     </div>
 			
 		</div>
+		
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<small>Categoría del curso.</small>
+			</div>
+
+			<div class="col-md-7">
+      <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($categoriaList, ['prompt' => '-- Categoría  --'])?>
+    
+    </div>
+
+		</div>
+		
 
 
 
