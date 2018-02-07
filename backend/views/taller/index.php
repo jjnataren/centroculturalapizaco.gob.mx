@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\search\TallerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tallers';
+$this->title = 'Talleres';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="taller-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a('Create Taller', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('Crear Taller', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([
