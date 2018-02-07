@@ -103,7 +103,7 @@ use yii\bootstrap\ActiveForm;
 			</div>
 			<div class="col-md-8">
     <?php
-    $var = [ 0 => 'NO', 1 => 'SI'];
+    $var = [  1 => 'SI',0 => 'NO'];
     echo $form->field($model, 'disponible', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
@@ -118,6 +118,7 @@ use yii\bootstrap\ActiveForm;
    				</div>'
     ])
         ->dropDownList($var,[
+            'prompt' => '-- Disponible  --',
         'placeholder' => 'disponible',
         'class' => 'form-control input-lg',
         'maxlength' => '200'
@@ -129,7 +130,7 @@ use yii\bootstrap\ActiveForm;
 
 
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
