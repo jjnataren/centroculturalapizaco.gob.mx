@@ -15,6 +15,9 @@ use Intervention\Image\ImageManagerStatic;
 use backend\models\CuotaTaller;
 use backend\models\TallerImp;
 use backend\models\CuotaTallerImp;
+use backend\models\search\TallerImpSearch;
+use mPDF;
+use kartik\mpdf\Pdf;
 
 /**
  * TallerController implements the CRUD actions for Taller model.
@@ -94,9 +97,42 @@ class TallerController extends Controller
      */
     public function actionDashboard($id)
     {
+        
+        
+        $searchModel = new TallerImpSearch();
+        $dataProvider = $searchModel->searchByParent(Yii::$app->request->queryParams,$id);
+        
+        
+        
+        $searchCuotaModel = new CuotaTallerSearch();
+        $dataCuotaProvider = $searchCuotaModel->search(Yii::$app->request->queryParams);
+        
+        $sModel = new CuotaTaller();
+        $sModel->id_taller = $id;
+        
+        if ($sModel->load(Yii::$app->request->post()) && $sModel->save()) {
+            
+            Yii::$app->getSession()->setFlash('success', [
+                'body'=>'Se ha creado una nueva cuota.',
+                'options'=>['class'=>'alert-danger']
+            ]);
+            
+            return $this->redirect(['dashboard', 'id' => $model->id]);
+        }
+        
+        
+        
+        
         return $this->render('dashboard', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchCuotaModel' => $searchCuotaModel,
+            'dataCuotaProvider' => $dataCuotaProvider,
         ]);
+        
+        
+        
     }
     
     
@@ -251,7 +287,7 @@ class TallerController extends Controller
     	        'options'=>['class'=>'alert-danger']
     	    ]);
     	    
-    	    return $this->redirect(['cuota', 'id' => $model->id]);
+    	    
     	} else {
     	
     	    
@@ -264,18 +300,12 @@ class TallerController extends Controller
     	        
     	    }
     	    
-    	    
-    	    return $this->render('cuota', [
-    	        'searchModel' => $searchModel,
-    	        'dataProvider' => $dataProvider,
-    	        'model'=>$sModel
-    	    ]);
-    	    
+    	  
     	
     	}
     	
     	
-    	
+    	return $this->redirect(['dashboard', 'id' => $model->id]);
     	
     	
    
@@ -315,7 +345,7 @@ class TallerController extends Controller
          
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['dashboard', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -336,6 +366,60 @@ class TallerController extends Controller
         return $this->redirect(['index']);
     }
 
+    
+    /**
+     * Prints new  instription
+     * @param unknown $id
+     */
+    public function actionImprimirInfo($id){
+        
+        //	Yii::$app->response->format = 'pdf';
+        
+        $model = Taller::findOne($id);
+        
+        
+        if ($model  === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        
+        $content = $this->renderPartial('detalle-taller',['model'=>$model]);
+        
+        
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            
+            
+            
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            //'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}
+    							#menu{
+								      font:5px;
+								    }',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'Ficha de inscripción'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader'=>['Detalle del taller'],
+                'SetFooter'=>['{PAGENO}'],
+            ]
+        ]);
+        
+        // return the pdf output as per the destination setting
+        return $pdf->render();
+        
+    }
     /**
      * Finds the Taller model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
