@@ -7,6 +7,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use backend\models\CuotaTaller;
 
+
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
@@ -35,6 +37,7 @@ $cuotaList=ArrayHelper::map
               <h3 class="box-title">Información de taller base</h3>
 
               <div class="box-tools pull-right">
+              <?php echo Html::a('<i class="fa fa-print"></i>', ['imprimir-info', 'id' => $model->id], ['class' => 'btn']) ?>
               <?php echo Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn']) ?>
               <?php echo Html::a('<i class="fa fa-trash"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn',
@@ -46,47 +49,47 @@ $cuotaList=ArrayHelper::map
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             <div class="col-md-3">
             <dl>
-                <dt>Tesoem</dt>
-               <dd><?=$model->nombre;?></dd>
-                
-                <dt>Descripción</dt>
-                <dd><?=$model->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$model->duracion_hora;?></dd>
-              </dl>
               
+               <dd><img class="img-thumbnail" style="width:350px; height:250px;" src="<?= isset ($model->path)? $model->base_url.'/' . $model->path : '/img/clipboard.png'?>" alt="" /></dd>
+                
+              
+              </dl>
+              </div>
               <div class="col-md-3">
+				
               <dl>
-                <dt>Nombre</dt>
+                <dt>Nombre del taller </dt>
                <dd><?=$model->nombre;?></dd>
                 
                 <dt>Descripción</dt>
                 <dd><?=$model->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$model->duracion_hora;?></dd>
+               <dt>Instructor</dt>
+              
+                <dd><?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?></dd>
+               <dt>Categoría</dt>
+               <dd><?=$model->categoria->nombre;?></dd>
               </dl>
              </div> 
               <div class="col-md-3">
             
               <dl>
-                <dt>Instructor</dt>
-                <dd><?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?></dd>
-                <dt>Descripción</dt>
-                <dd><?=$model->descripcion;?></dd>
+               <dt>Aula preferente</dt>
+               <dd><?=$model->aula->nombre;?></dd>
+                <dt>Maximo de personas</dt>
+                 <dd><?=$model->numero_personas;?></dd>
+              
                <dt>Duración meses</dt>
                <dd><?=$model->duracion_mes;?></dd>
                <dt>Duración hora</dt>
                <dd><?=$model->duracion_hora;?></dd>
+               
               </dl>
              </div> 
               <div class="col-md-3">
@@ -114,12 +117,12 @@ $cuotaList=ArrayHelper::map
                 <dd>Domingo</dd>
                 <?php endif;?>
                 
-                <dt>Descripción</dt>
-                <dd><?=$model->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$model->duracion_hora;?></dd>
+                <dt>Disponible</dt>
+               <dd><?=$model->disponible;?></dd>
+               <dt>Fecha de creación</dt>
+               <dd><?=$model->fecha_creacion;?></dd>
+               
+               
               </dl>
              </div> 
             </div>
