@@ -15,11 +15,14 @@ use yii\widgets\Breadcrumbs;
 use backend\models\Taller;
 use backend\models\TallerImp;
 use backend\models\Comun;
+use backend\models\Categoria;
 
 $bundle = BackendAsset::register($this);
 
 
 $talleres   = Taller::findAll(['disponible'=>1]);
+
+$categorias   = Categoria::findAll(['disponible'=>1]);
 
 /*['label' => Yii::t('backend', 'Piano'),
 'url' => ['/taller'],
@@ -41,6 +44,10 @@ $talleres   = Taller::findAll(['disponible'=>1]);
  * tedtsss
 */
 
+
+$menuCategorias  =  []; 
+
+
 $menuTalleres = [];
 
 $i= 0;
@@ -54,6 +61,28 @@ $i= 0;
 	$menuTalleres[$i]['url'] = ['/taller/index'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
 	$menuTalleres[$i++]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	
+	foreach ($categorias as $cate){
+	    
+	    $tallerItems = [];
+	    $j = 0;
+	    foreach ($cate->tallers as $tallerItem){
+	        
+	        $tallerItems[$j]['label'] = $tallerItem->nombre;
+	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
+	        $tallerItems[$j]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	        $tallerItems[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	        
+	        
+	    }
+	    
+	    $menuTalleres[$i]['label'] = $cate->nombre;
+	    $menuTalleres[$i]['url'] = '#';
+	    $menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	    $menuTalleres[$i]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	    $menuTalleres[$i++]['items'] = $tallerItems;
+	    
+	}
 
 
 foreach ($talleres as $taller){
@@ -82,9 +111,9 @@ foreach ($talleres as $taller){
     
     $menuTalleresItems = [];
     $menuTalleresItems[] = ['label' => 'Inicio', 'url' => ['/taller/view','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
-    $menuTalleresItems[] = ['label' => 'Editar', 'url' => ['/taller/update','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
-    $menuTalleresItems[] = ['label' => 'Cuotas', 'url' => ['/taller/cuota','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
-    $menuTalleresItems[] = ['label' => 'Impartir', 'url' => ['/taller/implement','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')];
+    //$menuTalleresItems[] = ['label' => 'Editar', 'url' => ['/taller/update','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
+    //$menuTalleresItems[] = ['label' => 'Cuotas', 'url' => ['/taller/cuota','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
+    //$menuTalleresItems[] = ['label' => 'Impartir', 'url' => ['/taller/implement','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')];
     
     
     if (count($menuTalleresImp)){
@@ -244,22 +273,30 @@ foreach ($talleres as $taller){
                         'badge' => TimelineEvent::find()->today()->count(),
                         'badgeBgClass' => 'label-success',
                     ],
+                        [
+                        'label'=>Yii::t('backend', 'Talleres'),
+                        'options'=>['class'=>'header'],
+                        'icon'=>'<i class="fa fa-paint-brush"></i>',
+                        ],
+                    
+                    [
+                        'label' => Yii::t('backend', 'Categorías'),
+                        'url' => ['/categoria/index'],
+                        'icon' => '<i class="fa fa-tasks"></i>',
+                        
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['categoria']),
+                     
+                        
+                    ],
                 		
                 		[
                 		'label'=>Yii::t('backend', 'Talleres'),
                 		'url' => '#',
-                		'icon'=>'<i class="fa fa-pencil-square-o"></i>',
+                		'icon'=>'<i class="fa fa-cogs"></i>',
                 		'options'=>['class'=>'treeview'],
                 		'items'=>$menuTalleres,
                 		],
-                    
-                    [
-                        'label'=>Yii::t('backend', 'Instructores'),
-                        'url' =>  ['/instructor/index'],
-                        'icon'=>'<i class="fa fa-coffee"></i>',
-                        'options'=>['class'=>'treeview'],
-                        
-                    ],
                     
                     [
                         'label' => Yii::t('backend', 'Ingresos'),
@@ -269,7 +306,7 @@ foreach ($talleres as $taller){
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                         'items' => [
-                            ['label' => Yii::t('backend', 'Pagos cuotas'), 'url' => ['/pagos/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'page')],
+                            ['label' => Yii::t('backend', 'Pagos cuotas'), 'url' => ['/pago-taller-cuota/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
                             ['label' => Yii::t('backend', 'Pagos renta'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
                             ]
                         
@@ -306,14 +343,6 @@ foreach ($talleres as $taller){
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                       
-                    ],
-                    [
-                        'label' => Yii::t('backend', 'Aulas'),
-                        'url' =>  ['/aula/index'],
-                        'icon' => '<i class="fa fa-building"></i>',
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
-                        
                     ],
                     [
                         'label' => Yii::t('backend', 'System'),
