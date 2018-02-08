@@ -298,7 +298,7 @@ $gridColumns = [
             'view' => function ($url, $model, $key) {
             //Html::a('borrar', ['cuota-taller/delete','id'=>$key], ['class' => 'bg-red label']);
     return Html::a('', ['taller-imp/dashboard', 'id'=>$model->id], [
-    'class' => 'fa fa-tachometer',
+    'class' => 'fa fa-tachometer','data-pjax' => '0',
     ]);
             }
             ]
