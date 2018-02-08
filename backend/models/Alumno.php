@@ -44,6 +44,7 @@ use Yii;
  */
 class Alumno extends \yii\db\ActiveRecord
 {
+    
     /**
      * @inheritdoc
      */
