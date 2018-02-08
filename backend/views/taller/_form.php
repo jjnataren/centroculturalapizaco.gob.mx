@@ -19,7 +19,6 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 ?>
 
 <div class="row">
-	<div class="col-md-12">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -31,6 +30,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
 
 		<div class="col-md-3 col-sm-12 col-xs-12">
+		<h2>Imagen del taller</h2>
 		<?php
 
 echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
@@ -38,13 +38,14 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
         'avatar-upload'
     ],
     'maxNumberOfFiles' => 1
-])?>
+])->label(false)?>
 
 
 	
 	</div>
 
-
+<div class="col-md-9">
+<h2>Información del curso</h2>
 
 		<div class="col-md-12">
 		<div class="col-md-4">
@@ -387,10 +388,11 @@ echo $form->field($model, 'numero_personas', [
     </div>
 
     <div class="col-md-12">
-        <?php echo Html::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
 </div>
