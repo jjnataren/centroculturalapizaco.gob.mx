@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php echo Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Credencial', ['imprimir-credencial', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Ficha personal', ['imprimir-comprobante', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('Credencial', ['imprimir-credencial', 'id' => $model->id], ['class' => 'btn btn-primary', 'target'=>'_blank']) ?>
+        <?php echo Html::a('Ficha personal', ['imprimir-comprobante', 'id' => $model->id], ['class' => 'btn btn-primary','target'=>'_blank']) ?>
       
         <?php echo Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -25,7 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+<div class="col-md-3">
+            <dl>
+              
+               <dd><img class="img-thumbnail" style="width:350px; height:250px;" src="<?= isset ($model->path)? $model->base_url.'/' . $model->path : '/img/usuario.jpg'?>" alt="" /></dd>
+                
+              
+              </dl>
+              </div>
     <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [

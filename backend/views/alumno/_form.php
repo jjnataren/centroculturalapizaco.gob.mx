@@ -15,8 +15,22 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->errorSummary($model); ?>
 
 
+<div class="col-md-3 col-sm-12 col-xs-12">
+		<h2>Imagen del taller</h2>
+		<?php
 
- 
+echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
+    'url' => [
+        'avatar-upload'
+    ],
+    'maxNumberOfFiles' => 1
+])->label(false)?>
+
+
+	
+	</div>
+ <div class="col-md-9">
+<h2>Información del Alumno</h2>
     <div class="col-md-12">
 		<div class="col-md-4">
 				<small> Nombre del alumno</small>
@@ -671,5 +685,5 @@ use yii\bootstrap\ActiveForm;
 
 		
 
-
+</div>
 </div>

@@ -24,7 +24,7 @@
 
 		<tr >
     		<th valign="top" style="height: 100%; width: 30%;"  align="left"><img alt="" src="/img/gobtlax.jpg" width="120" height="100"></th>
-    		<td align="center" valign="bottom"> <br>"LA LIBERTAD" CENTRO CULTURAL DE APIZACO</td>
+    		<td align="center" valign="bottom"> <br><b>"LA LIBERTAD" CENTRO CULTURAL DE APIZACO</b></td>
     		
     		<th valign="top" style="height: 100%; width: 30%;"align="right"><img alt="" src="/img/logoLCC.jpg" width="120" height="90"></th>
 		</tr>
@@ -33,7 +33,8 @@
     		
     		<table border="1" >
     		<tr>
-    			<td style=" height: 100; width: 100;"></td>
+    			<td style=" height: 100; width: 100;" align="center"><img class="img-thumbnail" style="width:80px; height:80px;" src="<?= isset ($model->path)? $model->base_url.'/' . $model->path : '/img/usuario.jpg'?>" alt="" />
+                </td>
     		
     		</tr>
     		
@@ -44,7 +45,7 @@
 		</tr>
 			<tr>
     	
-    		<td valign="top" align="center" colspan="2"> NOMBRE DEL ALUMNO</td>
+    		<td valign="top" align="center" colspan="2"><b> NOMBRE DEL ALUMNO</b></td>
     	
 		</tr>
 		<tr>
@@ -54,14 +55,14 @@
 		</tr>
 		<tr>
 		<td></td>
-		<td valign="top" align="center" colspan="2"> DIRECCION</td>
+		<td valign="top" align="center" colspan="2"><b> DIRECCION</b></td>
 		</tr>
 		
 		<tr>
 		
-		<td>FIRMA DEL ALUMNO</td>
-	<td  align="center" colspan="2">TEL DE EMERGENCIA: <u><?= $model->tel_emergencia; ?></u></td>
+		<td><b>FIRMA DEL ALUMNO</b></td>
 		
+	<td  align="center" colspan="2"><b>TEL. DE EMERGENCIA: </b><u><?= $model->tel_emergencia; ?></u></td>
 		</tr>
 </table>
 	    </TD>

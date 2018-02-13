@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use trntv\filekit\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "tbl_alumno".
@@ -38,16 +39,40 @@ use Yii;
  * @property string $afiliacion_seguro
  * @property string $curp
  * @property string $taller_inscribe
+ * @property string $imagen_url
+ * @property string $base_url
+ * @property string $path
  *
  * @property Inscripcion[] $inscripcions
  * @property PagoTallerCuota[] $pagoTallerCuotas
  */
 class Alumno extends \yii\db\ActiveRecord
 {
-    
     /**
      * @inheritdoc
      */
+    
+    /**
+     * @var
+     */
+    public $imagen_url;
+    
+    
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'imagen_url' => [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'imagen_url',
+                'pathAttribute' => 'path',
+                'baseUrlAttribute' => 'base_url'
+            ]
+        ];
+    }
+    
     public static function tableName()
     {
         return 'tbl_alumno';
@@ -59,10 +84,10 @@ class Alumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_nacimiento', 'fecha_alta', 'fecha_ingreso'], 'safe'],
+            [['fecha_nacimiento', 'fecha_alta', 'fecha_ingreso', 'imagen_url'], 'safe'],
             [['sexo', 'edad_padre', 'tel_padre', 'edad_madre', 'tel_madre', 'tel_emergencia'], 'integer'],
             [['numero_registro', 'nombre', 'tipo_sangineo'], 'string', 'max' => 100],
-            [['direccion', 'correo_electronico'], 'string', 'max' => 300],
+            [['direccion', 'correo_electronico', 'base_url', 'path'], 'string', 'max' => 300],
             [['nacionalidad', 'estado', 'codigo_postal', 'fecha_baja', 'telefono_movil', 'telefono_casa'], 'string', 'max' => 45],
             [['nombre_padre', 'ocupacion_padre', 'nombre_madre', 'ocupacion_madre', 'lugar_nacimiento', 'escuela_procedencia', 'alergia_enfermedad', 'afiliacion_seguro'], 'string', 'max' => 200],
             [['curp'], 'string', 'max' => 20],
@@ -107,6 +132,9 @@ class Alumno extends \yii\db\ActiveRecord
             'afiliacion_seguro' => 'Afiliacion Seguro',
             'curp' => 'Curp',
             'taller_inscribe' => 'Taller Inscribe',
+            'imagen_url' => 'Imagen Url',
+            'base_url' => 'Base Url',
+            'path' => 'Path',
         ];
     }
 

@@ -37,7 +37,7 @@ $cuotaList=ArrayHelper::map
               <h3 class="box-title">Información de taller base</h3>
 
               <div class="box-tools pull-right">
-              <?php echo Html::a('<i class="fa fa-print"></i>', ['imprimir-info', 'id' => $model->id], ['class' => 'btn']) ?>
+              <?php echo Html::a('<i class="fa fa-print"></i>', ['imprimir-info', 'id' => $model->id], ['class' => 'btn','target'=>'_blank']) ?>
               <?php echo Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn']) ?>
               <?php echo Html::a('<i class="fa fa-trash"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn',

@@ -181,4 +181,34 @@ class AlumnoSearch extends Alumno
     }
     
     
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchTallerImp($params,$id_taller)
+    {
+        $query = Alumno::findBySql('select * from  tbl_alumno where id in (select id_alumno from tbl_inscripcion where id_taller_imp = '.$id_taller.')' );
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+        
+        $query->andFilterWhere([
+            'id' => $this->id,
+            
+        ]);
+        
+        //$query->andFilterWhere(['like', 'numero_registro', $this->numero_registro]);
+        
+        return $dataProvider;
+    }
+    
+    
 }

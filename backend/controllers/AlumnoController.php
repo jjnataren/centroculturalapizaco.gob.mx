@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\controllers;
 
 use Yii;
@@ -10,10 +9,15 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use mPDF;
 use kartik\mpdf\Pdf;
+use trntv\filekit\actions\UploadAction;
+use trntv\filekit\actions\DeleteAction;
+use Intervention\Image\ImageManagerStatic;
 
 /**
  * AlumnoController implements the CRUD actions for Alumno model.
  */
+
+$array=array();
 class AlumnoController extends Controller
 {
     public function behaviors()
@@ -26,6 +30,31 @@ class AlumnoController extends Controller
                 ],
             ],
         ];
+    }
+    
+    
+    
+    /**
+     * (non-PHPdoc)
+     * @see \yii\base\Controller::actions()
+     */
+    public function actions()
+    {
+        return [
+            'avatar-upload' => [
+                'class' => UploadAction::className(),
+                'deleteRoute' => 'avatar-delete',
+                'on afterSave' => function ($event) {
+                /* @var $file \League\Flysystem\File */
+                        $file = $event->file;
+                        $img = ImageManagerStatic::make($file->read());
+                        $file->put($img->encode());
+                }
+                ],
+                'avatar-delete' => [
+                    'class' => DeleteAction::className()
+                ]
+                ];
     }
 
     /**
@@ -194,6 +223,9 @@ class AlumnoController extends Controller
             'mode' => Pdf::MODE_UTF8,
             // A4 paper format
             'format' => Pdf::FORMAT_A4,
+            
+            
+            
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT,
             // stream to browser inline
@@ -209,7 +241,7 @@ class AlumnoController extends Controller
 								      font:5px;
 								    }',
             // set mPDF properties on the fly
-            'options' => ['title' => 'Ficha de inscripción'],
+            'options' => ['title' => 'Credencial del alumno'],
             // call mPDF methods on the fly
             'methods' => [
                 'SetHeader'=>['Ficha de inscripción'],
