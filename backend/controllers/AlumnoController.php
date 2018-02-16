@@ -23,6 +23,7 @@ class AlumnoController extends Controller
     public function behaviors()
     {
         return [
+            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
