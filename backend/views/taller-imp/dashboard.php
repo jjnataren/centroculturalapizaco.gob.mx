@@ -1,29 +1,54 @@
 <?php
 
 use backend\models\Cuota;
+use kartik\datecontrol\DateControl;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use backend\models\CuotaTallerImp;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
-$this->title = $model->id;
+$this->title = "Taller:  "  .  $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Talleres', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 
+Yii::$app->formatter->locale = 'es-MX';
 
 
+$cuotasDB = Cuota::findBySql('select id,  CONCAT(id, \' - \',concepto ) as concepto from tbl_cuota where disponible = 1')->all();
 
 $cuotaList=ArrayHelper::map
-(Cuota::findBySql('select id,  CONCAT(id, \' - \',concepto ) as concepto from tbl_cuota where disponible = 1')->all(), 'id', 'concepto');
+($cuotasDB, 'id', 'concepto');
+
+$cuotaList2=$cuotaList;
+
+$cuotaList2[0] = 'Seleccionar todas';
+
 
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12">
 
 
-   
+   <div >
+   	<?php 
+   	
+   	    $cuotaDBTest = Cuota::find()->all();
+   	
+   	    foreach ($cuotaDBTest as $itemCuota){
+            
+            echo Html::input('hidden','cuota_monto'.$itemCuota->id, $itemCuota->monto, ['id'=>'cuota_monto'.$itemCuota->id]);
+            echo Html::input('hidden','cuota_concepto'.$itemCuota->id, $itemCuota->concepto, ['id'=>'cuota_concepto'.$itemCuota->id]);
+            
+        }   	    
+   	?>
+   		
+   		
+   	
+   </div>
 
           
           <div class="col-md-12">
@@ -131,7 +156,7 @@ $cuotaList=ArrayHelper::map
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             	    <?php 
+             	    <?php   
              	    
              	    
              	    $gridCuotaColumns = [   ['class' => 'yii\grid\SerialColumn'],
@@ -158,7 +183,16 @@ $cuotaList=ArrayHelper::map
              	                
              	                ],
              	                
-             	                'fecha_max_pago',
+             	               
+             	                [
+             	                    'attribute'=>'fecha_max_pago',
+             	                    'header'=>'Fecha limite',
+             	                    'content'=>function($data){
+             	                    
+             	                    return  Yii::$app->formatter->asDate($data->fecha_max_pago,'dd/MMM/Y');
+             	                    },
+             	                    
+             	                    ],
              	                [
              	                    'attribute'=>'obligatoria',
              	                    
@@ -176,11 +210,10 @@ $cuotaList=ArrayHelper::map
              	                            
              	                            'delete' => function ($url, $model, $key) {
              	                            //Html::a('borrar', ['cuota-taller/delete','id'=>$key], ['class' => 'bg-red label']);
-                         	                    return Html::a('', ['cuota-taller/delete', 'id'=>$model->id], [
+                         	                    return Html::a('', ['delete-cuota', 'id'=>$model->id, 'id_taller_imp'=>$model->id_taller_imp], [
                          	                    'class' => 'fa fa-trash',
                          	                    'data' => [
-                         	                    'confirm' => "Are you sure you want to delete profile?",
-                         	                    'method' => 'post',
+                         	                    'confirm' => "Esta seguro de borrar esta cuota?",                         	                    
                          	                    ],
                          	                    ]);
              	                            }
@@ -277,19 +310,22 @@ $cuotaList=ArrayHelper::map
                         
                     ],
                     [
-                        
-                        'attribute' => 'fecha_pago',
-                        'vAlign'=>'middle',
-                        
-                    ],
-                    [
-                        
-                        'attribute' => 'monto',
-                        'vAlign'=>'middle',
+                        'attribute'=>'fecha_pago',
                        
+                        'content'=>function($data){
                         
+                        return  Yii::$app->formatter->asDate($data->fecha_pago,'dd/MMM/Y');
+                        },
                         
-                    ],
+                        ],
+                        [
+                            'attribute'=>'monto',
+                            'content'=>function($data){
+                            
+                            return  Yii::$app->formatter->asCurrency($data->monto);
+                            },
+                            
+                            ],
                     
                 
                             ];
@@ -305,7 +341,7 @@ $cuotaList=ArrayHelper::map
                 
                     'toolbar' =>  [
                         ['content'=>
-                            Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Inscribir alumno'), 'class'=>'btn btn-success', ]) . ' '.
+                            Html::a('<i class="glyphicon glyphicon-plus"></i>',['pago','id'=>$model->id], ['type'=>'button', 'title'=> 'Nuevo pago', 'class'=>'btn btn-success', ]) . ' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
                         ],
                         '{export}',
@@ -360,12 +396,15 @@ $cuotaList=ArrayHelper::map
         
         
     ],
-    [
-        
-        'attribute' => 'fecha_inscripcion',
-        'vAlign'=>'middle',
-        
-    ],
+              [
+                  'attribute'=>'fecha_inscripcion',
+                  
+                  'content'=>function($data){
+                  
+                  return  Yii::$app->formatter->asDate($data->fecha_inscripcion,'dd/MMM/Y');
+                  },
+                  
+                  ],
     [
         
         'attribute' => 'id_pago',
@@ -463,7 +502,7 @@ echo GridView::widget([
 	<div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
-            
+             <?php $form = ActiveForm::begin(['action' =>['cuota','id'=>$model->id]]); ?>
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
@@ -471,15 +510,123 @@ echo GridView::widget([
               </div>
               <div class="modal-body">
                 
+					<div class="col-md-12">
+    <?php 
+    
+    $cuotaModel  =  new CuotaTallerImp(); ?>
+   
+    </div> 
 
+
+ <?= $form->field($cuotaModel, 'id_cuota',['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-sticky-note"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($cuotaList,
+   						['prompt'=>'-- TIPO DE CUOTA  --',
+   						'id' => 'selectProCuota',
+   						'onchange'=>'var id_cuota = $("#selectProCuota option:selected").val();  
+                                    $("#cuota_monto").val($("#cuota_monto"+id_cuota).val());  
+                                    $("#cuota_concepto").val($("#cuota_concepto"+id_cuota).val());'
+   						
+   						
+      ]) ?>
+      
+        <?php echo $form->field($cuotaModel, 'concepto_imp', ['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-pencil"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->textInput(['placeholder' => 'Concepto de la cuota','class'=>'form-control input-lg','maxlength' => '50', 'id'=>'cuota_concepto'])->label(false); ?>
+     
+      
+      <?php echo $form->field($cuotaModel, 'monto', ['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-dollar"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->textInput(['placeholder' => 'Monto para esta cuota','class'=>'form-control input-lg','maxlength' => '50', 'id'=>'cuota_monto'])->label(false); ?>
+      
+      <?php echo $form->field($cuotaModel, 'obligatoria')->checkbox(['class'=>'form']); ?>
+      
+   		<?php  
+   		echo $form->field($cuotaModel, 'fecha_max_pago')->widget(DateControl::classname(), [
+   		    'type'=>DateControl::FORMAT_DATE,
+   		    'ajaxConversion'=>false,
+   		    'widgetOptions' => [
+   		        'pluginOptions' => [
+   		            'autoclose' => true
+   		        ]
+   		    ]
+   		]);?>
+      
+       <?= $form->field($cuotaModel, 'tipo_periodo',['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-calendar-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList([2=>'Semanal', 1=>'Mensual', 3=>'Anual'],
+   						['prompt'=>'-- PERIODICIDAD  --',
+   						'id' => 'selectPeriod',
+   						
+   						
+      ]) ?>
+      
+      
+      
+      
+      
+        <?php echo $form->field($cuotaModel, 'comentario', ['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-pencil"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->textArea(['placeholder' => 'Comentario de ayuda','class'=>'form-control input-lg','maxlength' => '200'])->label(false); ?>
+      
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                 <?php echo Html::submitButton($cuotaModel->isNewRecord ? 'Guardar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+              </div>
+            </div>
+            <?php ActiveForm::end(); ?>
 
 
      
-          </div>
           <!-- /.modal-dialog -->
         </div>
         </div>
-        </div>
         
-
 

@@ -2,23 +2,27 @@
 
 namespace backend\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\PagoTallerCuota;
+use backend\models\TallerImp;
+
+
+
 
 /**
  * PagoTallerCuotaSearch represents the model behind the search form about `backend\models\PagoTallerCuota`.
  */
 class PagoTallerCuotaSearch extends PagoTallerCuota
 {
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'id_taller_imp', 'id_cuota', 'id_alumno'], 'integer'],
+            [['id', 'id_taller_imp', 'id_cuota', 'id_alumno','id_instructor'], 'integer'],
             [['monto', 'concepto', 'fecha_pago', 'metodo_pago', 'comentario'], 'safe'],
         ];
     }
@@ -47,14 +51,18 @@ class PagoTallerCuotaSearch extends PagoTallerCuota
             'query' => $query,
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
+        if (!($this->load($params) )) {
             return $dataProvider;
         }
+        
+     
+        
+        
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_taller_imp' => $this->id_taller_imp,
-            'id_cuota' => $this->id_cuota,
+           // 'id_taller_imp' => $this->id_taller_imp,
+            //'id_cuota' => $this->id_cuota,
             'id_alumno' => $this->id_alumno,
         ]);
 
@@ -66,6 +74,26 @@ class PagoTallerCuotaSearch extends PagoTallerCuota
             $query->andFilterWhere(['between', 'fecha_pago', $date1,$date2]);
         }
         
+        
+        /**
+         * Find taller imp   in instructores
+         */
+        
+        $instructorTalleres = [];
+        
+        if (isset($this->id_instructor)){
+            
+            $talleres =  TallerImp::find()->andFilterWhere(['in','id_instructor',$this->id_instructor])->all();
+            
+            foreach ($talleres as $taller){
+                
+                $instructorTalleres[]  =  $taller->id;
+            }
+            
+        }
+        
+        $query->andFilterWhere(['in', 'id_cuota',$this->id_cuota]);
+        $query->andFilterWhere(['in', 'id_taller_imp',$instructorTalleres]);
         
         $query->andFilterWhere(['like', 'monto', $this->monto])
             ->andFilterWhere(['like', 'concepto', $this->concepto])

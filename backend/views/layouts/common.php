@@ -345,6 +345,17 @@ foreach ($talleres as $taller){
                       
                     ],
                     [
+                        'label' => Yii::t('backend', 'Pagos'),
+                        'url' =>  ['/pago-taller-cuota/create'],
+                        'icon' => '<i class="fa fa-graduation-cap"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'items' => [
+                            ['label' => Yii::t('backend', 'Pago inscripción'), 'url' => ['/pago-taller-cuota/create?id=1'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
+                        ]
+                        
+                    ],
+                    [
                         'label' => Yii::t('backend', 'System'),
                         'options' => ['class' => 'header']
                     ],

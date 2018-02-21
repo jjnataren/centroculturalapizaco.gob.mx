@@ -89,6 +89,43 @@ class PagoTallerCuotaController extends Controller
         }
     }
 
+    
+    
+    /**
+     * Creates a new PagoTallerCuota model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateInscripcion()
+    {
+        $model = new PagoTallerCuota();
+        
+        
+        $alumnoSearchModel = new AlumnoSearch();
+        $alumnoDataProvider = $alumnoSearchModel->search(Yii::$app->request->queryParams);
+        
+        
+        $tallerImpSearchModel = new TallerImpSearch();
+        $tallerImpDataProvider = $tallerImpSearchModel->search(Yii::$app->request->queryParams);
+        
+        
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create_inscripcion', [
+                'model' => $model,
+                'alumnoSearchModel' => $alumnoSearchModel,
+                'alumnoDataProvider' => $alumnoDataProvider,
+                'tallerImpSearchModel'=>$tallerImpSearchModel,
+                'tallerImpDataProvider'=>$tallerImpDataProvider
+                
+                
+            ]);
+        }
+    }
+    
+    
     /**
      * Updates an existing PagoTallerCuota model.
      * If update is successful, the browser will be redirected to the 'view' page.

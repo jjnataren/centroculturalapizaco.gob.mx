@@ -105,7 +105,7 @@ class TallerController extends Controller
         
         
         $searchCuotaModel = new CuotaTallerSearch();
-        $dataCuotaProvider = $searchCuotaModel->search(Yii::$app->request->queryParams);
+        $dataCuotaProvider = $searchCuotaModel->searchByTaller(Yii::$app->request->queryParams,$id);
         
         $sModel = new CuotaTaller();
         $sModel->id_taller = $id;

@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use backend\models\TallerImp;
+use dosamigos\multiselect\MultiSelect;
+use backend\models\Instructor;
+use kartik\select2\Select2;
+use yii\base\Widget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PagoTallerCuotaSearch */
@@ -12,6 +16,7 @@ use backend\models\TallerImp;
 $this->title = 'Pago Taller Cuotas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="row">
 <div class="col-md-12">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -32,7 +37,7 @@ $gridColumns = [
        
         'attribute' => 'id',
         'vAlign'=>'middle',
-        'header'=>'Folio de pago',
+        'header'=>'Folio',
         
         
     ],
@@ -68,21 +73,52 @@ $gridColumns = [
             },
             'filterType' => GridView::FILTER_SELECT2,
             'filter' => ArrayHelper::map(TallerImp::findBySql('select id, concepto  from tbl_cuota')->orderBy('concepto')->asArray()->all(), 'id', 'concepto'),
+            
+                
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true],
             ],
-            'filterInputOptions' => ['placeholder' => 'Todas'],
+            'filterInputOptions' => ['placeholder' => 'Todas','multiple'=>true],
             'format' => 'raw'
       ],
     
+      
+      [
+          'attribute' => 'id_instructor',
+          'vAlign' => 'middle',
+          'width' => '180px',
+          'value' => function ($model, $key, $index, $widget) {
+          return Html::a($model->tallerImp->instructor->nombre,
+              '#',
+              ['title' => 'View author detail', 'onclick' => 'alert("This will open the author page.\n\nDisabled for this demo!")']);
+          },
+          'filterType' => GridView::FILTER_SELECT2,
+          'filter' => ArrayHelper::map(Instructor::findBySql('select id, nombre  from tbl_instructor')->orderBy('nombre')->asArray()->all(), 'id', 'nombre'),
+          
+          
+          'filterWidgetOptions' => [
+              'pluginOptions' => ['allowClear' => true],
+          ],
+          'filterInputOptions' => ['placeholder' => 'Todos','multiple'=>true],
+          'format' => 'raw',
+            'pageSummary' => 'Total',
+              ],
 
+    
+    
     
     [
         
         'attribute' => 'monto',
         'vAlign'=>'middle',
+        'format' => ['decimal', 2],
+        'pageSummary' => true,
+        'pageSummaryFunc' => GridView::F_SUM,
+        'footer' => true,
         
     ],
+    
+
     
     [
         
@@ -90,6 +126,8 @@ $gridColumns = [
         'vAlign'=>'middle',
         
     ],
+    
+
     
     [
         
@@ -121,14 +159,6 @@ $gridColumns = [
         'format'=>'raw',
         'header'=>'Alumno',
         ],
-        [
-            'attribute'=>'id_alumno',
-            'value'=>function ($data, $key, $index, $widget) {
-            return "".$data->alumno->direccion;
-            },
-            'vAlign'=>'middle',
-            'header'=>'Dirección',
-            ],
            
                     
        
@@ -142,6 +172,8 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => $gridColumns,
+    'showPageSummary' => true,
+    'resizableColumns'=>true,
 
 //    'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
 
@@ -171,6 +203,7 @@ echo GridView::widget([
 ?>
 
 
+</div>
 </div>
     
     

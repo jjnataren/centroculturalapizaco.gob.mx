@@ -64,4 +64,38 @@ class CuotaTallerSearch extends CuotaTaller
 
         return $dataProvider;
     }
+    
+    
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchByTaller($params,$id)
+    {
+        $query = CuotaTaller::findBySql('select * from tbl_cuota_taller where id_taller = ' .$id);
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+        
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'id_cuota' => $this->id_cuota,
+            'id_taller' => $this->id_taller,
+            'obligatoria' => $this->obligatoria,
+            'tipo_periodo' => $this->tipo_periodo,
+        ]);
+        
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+        ->andFilterWhere(['like', 'comentario', $this->comentario]);
+        
+        return $dataProvider;
+    }
 }

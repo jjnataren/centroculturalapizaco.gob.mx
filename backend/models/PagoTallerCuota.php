@@ -11,12 +11,14 @@ use Yii;
  * @property int $id_taller_imp
  * @property int $id_cuota_taller_imp
  * @property int $id_cuota
- * @property string $monto
+ * @property double $monto
  * @property int $id_alumno
  * @property string $concepto
  * @property string $fecha_pago
  * @property string $metodo_pago
  * @property string $comentario
+ * @property int $id_instructor
+ * @property string $fecha_operacion
  *
  * @property Inscripcion $inscripcion
  * @property Alumno $alumno
@@ -40,9 +42,10 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_taller_imp', 'id_cuota_taller_imp', 'id_cuota', 'id_alumno'], 'integer'],
-            [['fecha_pago'], 'safe'],
-            [['monto', 'concepto', 'metodo_pago', 'comentario'], 'string', 'max' => 45],
+            [['id_taller_imp', 'id_cuota_taller_imp', 'id_cuota', 'id_alumno', 'id_instructor'], 'integer'],
+            [['monto'], 'number'],
+            [['fecha_pago', 'fecha_operacion'], 'safe'],
+            [['concepto', 'metodo_pago', 'comentario'], 'string', 'max' => 45],
             [['id_alumno'], 'exist', 'skipOnError' => true, 'targetClass' => Alumno::className(), 'targetAttribute' => ['id_alumno' => 'id']],
             [['id_cuota'], 'exist', 'skipOnError' => true, 'targetClass' => Cuota::className(), 'targetAttribute' => ['id_cuota' => 'id']],
             [['id_cuota_taller_imp'], 'exist', 'skipOnError' => true, 'targetClass' => CuotaTallerImp::className(), 'targetAttribute' => ['id_cuota_taller_imp' => 'id']],
@@ -66,6 +69,8 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
             'fecha_pago' => 'Fecha Pago',
             'metodo_pago' => 'Metodo Pago',
             'comentario' => 'Comentario',
+            'id_instructor' => 'Id Instructor',
+            'fecha_operacion' => 'Fecha Operacion',
         ];
     }
 

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pago-taller-cuota-create">
 
-    <?php echo $this->render('_form', [
+    <?php echo $this->render('_form_inscripcion', [
         'model' => $model,
         'alumnoDataProvider'=>$alumnoDataProvider,
         'alumnoSearchModel'=>$alumnoSearchModel,
