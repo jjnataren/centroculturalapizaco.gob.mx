@@ -22,6 +22,8 @@ use Yii;
  * @property int $sexo
  * @property int $disponible
  * @property int $localidad
+ * @property string $correo_electroinico
+ * @property int $telefono
  *
  * @property Taller[] $tallers
  * @property TallerImp[] $tallerImps
@@ -35,7 +37,7 @@ class Instructor extends \yii\db\ActiveRecord
     {
         return 'tbl_instructor';
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -43,13 +45,13 @@ class Instructor extends \yii\db\ActiveRecord
     {
         return [
             [['fecha_nacimiento', 'fecha_alta', 'fecha_baja'], 'safe'],
-            [['sexo', 'disponible', 'localidad'], 'integer'],
+            [['sexo', 'disponible', 'localidad', 'telefono'], 'integer'],
             [['nombre'], 'string', 'max' => 200],
-            [['direccion', 'url_foto', 'url_fb', 'url_tw', 'url_cv'], 'string', 'max' => 300],
+            [['direccion', 'url_foto', 'url_fb', 'url_tw', 'url_cv', 'correo_electroinico'], 'string', 'max' => 300],
             [['numero_cedula', 'numero_registro'], 'string', 'max' => 45],
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -71,9 +73,11 @@ class Instructor extends \yii\db\ActiveRecord
             'sexo' => 'Sexo',
             'disponible' => 'Disponible',
             'localidad' => 'Localidad',
+            'correo_electroinico' => 'Correo Electroinico',
+            'telefono' => 'Telefono',
         ];
     }
-
+    
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -81,7 +85,7 @@ class Instructor extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Taller::className(), ['id_instructor' => 'id']);
     }
-
+    
     /**
      * @return \yii\db\ActiveQuery
      */
