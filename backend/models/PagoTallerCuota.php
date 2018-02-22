@@ -44,6 +44,7 @@ class PagoTallerCuota extends \yii\db\ActiveRecord
         return [
             [['id_taller_imp', 'id_cuota_taller_imp', 'id_cuota', 'id_alumno', 'id_instructor'], 'integer'],
             [['monto'], 'number'],
+            [['monto','concepto','id_alumno','id_taller_imp'], 'required'],
             [['fecha_pago', 'fecha_operacion'], 'safe'],
             [['concepto', 'metodo_pago', 'comentario'], 'string', 'max' => 45],
             [['id_alumno'], 'exist', 'skipOnError' => true, 'targetClass' => Alumno::className(), 'targetAttribute' => ['id_alumno' => 'id']],

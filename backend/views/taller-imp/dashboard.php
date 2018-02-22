@@ -30,7 +30,9 @@ $cuotaList2[0] = 'Seleccionar todas';
 
 
 ?>
-<div class="col-md-12 col-sm-12 col-xs-12">
+
+<div class="row">
+
 
 
    <div >
@@ -463,7 +465,7 @@ echo GridView::widget([
 
     'toolbar' =>  [
         ['content'=>
-            Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Inscribir alumno'), 'class'=>'btn btn-success', ]) . ' '.
+            Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create-inscripcion','id'=>$model->id],['type'=>'button', 'title'=>Yii::t('kvgrid', 'Inscribir alumno'), 'class'=>'btn btn-success', ]) . ' '.
             Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
         ],
         '{export}',
@@ -493,7 +495,6 @@ echo GridView::widget([
         </div>
         
         
-</div>
 
 
 
@@ -630,3 +631,4 @@ echo GridView::widget([
         </div>
         
 
+</div>

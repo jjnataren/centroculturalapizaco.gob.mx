@@ -16,7 +16,6 @@ use backend\models\CuotaTaller;
 use backend\models\TallerImp;
 use backend\models\CuotaTallerImp;
 use backend\models\search\TallerImpSearch;
-use mPDF;
 use kartik\mpdf\Pdf;
 
 /**

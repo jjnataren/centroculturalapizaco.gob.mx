@@ -154,7 +154,10 @@ $this->registerJs("
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <?php echo $form->errorSummary($model); ?>
+    
+    <?php echo $form->errorSummary($model,['class'=>'panel panel-danger text text-danger']); ?>
+    
+    
     <div class="col-md-6 col-xs-12 col-sm-12">
     <div class="row">
     <div class="col-md-12 col-xs-12 col-sm-12">
