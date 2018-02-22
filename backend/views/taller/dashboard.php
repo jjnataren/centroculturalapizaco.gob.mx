@@ -128,7 +128,7 @@ $cuotaList=ArrayHelper::map
             </div>
             <div class="box-footer">
             	
-            	<a href="implement?id=<?php echo $model->id;?>>" class="btn btn-primary btn-lg" ><i class="fa fa-star"></i>&nbsp;Impartir taller</a>
+            	<a href="implement?id=<?php echo $model->id;?>" class="btn btn-primary btn-lg" ><i class="fa fa-star"></i>&nbsp;Impartir taller</a>
             	
             </div>
             <!-- /.box-body -->

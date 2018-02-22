@@ -196,7 +196,7 @@ class TallerController extends Controller
         $sModel->numero_max_personas = $model->numero_personas;
         
         
-        if($model->idAula){
+        if($model->aula){
             $sModel->id_aula_lunes = $model->id_aula;
             $sModel->id_aula_martes = $model->id_aula;
             $sModel->id_aula_miercoles = $model->id_aula;
