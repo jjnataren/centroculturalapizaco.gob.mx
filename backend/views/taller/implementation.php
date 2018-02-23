@@ -4,6 +4,7 @@ use backend\models\Aula;
 use backend\models\Categoria;
 use backend\models\Instructor;
 use kartik\datecontrol\DateControl;
+use kartik\time\TimePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -19,15 +20,92 @@ $aulaList = ArrayHelper::map(Aula::findBySql('select id,  CONCAT(id, \' - \',nom
 $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_categoria where disponible = 1')->all(), 'id', 'nombre');
 
 
+
+$this->title = 'Implementar taller base. [' . $model->id_curso_base . '] ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id]];
+$this->params['breadcrumbs'][] = 'Implementar taller base';
 ?>
+
+
 
 <div class="row">
 
+<div class="col-md-12">
     <?php $form = ActiveForm::begin(); ?>
 
     <?php echo $form->errorSummary($model); ?>
 
     <?php echo $form->field($model, 'id_curso_base')->hiddenInput()->label(false) ?>
+
+			<div class="col-md-12">
+		
+		<div class="col-md-4">
+				<small>Nombre base del taller.</small>
+			</div>
+			<div class="col-md-8">
+    <?php
+    
+echo $form->field($model, 'nombre', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-cog"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textInput([
+        'placeholder' => 'NOMBRE TALLER',
+        'class' => 'form-control input-lg',
+        'maxlength' => '16'
+    ])
+        ->label(false);
+    ?>
+			
+	</div>
+			
+		</div>
+
+
+		<div class="col-md-12">
+		<div class="col-md-4">
+				<small> Agregue una descripción del curso para que se pueda
+					identificar de mejor manera. </small>
+			</div>
+			<div class="col-md-8">
+     <?php
+    
+echo $form->field($model, 'descripcion', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-pencil"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textArea([
+        'placeholder' => 'DESCRIPCIÓN Y DETALLES DEL TALLER',
+        'class' => 'form-control input-lg',
+        'maxlength' => '200'
+    ])
+        ->label(false);
+    ?>
+			
+    
+	</div>
+
+			
+
+		</div>
 
     	<div class="col-md-12">
 		<div class="col-md-4">
@@ -53,83 +131,218 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 			
 		</div>
 
-    <?php echo $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-    
-    <?php  
-   		echo $form->field($model, 'fecha_inicio')->widget(DateControl::classname(), [
-   		    'type'=>DateControl::FORMAT_DATE,
-   		    'ajaxConversion'=>false,
-   		    'widgetOptions' => [
-   		        'pluginOptions' => [
-   		            'autoclose' => true
-   		        ]
-   		    ]
-   		]);?>
-   
-    
-	<?php  
-   		echo $form->field($model, 'fecha_fin')->widget(DateControl::classname(), [
-   		    'type'=>DateControl::FORMAT_DATE,
-   		    'ajaxConversion'=>false,
-   		    'widgetOptions' => [
-   		        'pluginOptions' => [
-   		            'autoclose' => true
-   		        ]
-   		    ]
-   		]);?>
 	
+		
 
-    <?php echo $form->field($model, 'descripcion')->textarea() ?>
+	<div class="col-md-12">
+		<div class="col-md-4">
+				<small>Duración del taller</small>
+		</div>
+			<div class="col-md-8">
+			<div class="row">
+    		<div class="col-md-6">
+                <?php  
+               		echo $form->field($model, 'fecha_inicio')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_DATE,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		]);?>
+               
+            </div>
+            <div class="col-md-6">    
+            	<?php  
+               		echo $form->field($model, 'fecha_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_DATE,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		]);?>
+              </div>
+			</div>
 
+	</div>
+	</div>
+	
     <?php echo $form->field($model, 'numero_max_personas')->textInput() ?>
 
     <?php echo $form->field($model, 'comentarios')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'url_img_publicitaria')->textInput(['maxlength' => true]) ?>
     
-    
-
-    
-    	<?php  
-   		echo $form->field($model, 'lunes')->widget(DateControl::classname(), [
-   		    'type'=>DateControl::FORMAT_TIME,
-   		    'ajaxConversion'=>false,
-   		    'widgetOptions' => [
-   		        'pluginOptions' => [
-   		            'autoclose' => true
-   		        ]
-   		    ]
-   		]);?>
-    
-
-    <?php echo $form->field($model, 'martes')->textInput() ?>
-
-    <?php echo $form->field($model, 'miercoles')->textInput() ?>
-
-    <?php echo $form->field($model, 'jueves')->textInput() ?>
-
-    <?php echo $form->field($model, 'viernes')->textInput() ?>
-
-    <?php echo $form->field($model, 'sabado')->textInput() ?>
-
-    <?php echo $form->field($model, 'domingo')->textInput() ?>
-
     <?php echo $form->field($model, 'duracion_hora')->textInput() ?>
+    
+    
+	<div class="col-md-12">
+		<div class="box box-info with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-clock-o"></i>
+              <h3 class="box-title">Horarios definidos</h3>
 
-    <?php echo $form->field($model, 'lunes_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'martes_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'miercoles_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'jueves_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'viernes_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'sabado_fin')->textInput() ?>
-
-    <?php echo $form->field($model, 'domingo_fin')->textInput() ?>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+    		
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Lunes</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_lunes', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'lunes')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'lunes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Martes</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_martes', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'martes')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'martes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Miercoles</div>
+    		<div class="panel-body">
+    			<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_miercoles', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+                    
+		          {input}
+                    
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'miercoles')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'miercoles_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Jueves</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_jueves', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'jueves')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'jueves_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Viernes</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_viernes', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'viernes')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'viernes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Sabado</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_sabado', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'sabado')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'sabado_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
+    		<div class="col-md-4">
+    		<div class="panel panel-default">
+    		<div class="panel-heading">Domingo</div>
+    		<div class="panel-body">
+    		<label>Aula</label>
+    			<?=$form->field($model, 'id_aula_domingo', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-building-o"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
+    			<?php echo $form->field($model, 'domingo')->widget(TimePicker::classname(), [])->label("Inicio");?>
+    			<?php echo $form->field($model, 'domingo_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    		</div>
+    		</div>
+    		</div>
 
     <?php echo $form->field($model, 'estatus')->textInput() ?>
 
@@ -137,19 +350,13 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
     <?php echo $form->field($model, 'disponible')->textInput() ?>
 
-    <?php echo $form->field($model, 'id_aula_lunes')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_martes')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_miercoles')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_jueves')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_viernes')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_sabado')->textInput() ?>
-
-    <?php echo $form->field($model, 'id_aula_domingo')->textInput() ?>
+    
+    
+   </div>
+   </div>
+   </div>
+   
+    
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -157,4 +364,5 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

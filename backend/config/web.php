@@ -50,6 +50,7 @@ $config = [
         'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',
             
+            'ajaxConversion'=>true,
             // format settings for displaying each date attribute (ICU format example)
             'displaySettings' => [
                 Module::FORMAT_DATE => 'dd/MM/yyyy',
@@ -88,7 +89,7 @@ $config = [
                     'options' => [
                         'dateFormat' => 'php:d/M/Y',
                         'options' => ['class'=>'form-control'],
-                    ]
+                    ] 
                 ]
             ]
             // other settings
