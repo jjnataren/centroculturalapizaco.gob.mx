@@ -7,7 +7,7 @@ use yii\web\View;
 use backend\models\Cuota;
 use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
+/* @var $this yii\web\View */ 
 /* @var $model backend\models\PagoTallerCuota */
 /* @var $form yii\bootstrap\ActiveForm */
 

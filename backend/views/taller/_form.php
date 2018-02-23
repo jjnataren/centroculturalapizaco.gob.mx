@@ -30,22 +30,47 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
 
 		<div class="col-md-3 col-sm-12 col-xs-12">
-		<h2>Imagen del taller</h2>
-		<?php
+		
+		
+		   <div class="box box-info with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-th"></i>
+              <h3 class="box-title">Imagen del curso</h3>
 
-echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
-    'url' => [
-        'avatar-upload'
-    ],
-    'maxNumberOfFiles' => 1
-])->label(false)?>
-
-
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+		
+        		<?php
+                        echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
+                    'url' => [
+                        'avatar-upload'
+                    ],
+                    'maxNumberOfFiles' => 1
+                ])->label(false)?>
+        	</div>
+        	</div>
+        	</div>
 	
-	</div>
 
 <div class="col-md-9">
-<h2>Información del curso</h2>
+  <div class="box box-info with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-th"></i>
+              <h3 class="box-title">Información de taller </h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
 
 		<div class="col-md-12">
 		<div class="col-md-4">
@@ -77,7 +102,7 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
 			</div>
 
 			<div class="col-md-7">
-      <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
+      <?=$form->field($model, 'id_categoria', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
 		             <span class="fa fa-building-o"></span>
@@ -311,43 +336,30 @@ echo $form->field($model, 'numero_personas', [
 			<div class="col-md-4">
 				<small>Defina en que dias se impartira el taller.</small>
 			</div>
-			
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'lunes')->checkbox(['class'=>'form form-horizontal']); ?>
+			<div class="col-md-8">
+				<div class="col-md-3">
+					<?php echo $form->field($model, 'lunes')->checkbox(['class'=>'form form-horizontal']); ?>
+				</div>
+				<div class="col-md-3">
+	            	<?php echo $form->field($model, 'martes')->checkbox(['class'=>'form form-horizontal']); ?>
+            	</div>
+				<div class="col-md-3">
+	                <?php echo $form->field($model, 'miercoles')->checkbox(['class'=>'form']); ?>
+                </div>
+				<div class="col-md-3">
+	            	<?php echo $form->field($model, 'jueves')->checkbox(['class'=>'form-vertical']); ?>
+            	</div>
+				<div class="col-md-3">
+	            	<?php echo $form->field($model, 'viernes')->checkbox(['class'=>'form form-horizontal']); ?>
+            	</div>
 
-	</div>
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'martes')->checkbox(['class'=>'form form-horizontal']); ?>
-
-	</div>
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'miercoles')->checkbox(['class'=>'form']); ?>
-
-	</div>
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'jueves')->checkbox(['class'=>'form-vertical']); ?>
-
-	</div>
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'viernes')->checkbox(['class'=>'form form-horizontal']); ?>
-
-	</div>
-
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'sabado')->checkbox(['class'=>'form form-horizontal']); ?>
-
-	</div>
-				<div class="col-md-1">
-	
-	<?php echo $form->field($model, 'domingo')->checkbox(['class'=>'form form-horizontal']); ?>
-
-	</div>
+				<div class="col-md-3">
+	            	<?php echo $form->field($model, 'sabado')->checkbox(['class'=>'form form-horizontal']); ?>
+            	</div>
+				<div class="col-md-3">
+	            	<?php echo $form->field($model, 'domingo')->checkbox(['class'=>'form form-horizontal']); ?>
+            	</div>
+            </div>
 	
 	</div>
 			</div>
@@ -390,6 +402,10 @@ echo $form->field($model, 'numero_personas', [
     <div class="col-md-12">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
+    
+    </div>
+    </div>
+    
 
     <?php ActiveForm::end(); ?>
 

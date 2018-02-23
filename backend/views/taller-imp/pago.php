@@ -11,7 +11,7 @@ use kartik\datecontrol\DateControl;
 /* @var $model backend\models\PagoTallerCuota */
 /* @var $form yii\bootstrap\ActiveForm */
 
-
+ 
 $this->title = "Pago cuota de taller";
 $this->params['breadcrumbs'][] = ['label' => $modelTaller->nombre, 'url' => ['dashboard','id'=>$modelTaller->id]];
 $this->params['breadcrumbs'][] = 'Pagar cuota de taller';

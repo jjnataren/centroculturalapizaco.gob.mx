@@ -1,14 +1,12 @@
 <?php
 
-use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
 
-$this->title = 'Actualizar Taller: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tallers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Actualizar taller base. [' . $model->id . '] ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id]];
+$this->params['breadcrumbs'][] = 'Actualizar taller base';
 ?>
 <div class="taller-update">
 
