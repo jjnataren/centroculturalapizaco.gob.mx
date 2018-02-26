@@ -352,7 +352,7 @@ class TallerImpController extends Controller
      * Makes a pago
      * @param integer $id
      * @return string
-     */
+     */ 
     public function actionPago($id){
         
         
