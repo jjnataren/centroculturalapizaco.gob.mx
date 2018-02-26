@@ -73,7 +73,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 			
 
 			<div class="col-md-7">
-      <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
+      <?=$form->field($model, 'id_categoria', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
 		             <span class="fa fa-building-o"></span>

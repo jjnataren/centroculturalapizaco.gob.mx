@@ -4,14 +4,10 @@ use backend\models\Aula;
 use backend\models\Categoria;
 use backend\models\Instructor;
 use kartik\datecontrol\DateControl;
-use kartik\time\TimePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\TallerImp */
-/* @var $form yii\bootstrap\ActiveForm */
 
 $instructorList = ArrayHelper::map(Instructor::findBySql('select id,  CONCAT(id, \' - \',nombre ) as nombre from tbl_instructor where disponible = 1')->all(), 'id', 'nombre');
 
@@ -24,6 +20,8 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 $this->title = 'Implementar taller base. [' . $model->id_curso_base . '] ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id]];
 $this->params['breadcrumbs'][] = 'Implementar taller base';
+
+Yii::$app->formatter->locale = 'es-MX';
 ?>
 
 
@@ -31,13 +29,28 @@ $this->params['breadcrumbs'][] = 'Implementar taller base';
 <div class="row">
 
 <div class="col-md-12">
+
+<div class="box box-primary with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-list"></i>
+              <h3 class="box-title">Datos del taller</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?php echo $form->errorSummary($model); ?>
 
     <?php echo $form->field($model, 'id_curso_base')->hiddenInput()->label(false) ?>
 
-			<div class="col-md-12">
+	<div class="col-md-12">
 		
 		<div class="col-md-4">
 				<small>Nombre base del taller.</small>
@@ -61,7 +74,7 @@ echo $form->field($model, 'nombre', [
         ->textInput([
         'placeholder' => 'NOMBRE TALLER',
         'class' => 'form-control input-lg',
-        'maxlength' => '16'
+        'maxlength' => '50'
     ])
         ->label(false);
     ?>
@@ -171,13 +184,63 @@ echo $form->field($model, 'descripcion', [
 	</div>
 	</div>
 	
-    <?php echo $form->field($model, 'numero_max_personas')->textInput() ?>
-
-    <?php echo $form->field($model, 'comentarios')->textInput(['maxlength' => true]) ?>
-
-    <?php echo $form->field($model, 'url_img_publicitaria')->textInput(['maxlength' => true]) ?>
     
-    <?php echo $form->field($model, 'duracion_hora')->textInput() ?>
+    <div class="col-md-12">
+		
+		<div class="col-md-4">
+				<small>Numero maximo de personas</small>
+			</div>
+			<div class="col-md-8">
+    <?php
+    
+echo $form->field($model, 'numero_max_personas', [
+        'template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-cog"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'
+    ])
+        ->textInput([
+        'placeholder' => 'NUMERO DE PERSONAS',
+        'class' => 'form-control input-lg',
+        'maxlength' => '16'
+    ])
+        ->label(false);
+    ?>
+			
+	</div>
+			
+		</div>
+    
+    	<div class="col-md-12">
+		<div class="col-md-4">
+				<small>Disponibilidad</small>
+		</div>
+			<div class="col-md-8">
+      <?=$form->field($model, 'disponible', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-cog"></span>
+		          </span>
+		              {input}		     		
+		          </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList([0=>'NO', 1=>'SI'], ['prompt' => '-- Seleccione una opción  --','id' => 'selectPro','onchange' => '
+			                $.get( "' . Yii::$app->urlManager->createUrl('tipo-producto/get-img?id=') . '"+$(this).val(), function( data ) {
+			                  $( "#divimg" ).html( data );
+			                });
+            			'])?>
+    
+    </div>
+			
+		</div>
     
     
 	<div class="col-md-12">
@@ -210,8 +273,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'lunes')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'lunes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'lunes')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'lunes_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -231,8 +316,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'martes')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'martes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+   				
+   				<?php  
+               		echo $form->field($model, 'martes')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'martes_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -254,8 +361,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'miercoles')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'miercoles_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'miercoles')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'miercoles_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -275,8 +404,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'jueves')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'jueves_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'jueves')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'jueves_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -296,8 +447,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'viernes')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'viernes_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'viernes')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'viernes_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -317,8 +490,30 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'sabado')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'sabado_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'sabado')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'sabado_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
@@ -338,25 +533,37 @@ echo $form->field($model, 'descripcion', [
 		     			
 		      <div> {error}{hint}</div>
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-    			<?php echo $form->field($model, 'domingo')->widget(TimePicker::classname(), [])->label("Inicio");?>
-    			<?php echo $form->field($model, 'domingo_fin')->widget(TimePicker::classname(), [])->label("Fin");?>
+    			
+    			<?php  
+               		echo $form->field($model, 'domingo')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Inicio");?>
+    			
+    			
+    			<?php  
+               		echo $form->field($model, 'domingo_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_TIME,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		])->label("Fin");?>
+    			
     		</div>
     		</div>
     		</div>
-
-    <?php echo $form->field($model, 'estatus')->textInput() ?>
-
-    <?php echo $form->field($model, 'duracion_mes')->textInput() ?>
-
-    <?php echo $form->field($model, 'disponible')->textInput() ?>
-
-    
     
    </div>
    </div>
    </div>
-   
-    
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -364,5 +571,7 @@ echo $form->field($model, 'descripcion', [
 
     <?php ActiveForm::end(); ?>
 
+</div>
+</div>
 </div>
 </div>

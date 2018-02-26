@@ -50,26 +50,28 @@ $config = [
         'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',
             
-            'ajaxConversion'=>true,
+            
             // format settings for displaying each date attribute (ICU format example)
             'displaySettings' => [
                 Module::FORMAT_DATE => 'dd/MM/yyyy',
-                Module::FORMAT_TIME => 'hh:mm',
+                Module::FORMAT_TIME => 'hh:mm a',
                 Module::FORMAT_DATETIME => 'dd/MM/yyyy hh:mm',
             ],
             
             // format settings for saving each date attribute (PHP format example)
             'saveSettings' => [
                 Module::FORMAT_DATE => 'php:Y-m-d', // saves as unix timestamp
-                Module::FORMAT_TIME => 'php:H:i:s',
+                Module::FORMAT_TIME => 'php:H:i',
                 Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
             ],
             
             // set your display timezone
-            'displayTimezone' => 'Asia/Kolkata',
+            //'displayTimezone' => 'Asia/Kolkata',
             
             // set your timezone for date saved to db
-            'saveTimezone' => 'UTC',
+            //'saveTimezone' => 'UTC',
+            
+            'ajaxConversion'=>true,
             
             // automatically use kartik\widgets for each of the above formats
             'autoWidget' => true,

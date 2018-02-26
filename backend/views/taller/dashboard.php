@@ -12,11 +12,8 @@ use backend\models\CuotaTaller;
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
-$this->title = 'Talleres' ;
-$this->params['breadcrumbs'][] = ['label' => 'Talleres', 'url' => ['index']];
+$this->title = 'Taller base.  [' . $model->id . ']  ' .$model->nombre;
 $this->params['breadcrumbs'][] = $this->title;
-
-
 
 
 
@@ -81,7 +78,7 @@ $cuotaList=ArrayHelper::map
             
               <dl>
                <dt>Aula preferente</dt>
-               <dd><?=$model->aula->nombre;?></dd>
+               <dd><?=isset($model->aula->nombre) ?$model->aula->nombre:'?';?></dd>
                 <dt>Maximo de personas</dt>
                  <dd><?=$model->numero_personas;?></dd>
               

@@ -171,7 +171,7 @@ class TallerController extends Controller
                     
                 }
                 
-                return $this->redirect(['taller-imp/view', 'id' => $sModel->id]); 
+                return $this->redirect(['taller-imp/dashboard', 'id' => $sModel->id]); 
             
             }            
                 else   return $this->render('implementation', ['model' => $sModel,  ]);
@@ -189,7 +189,7 @@ class TallerController extends Controller
         //Calcular
         $sModel->fecha_inicio = date('Y-m-d');
         
-        $sModel->fecha_fin = date('Y-m-d');
+        //$sModel->fecha_fin = date('Y-m-d');
         
         $sModel->descripcion = $model->descripcion;
         
@@ -204,53 +204,50 @@ class TallerController extends Controller
             $sModel->id_aula_viernes = $model->id_aula;
             $sModel->id_aula_sabado = $model->id_aula;
             $sModel->id_aula_domingo = $model->id_aula;
-            
-            
-        
         }
         
         if($model->lunes){
             
             $sModel->lunes = $model->hora_inicio;
-            $sModel->lunes_fin = 12;
+            //$sModel->lunes_fin = 12;
         }
         
         if($model->martes){
             
             $sModel->martes = $model->hora_inicio;
-            $sModel->martes_fin = 12;
+          //  $sModel->martes_fin = 12;
         }
         
         
         if($model->miercoles){
             
             $sModel->miercoles = $model->hora_inicio;
-            $sModel->miercoles_fin = 12;
+           // $sModel->miercoles_fin = 12;
         }
         
         if($model->jueves){
             
             $sModel->jueves = $model->hora_inicio;
-            $sModel->jueves_fin = 12;
+           // $sModel->jueves_fin = 12;
         }
         
         
         if($model->viernes){
             
             $sModel->viernes = $model->hora_inicio;
-            $sModel->viernes_fin = 12;
+            //$sModel->viernes_fin = 12;
         }
         
         if($model->sabado){
             
             $sModel->sabado = $model->hora_inicio;
-            $sModel->sabado_fin = 12;
+            //$sModel->sabado_fin = 12;
         }
         
         if($model->domingo){
             
             $sModel->domingo = $model->hora_inicio;
-            $sModel->domingo_fin = 12;
+            //$sModel->domingo_fin = 12;
         }
         
         
@@ -322,7 +319,7 @@ class TallerController extends Controller
         $model->disponible = 1;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['dashboard', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
