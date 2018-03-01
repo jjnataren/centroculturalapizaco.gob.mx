@@ -13,8 +13,6 @@ use yii\helpers\Url;
 use yii\log\Logger;
 use yii\widgets\Breadcrumbs;
 use backend\models\Taller;
-use backend\models\TallerImp;
-use backend\models\Comun;
 use backend\models\Categoria;
 
 $bundle = BackendAsset::register($this);
@@ -60,7 +58,7 @@ $i= 0;
 	$menuTalleres[$i]['label'] = 'Ver todos';
 	$menuTalleres[$i]['url'] = ['/taller/index'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
-	$menuTalleres[$i++]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	$menuTalleres[$i++]['active'] = ( strpos(get_class(\Yii::$app->controller ), 'TallerController' ) && strpos(\Yii::$app->controller->defaultAction, 'index') ); 
 	
 	foreach ($categorias as $cate){
 	    
@@ -70,7 +68,7 @@ $i= 0;
 	        
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
-	        $tallerItems[$j]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
 	        $tallerItems[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
 	        
 	        
@@ -78,14 +76,14 @@ $i= 0;
 	    
 	    $menuTalleres[$i]['label'] = $cate->nombre;
 	    $menuTalleres[$i]['url'] = '#';
-	    $menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+	    $menuTalleres[$i]['icon'] = '<i class="fa fa-sitemap"></i>';
 	    $menuTalleres[$i]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
 	    $menuTalleres[$i++]['items'] = $tallerItems;
 	    
 	}
 
 
-foreach ($talleres as $taller){
+/*foreach ($talleres as $taller){
     
     $talleresImp = TallerImp::findBySql('select * from tbl_taller_imp where id_curso_base = '.$taller->id.' and  disponible = 1 and estatus ='.Comun::$TALLER_ESTATUS_IMPARTIENDO)->all();
     $j = 0;
@@ -95,7 +93,7 @@ foreach ($talleres as $taller){
         
         $menuTalleresImp[$j]['label'] = $imp->id;
         $menuTalleresImp[$j]['url'] = '/taller-imp/view?id='.$imp->id;
-        $menuTalleresImp[$j]['icon'] = '<i class="fa fa-angle-double-right"></i>';
+        $menuTalleresImp[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
         $menuTalleresImp[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
         $menuTalleresImp[$j++]['items'] =  [    
                                                 ['label' => 'Ver', 'url' => ['/taller-imp/view','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
@@ -137,7 +135,7 @@ foreach ($talleres as $taller){
 	$menuTalleres[$i++]['items'] = $menuTalleresItems;
 	
 	
-}
+}*/
 
 
 

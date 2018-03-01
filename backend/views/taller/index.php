@@ -13,8 +13,16 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
 
 <div class="col-md-12">
 <div class="callout callout-info">
-                <h4>Talleres base</h4>
-                <p>En esta sección podras encontrar los talleres base  que imparte el contro cultural.</p>
+                <h4>Talleres</h4>
+                <p>En esta sección podras encontrar los talleres base  que imparte el centro cultural.</p>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="panel panel-default">
+	<div class="panel-body">
+		<?= Html::a('<i class="fa fa-plus-square"></i>  Agregar nuevo', ['create'], [ 'class' => 'btn btn-primary', 'title'=>'Agregar nuevo']);?>		
+	</div>
 </div>
 </div>
 
@@ -81,16 +89,17 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+           
+            
+            'nombre',
             [
                 
-             'header'=>'Instructor',
-             'attribute'=>'id_instructor',
-             'value'=>function($data){                 
-             return isset( $data->instructor->nombre)?$data->instructor->nombre: '?' ;
-             }
-            ]
-            ,
-            'nombre',
+                'header'=>'Instructor',
+                'attribute'=>'id_instructor',
+                'value'=>function($data){
+                return isset( $data->instructor->nombre)?$data->instructor->nombre: '?' ;
+                }
+             ],
             'descripcion',
             'descripcion_temario',
             // 'numero_personas',

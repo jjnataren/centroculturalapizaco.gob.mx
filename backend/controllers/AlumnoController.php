@@ -245,7 +245,7 @@ class AlumnoController extends Controller
             'options' => ['title' => 'Credencial del alumno'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Ficha de inscripción'],
+                'SetHeader'=>['Credencial del alumno'],
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
