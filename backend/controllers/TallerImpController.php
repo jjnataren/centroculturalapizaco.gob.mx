@@ -404,7 +404,7 @@ class TallerImpController extends Controller
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
             // A4 paper format
-            'format' => [50, 50],
+            'format' => Pdf::FORMAT_A4,
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT,
             // stream to browser inline
@@ -420,10 +420,10 @@ class TallerImpController extends Controller
 								      font:5px;
 								    }',
             // set mPDF properties on the fly
-            'options' => ['title' => 'Reporte de orden de venta'],
+            'options' => ['title' => 'Reporte de incripcion'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Reporte orden de venta'],
+                'SetHeader'=>['Reporte  de incripcion'],
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
