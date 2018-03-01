@@ -40,22 +40,24 @@
     		
     		</table>
     		</td>
-    		<td valign="bottom" align="center" colspan="2"><u><?= $model->nombre; ?></u></td>
+    			<td  align="center" colspan="2"><b> NOMBRE DEL ALUMNO</b></td>
+    		
     		
 		</tr>
 			<tr>
+    	<td align="center" colspan="2"><u><?= $model->nombre; ?></u></td>
     	
-    		<td valign="top" align="center" colspan="2"><b> NOMBRE DEL ALUMNO</b></td>
     	
 		</tr>
 		<tr>
 		
-		<td valign="TOP" align="center" colspan="2"><u><?= $model->direccion; ?></u></td>
+		<td  align="center" colspan="2"><b> DIRECCION</b></td>
 	
 		</tr>
 		<tr>
 		<td></td>
-		<td valign="top" align="center" colspan="2"><b> DIRECCION</b></td>
+		<td  align="center" colspan="2"><u><?= $model->direccion; ?></u></td>
+		
 		</tr>
 		
 		<tr>
