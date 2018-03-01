@@ -282,7 +282,7 @@ foreach ($talleres as $taller){
                     [
                         'label' => Yii::t('backend', 'Categorías'),
                         'url' => ['/categoria/index'],
-                        'icon' => '<i class="fa fa-tasks"></i>',
+                        'icon' => '<i class="fa fa-sitemap"></i>',
                         
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['categoria']),
@@ -293,7 +293,7 @@ foreach ($talleres as $taller){
                 		[
                 		'label'=>Yii::t('backend', 'Talleres'),
                 		'url' => '#',
-                		'icon'=>'<i class="fa fa-cogs"></i>',
+                		'icon'=>'<i class="fa fa-video-camera"></i>',
                 		'options'=>['class'=>'treeview'],
                 		'items'=>$menuTalleres,
                 		],
@@ -301,7 +301,7 @@ foreach ($talleres as $taller){
                     [
                         'label' => Yii::t('backend', 'Ingresos'),
                         'url' => '#',
-                        'icon' => '<i class="fa fa-usd"></i>',
+                        'icon' => '<i class="fa fa-balance-scale"></i>',
 
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
@@ -347,7 +347,7 @@ foreach ($talleres as $taller){
                     [
                         'label' => Yii::t('backend', 'Pagos'),
                         'url' =>  ['/pago-taller-cuota/create'],
-                        'icon' => '<i class="fa fa-graduation-cap"></i>',
+                        'icon' => '<i class="fa fa-credit-card"></i>',
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                         'items' => [
