@@ -46,7 +46,7 @@ $this->registerJs("
     <div class="col-md-12">
                <div class="box box-info with-border">
             <div class="box-header with-border">
-            	<i class="fa fa-th"></i>
+            	<i class="fa fa-video-camera"></i>
               <h3 class="box-title">Información de taller</h3>
 
               <div class="box-tools pull-right">
@@ -138,7 +138,7 @@ $this->registerJs("
 	
 	  <div class="box box-info with-border">
             <div class="box-header with-border">
-            	<i class="fa fa-th"></i>
+            	<i class="fa fa-calendar-check-o"></i>
               <h3 class="box-title">Cuota de Inscripción</h3>
 
               <div class="box-tools pull-right">
@@ -164,7 +164,7 @@ $this->registerJs("
 
 			<div class="panel panel-info">
 
-				<div class="panel-heading">Datos del alumno</div>
+				<div   class="panel-heading"><i class="fa fa-graduation-cap"></i> Datos del alumno</div>
 
 				<div class="panel-body">
     			 <?php echo $form->field($model, 'id_alumno')->hiddenInput(['id'=>'selectedAlumno'])->label(false); ?>
@@ -298,7 +298,7 @@ $this->registerJs("
             			
              	 
              	 <div class="panel panel-default">
-             	 <div class="panel-heading"> <h4>Información del pago de inscripción</h4></div>
+             	 <div class="panel-heading"> <h4><i class="fa fa-credit-card"></i> Información del pago de inscripción</h4></div>
              	 <div class="panel-body">
              	
              	 	 <?php echo $form->field($model, 'monto')->textInput(['maxlength' => true,'id'=>'cuota_monto']) ?>
