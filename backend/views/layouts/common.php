@@ -356,6 +356,23 @@ foreach ($talleres as $taller){
                         
                     ],
                     [
+                        'label' => Yii::t('backend', 'Instructores'),
+                        'url' =>  ['/instructor/index'],
+                        'icon' => '<i class="fa fa-black-tie"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        
+                    ],
+                    [
+                        'label' => Yii::t('backend', 'Aulas'),
+                        'url' =>  ['/aula/index'],
+                        'icon' => '<i class="fa fa-building"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        
+                    ],
+                    
+                    [
                         'label' => Yii::t('backend', 'System'),
                         'options' => ['class' => 'header']
                     ],
