@@ -53,7 +53,7 @@
 		<tr align="center">
 			
 		
-			<td align="center"   style="background: #d4d6d8;"><?= $model->fecha_inscripcion; ?></td>
+			<td align="center"   style="background: #d4d6d8;"><?= Yii::$app->formatter->asDate($model->fecha_inscripcion,'dd/MMM/Y'); ?></td>
 			<td align="center"   style="background: #d4d6d8;"><?= $model->id; ?></td>
 		</tr>
 </table>
@@ -95,9 +95,76 @@
 
 	
 </table>
+<br>
+<br>
+<H4>DETALLES DEL PAGO</H4>
 
+<table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
+		<tr align="center">
+		
+			<tH style=" width: 60%;" rowspan="2"><h3><?=$model->pago->concepto;?></h3></tH>
+		
+			<th align="left"  style="background: #d4d6d8;">Fecha de pago</th>
+			<th align="left"  style="background: #d4d6d8;">Folio pago</th>
+			
+						
+		</tr>
+		<tr align="center">
+			
+		
+			
+			<td align="center"   style="background: #d4d6d8;"><?= Yii::$app->formatter->asDate($model->pago->fecha_pago,'dd/MMM/Y'); ?></td>
+			<td align="center"   style="background: #d4d6d8;"><?=  substr('00000' .  $model->pago->id, -5 ); ?></td>
+		</tr>
+</table>
 
+<br />
 
+<table  style="width:100%; font-size: 17px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
+
+<thead>
+	<tr style="background: #d4d6d8" >
+		<th colspan="2" align="center">Descripcion</th>
+		<th align="center">Importe</th>
+	</tr>
+</thead>
+
+<tbody style="border: 3px solid black;">
+			
+		
+	
+		<tr>
+			<td colspan="2" align="center"  >
+			
+				<p><?=$model->tallerImp->nombre;?></p>
+				<p><?=$model->tallerImp->instructor->nombre;?></p>
+				<p><?=$model->pago->concepto;?></p>
+			
+			</td>
+			<td align="right"><?= Yii::$app->formatter->asCurrency($model->pago->monto); ?></td>
+			
+			
+		</tr>
+			<tr>
+				<td align="center"   style="background: #d4d6d8;width: 65%;"></td>
+				<td  align="right"  > <small> I.V.A 16%</small> </td>
+				<td  align="right"  >$ 0.00</td>
+			
+			</tr>
+		
+		
+		
+	</tbody>
+	
+	<tfoot>
+		<tr>
+			<td align="left"  style="background: #d4d6d8; width: 65%;"><small></small></td>
+			<td align="right">Total $</td>
+			<td align="right"><?= Yii::$app->formatter->asCurrency($model->pago->monto); ?></td>
+		</tr>
+	</tfoot>
+	
+</table>
 <br />
 <!-- 
 
