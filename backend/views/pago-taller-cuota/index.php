@@ -13,16 +13,24 @@ use yii\base\Widget;
 /* @var $searchModel backend\models\search\PagoTallerCuotaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pago Taller Cuotas';
+$this->title = 'Ingresos por talleres';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
+
+<div class="col-md-12">
+<div class="callout callout-info">
+                <h4>Ingresos generados por talleres</h4>
+                <p>Puede genear reportes especificos por taller, por instructor, por  un rango de fecha, y exportarlos para manipularlos.</p>
+</div>
+</div>
+
 <div class="col-md-12">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a('Create Pago Taller Cuota', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('Crear nuevo pago de cuota', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     
     
