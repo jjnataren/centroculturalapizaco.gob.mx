@@ -275,10 +275,10 @@ class TallerImpController extends Controller
 								      font:5px;
 								    }',
             // set mPDF properties on the fly
-            'options' => ['title' => 'Reporte de orden de venta'],
+            'options' => ['title' => 'Ficha de inscripcion'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Reporte orden de venta'],
+                'SetHeader'=>['Ficha de inscripcion'],
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
@@ -370,6 +370,10 @@ class TallerImpController extends Controller
         if ($pagoTallerCuota->load(Yii::$app->request->post()) && $pagoTallerCuota->save() ) {
             
             
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class' => 'alert-success'],
+                'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Pago realizado correctamente</h4>'
+            ]);
             
             return $this->redirect(['confirma-pago', 'id' => $id, 'id_pago'=>$pagoTallerCuota->id]);
         }
@@ -420,10 +424,10 @@ class TallerImpController extends Controller
 								      font:5px;
 								    }',
             // set mPDF properties on the fly
-            'options' => ['title' => 'Reporte de incripcion'],
+            'options' => ['title' => 'Reporte de pago'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Reporte  de incripcion'],
+                'SetHeader'=>['Reporte  de pago'],
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
@@ -496,10 +500,7 @@ class TallerImpController extends Controller
         
         $modelPago  = PagoTallerCuota::findOne($id_pago);
         
-        Yii::$app->session->setFlash('alert', [
-            'options' => ['class' => 'alert-success'],
-            'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Pago realizado correctamente</h4>'
-        ]);
+     
         
         return $this->render('confirma-pago',
             ['model'=>$model,
