@@ -439,6 +439,55 @@ class TallerImpController extends Controller
         
     }
     
+    
+    public function actionImprimirAnual ($id){
+        
+        $model = PagoTallerCuota::findOne($id);
+        
+        
+        if(!$model){
+            
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        
+        
+        $content = $this->renderPartial('reporte-anual',['model'=>$model]);
+        
+        
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            //'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}
+    							#menu{
+								      font:5px;
+								    }',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'Reporte anual'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader'=>['Reporte anual'],
+                'SetFooter'=>['{PAGENO}'],
+            ]
+        ]);
+        
+        // return the pdf output as per the destination setting
+        return $pdf->render();
+        
+        
+        
+    }
     /**
      * 
      * @param integer $id

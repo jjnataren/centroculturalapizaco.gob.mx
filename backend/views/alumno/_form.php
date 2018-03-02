@@ -2,6 +2,7 @@
  
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Alumno */
@@ -85,7 +86,35 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
      </div>
      </div>
      
-    <?php echo $form->field($model, 'fecha_ingreso')->textInput() ?>
+    
+    <?php  
+                    	echo $form->field($model, 'fecha_ingreso')->widget(DateControl::classname(), [
+                       		    'type'=>DateControl::FORMAT_DATE,
+                       		    'ajaxConversion'=>false,
+                    	        'value'=>date('dd/MM/yyyy'),
+                       		    'widgetOptions' => [
+                       		        'pluginOptions' => [
+                       		               'autoclose' => true,
+                       		            
+                       		        ]
+                       		    ]
+                       		]);?>
+      
+      
+    <?php  
+                    	echo $form->field($model, 'fecha_nacimiento')->widget(DateControl::classname(), [
+                       		    'type'=>DateControl::FORMAT_DATE,
+                       		    'ajaxConversion'=>false,
+                    	        'value'=>date('dd/MM/yyyy'),
+                       		    'widgetOptions' => [
+                       		        'pluginOptions' => [
+                       		               'autoclose' => true,
+                       		            
+                       		        ]
+                       		    ]
+                       		]);?>
+                    
+                    
       
     <?php echo $form->field($model, 'fecha_nacimiento')->textInput() ?>
     
