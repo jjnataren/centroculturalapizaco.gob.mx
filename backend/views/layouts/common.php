@@ -17,7 +17,7 @@ use backend\models\Categoria;
 
 $bundle = BackendAsset::register($this);
 
-
+$currentUrl =  Yii::$app->request->url ;
 $talleres   = Taller::findAll(['disponible'=>1]);
 
 $categorias   = Categoria::findAll(['disponible'=>1]);
@@ -52,13 +52,13 @@ $i= 0;
 	$menuTalleres[$i]['label'] = 'Crear';
 	$menuTalleres[$i]['url'] = ['/taller/create'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
-	$menuTalleres[$i++]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	$menuTalleres[$i++]['active'] = strpos(   $currentUrl   , 'taller/create');
 	
 	
 	$menuTalleres[$i]['label'] = 'Ver todos';
 	$menuTalleres[$i]['url'] = ['/taller/index'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
-	$menuTalleres[$i++]['active'] = ( strpos(get_class(\Yii::$app->controller ), 'TallerController' ) && strpos(\Yii::$app->controller->defaultAction, 'index') ); 
+	$menuTalleres[$i++]['active'] = strpos(   $currentUrl   , 'taller/index'); 
 	
 	foreach ($categorias as $cate){
 	    
@@ -69,7 +69,7 @@ $i= 0;
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
 	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
-	        $tallerItems[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	        $tallerItems[$j]['active'] = strpos(   $currentUrl   , 'taller/dashboard?id='.$tallerItem->id);
 	        
 	        
 	    }
@@ -304,8 +304,8 @@ $i= 0;
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
                         'items' => [
-                            ['label' => Yii::t('backend', 'Pagos cuotas'), 'url' => ['/pago-taller-cuota/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
-                            ['label' => Yii::t('backend', 'Pagos renta'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
+                            ['label' => Yii::t('backend', 'Talleres'), 'url' => ['/pago-taller-cuota/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
+                            ['label' => Yii::t('backend', 'Renta aulas'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
                             ]
                         
                     ],
