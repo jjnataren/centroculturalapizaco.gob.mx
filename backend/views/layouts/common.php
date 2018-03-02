@@ -301,10 +301,12 @@ $i= 0;
                         'url' => '#',
                         'icon' => '<i class="fa fa-balance-scale"></i>',
 
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'options' => ['class' => 'treeview'],                        
                         'items' => [
-                            ['label' => Yii::t('backend', 'Talleres'), 'url' => ['/pago-taller-cuota/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
+                            ['label' => Yii::t('backend', 'Talleres'), 
+                                'url' => ['/pago-taller-cuota/index'], 
+                                'icon' => '<i class="fa fa-angle-double-right"></i>', 
+                                'active' => strpos(   $currentUrl   , 'pago-taller-cuota/index')],
                             ['label' => Yii::t('backend', 'Renta aulas'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
                             ]
                         
