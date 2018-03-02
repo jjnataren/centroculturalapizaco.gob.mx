@@ -92,6 +92,11 @@ class PagoTallerCuotaSearch extends PagoTallerCuota
             
         }
         
+        if (isset($this->id_taller_imp) && $this->id_taller_imp ){
+            $instructorTalleres  = [];
+            $instructorTalleres[]  =  $this->id_taller_imp;
+        }
+        
         $query->andFilterWhere(['in', 'id_cuota',$this->id_cuota]);
         $query->andFilterWhere(['in', 'id_taller_imp',$instructorTalleres]);
         
