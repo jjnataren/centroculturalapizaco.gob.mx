@@ -31,6 +31,10 @@ class FrontendAsset extends AssetBundle
      */
     public $css = [
         'css/style.css',
+        'css/styles-merged.css',
+        'css/style.min.css',
+        'css/custom.css',
+        
     ];
 
     /**
@@ -38,6 +42,10 @@ class FrontendAsset extends AssetBundle
      */
     public $js = [
         'js/app.js',
+        'js/scripts.min.js',
+        'js/main.min.js',
+        'js/custom.js'
+        
     ];
 
     /**

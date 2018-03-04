@@ -15,6 +15,10 @@ use yii\helpers\Html;
     <title><?php echo Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?php echo Html::csrfMetaTags() ?>
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <?php $this->beginBody() ?>
