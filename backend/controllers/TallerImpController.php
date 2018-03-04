@@ -275,10 +275,10 @@ class TallerImpController extends Controller
 								      font:5px;
 								    }',
             // set mPDF properties on the fly
-            'options' => ['title' => 'Reporte de orden de venta'],
+            'options' => ['title' => 'Ficha de inscripcion'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Reporte orden de venta'],
+                'SetHeader'=>['Ficha de inscripcion'],
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);

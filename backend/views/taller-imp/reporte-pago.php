@@ -44,10 +44,10 @@ Yii::$app->formatter->locale = 'es-MX';
 
 <table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 		<tr align="center">
-			<tH style=" width: 60%;" rowspan="2"><h3>FICHA DE INSCRIPCION</h3></tH>
+			<tH style=" width: 60%;" rowspan="2"><h3><?=$model->concepto;?></h3></tH>
 		
-			<th align="left"  style="background: #d4d6d8;">Fecha de inscripción</th>
-			<th align="left"  style="background: #d4d6d8;">Folio inscripción</th>
+			<th align="left"  style="background: #d4d6d8;">Fecha de pago</th>
+			<th align="left"  style="background: #d4d6d8;">Folio pago</th>
 			
 						
 		</tr>
@@ -85,7 +85,12 @@ Yii::$app->formatter->locale = 'es-MX';
 			
 			
 		</tr>
+			<tr>
+				<td align="center"   style="background: #d4d6d8;width: 65%;"></td>
+				<td  align="right"  > <small> I.V.A 16%</small> </td>
+				<td  align="right"  >$ 0.00</td>
 			
+			</tr>
 		
 		
 		
@@ -93,7 +98,7 @@ Yii::$app->formatter->locale = 'es-MX';
 	
 	<tfoot>
 		<tr>
-			<td align="left"><small>cantidad con letra</small></td>
+			<td align="left"  style="background: #d4d6d8; width: 65%;"><small></small></td>
 			<td align="right">Total $</td>
 			<td align="right"><?= Yii::$app->formatter->asCurrency($model->monto); ?></td>
 		</tr>
