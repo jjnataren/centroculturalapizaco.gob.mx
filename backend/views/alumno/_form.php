@@ -16,8 +16,21 @@ use kartik\datecontrol\DateControl;
     <?php echo $form->errorSummary($model); ?>
 
 
-<div class="col-md-3 col-sm-12 col-xs-12">
-		<h2>Imagen del taller</h2>
+		<div class="col-md-3 col-sm-12 col-xs-12">
+		
+		
+		   <div class="box box-info with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-th"></i>
+              <h3 class="box-title">Foto del alumno</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
 		<?php
 
 echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::classname(), [
@@ -30,8 +43,22 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
 
 	
 	</div>
- <div class="col-md-9">
-<h2>Información del Alumno</h2>
+	</div>
+	</div>
+	
+<div class="col-md-9">
+  <div class="box box-info with-border">
+            <div class="box-header with-border">
+            	<i class="fa fa-th"></i>
+              <h3 class="box-title">Datos del alumno</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
     <div class="col-md-12">
 		<div class="col-md-4">
 				<small> Nombre del alumno</small>
@@ -59,49 +86,14 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
     	 </div>
      </div>
      
-    <div class="col-md-12">
+    
+     
+         <div class="col-md-12">
 		<div class="col-md-4">
-				<small> Taller al que se inscribe o reinscribe el alumno. </small>
+				<small> Fecha de nacimiento. </small>
 			</div>
 			<div class="col-md-8">
-    <?php echo $form->field($model, 'taller_inscribe', [
-        'template' => '<div class="form-group">
-		       		 <div class="input-group">
-		          <span class="input-group-addon" >
-		             <span class="fa fa-cogs"></span>
-		          </span>
-		          {input}
-		     		
-		       </div>
-		     			
-		      <div> {error}{hint}</div>
-   				</div>'
-    ])
-        ->textInput([
-        'placeholder' => 'NOMBRE DEL TALLER',
-        'class' => 'form-control input-lg',
-        'maxlength' => '200'
-    ])
-        ->label(false);?>
-     </div>
-     </div>
-     
-    
-    <?php  
-                    	echo $form->field($model, 'fecha_ingreso')->widget(DateControl::classname(), [
-                       		    'type'=>DateControl::FORMAT_DATE,
-                       		    'ajaxConversion'=>false,
-                    	        'value'=>date('dd/MM/yyyy'),
-                       		    'widgetOptions' => [
-                       		        'pluginOptions' => [
-                       		               'autoclose' => true,
-                       		            
-                       		        ]
-                       		    ]
-                       		]);?>
-      
-      
-    <?php  
+    					<?php  
                     	echo $form->field($model, 'fecha_nacimiento')->widget(DateControl::classname(), [
                        		    'type'=>DateControl::FORMAT_DATE,
                        		    'ajaxConversion'=>false,
@@ -112,11 +104,36 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
                        		            
                        		        ]
                        		    ]
-                       		]);?>
-                    
+                    	])->label(false);?>
+     </div>
+     </div>
+    
+             <div class="col-md-12">
+		<div class="col-md-4">
+				<small> Fecha de ingreso al centro cultural. </small>
+			</div>
+			<div class="col-md-8">
+    					<?php  
+                    	echo $form->field($model, 'fecha_ingreso')->widget(DateControl::classname(), [
+                       		    'type'=>DateControl::FORMAT_DATE,
+                       		    'ajaxConversion'=>false,
+                    	        'value'=>date('dd/MM/yyyy'),
+                       		    'widgetOptions' => [
+                       		        'pluginOptions' => [
+                       		               'autoclose' => true,
+                       		            
+                       		        ]
+                       		    ]
+                       		])->label(false);?>
+     </div>
+     </div>
+    
+
+      
+      
+
                     
       
-    <?php echo $form->field($model, 'fecha_nacimiento')->textInput() ?>
     
     
     <div class="col-md-12">
@@ -261,11 +278,13 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
     
     
     
+    <div class="col-md-12">
+    <div class="panel panel-default">
     
-    
+    <div class="panel-body">
     <div class="col-md-12">
     <div class="col-md-4">
-				<small> Nombre del padre. </small>
+				<p><b> Nombre del padre. </b></p>
 			</div>
 			<div class="col-md-8">
     <?php echo $form->field($model, 'nombre_padre', [
@@ -371,13 +390,19 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
      </div>
      </div>
      
- 
+ </div>
+ </div>
+    </div> 
      
-     
+  
+      <div class="col-md-12">
+    <div class="panel panel-default">
+    
+    <div class="panel-body">
   
     <div class="col-md-12">
     <div class="col-md-4">
-				<small> Nombre de la madre. </small>
+				<p> <b>Nombre de la madre. </b></p>
 			</div>
 			<div class="col-md-8">
     <?php echo $form->field($model, 'nombre_madre', [
@@ -483,10 +508,13 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
      </div>
      </div>
 
-     
+	</div>
+	</div>
+	</div>
+	     
       <div class="col-md-12">
 		<div class="col-md-4">
-				<small> En caso de emergencia llamar a: </small>
+				<p class="text text-danger"> En caso de emergencia llamar a: </p>
 			</div>
 			<div class="col-md-8">
     <?php echo $form->field($model, 'tel_emergencia', [
@@ -646,7 +674,7 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
    				</div>'
     ])
         ->textInput([
-        'placeholder' => 'CRUP',
+        'placeholder' => 'CURP',
         'class' => 'form-control input-lg',
         'maxlength' => '200'
     ])
@@ -715,4 +743,7 @@ echo $form->field($model, 'imagen_url')->widget(\trntv\filekit\widget\Upload::cl
 		
 
 </div>
+</div>
+</div>
+
 </div>

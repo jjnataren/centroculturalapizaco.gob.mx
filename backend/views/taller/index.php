@@ -51,7 +51,7 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
                 <h3><?php echo $taller->nombre;?></h3>
                 <p><?php echo $taller->descripcion;?></p>
                 <p><strong>Instructor:</strong>&nbsp; <?php echo isset( $taller->instructor->nombre)?$taller->instructor->nombre: '?'; ?></p>
-                <p><a href="/taller/dashboard?id=<?=$taller->id?>" class="btn btn-primary" role="button">Administrar</a> <a href="/taller/update?id=<?=$taller->id?>" class="btn btn-warning" role="button">Editar</a></p>
+                <p><a href="/taller/dashboard?id=<?=$taller->id?>" class="btn btn-primary" role="button"><i class="fa fa-tachometer"></i> Administrar</a> <a href="/taller/update?id=<?=$taller->id?>" class="btn btn-warning" role="button"><i class="fa fa-pencil"></i>Editar</a></p>
               </div>
             </div>
     	</div>

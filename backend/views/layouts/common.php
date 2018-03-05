@@ -69,15 +69,16 @@ $i= 0;
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
 	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
-	        $tallerItems[$j]['active'] = strpos(   $currentUrl   , 'taller/dashboard?id='.$tallerItem->id);
-	        
+	        $val =  (strpos($currentUrl,'taller/dashboard?id='.$tallerItem->id) > 0) || (strpos($currentUrl,'taller/implement?id='.$tallerItem->id) > 0);
+	        $tallerItems[$j]['active'] = $val;
+	        $j++;
 	        
 	    }
 	    
 	    $menuTalleres[$i]['label'] = $cate->nombre;
 	    $menuTalleres[$i]['url'] = '#';
 	    $menuTalleres[$i]['icon'] = '<i class="fa fa-sitemap"></i>';
-	    $menuTalleres[$i]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
+	    
 	    $menuTalleres[$i++]['items'] = $tallerItems;
 	    
 	}
@@ -341,7 +342,7 @@ $i= 0;
                         'url' =>  ['/alumno/index'],
                         'icon' => '<i class="fa fa-graduation-cap"></i>',
                         'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'active' => in_array(\Yii::$app->controller->id,['alumno']),
                       
                     ],
                     [
@@ -360,7 +361,7 @@ $i= 0;
                         'url' =>  ['/instructor/index'],
                         'icon' => '<i class="fa fa-black-tie"></i>',
                         'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'active' => in_array(\Yii::$app->controller->id,['instructor']),
                         
                     ],
                     [
@@ -368,7 +369,7 @@ $i= 0;
                         'url' =>  ['/aula/index'],
                         'icon' => '<i class="fa fa-building"></i>',
                         'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
+                        'active' => in_array(\Yii::$app->controller->id,['aula']),
                         
                     ],
                     

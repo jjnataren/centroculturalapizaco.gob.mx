@@ -7,7 +7,6 @@ use backend\models\search\AlumnoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use mPDF;
 use kartik\mpdf\Pdf;
 use trntv\filekit\actions\UploadAction;
 use trntv\filekit\actions\DeleteAction;
@@ -107,10 +106,20 @@ class AlumnoController extends Controller
     public function actionCreate()
     {
         $model = new Alumno();
+        
+        $model->fecha_alta = date('Y-m-d');
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class' => 'alert-success'],
+                'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i>Alumno creado correctamente</h4><p>
+                            </p>'
+            ]);
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->fecha_ingreso = date('Y-m-d');
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -151,7 +160,7 @@ class AlumnoController extends Controller
     
     /**
      * Prints new  instription
-     * @param unknown $id
+     * @param Integer $id
      */
     public function actionImprimirComprobante($id){
         
@@ -203,7 +212,7 @@ class AlumnoController extends Controller
     
     /**
      * Prints new  instription
-     * @param unknown $id
+     * @param Integer $id
      */
     public function actionImprimirCredencial($id){
         

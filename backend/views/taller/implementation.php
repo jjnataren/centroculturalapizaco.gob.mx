@@ -18,7 +18,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
 
 $this->title = 'Implementar taller base. [' . $model->id_curso_base . '] ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id_curso_base]];
 $this->params['breadcrumbs'][] = 'Implementar taller base';
 
 Yii::$app->formatter->locale = 'es-MX';

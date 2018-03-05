@@ -4,10 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use backend\models\TallerImp;
-use dosamigos\multiselect\MultiSelect;
 use backend\models\Instructor;
-use kartik\select2\Select2;
-use yii\base\Widget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PagoTallerCuotaSearch */
@@ -15,6 +12,7 @@ use yii\base\Widget;
 
 $this->title = 'Ingresos por talleres';
 $this->params['breadcrumbs'][] = $this->title;
+Yii::$app->formatter->locale = 'es-MX';
 ?>
 <div class="row">
 

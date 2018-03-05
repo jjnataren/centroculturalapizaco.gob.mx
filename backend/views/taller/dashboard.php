@@ -74,7 +74,7 @@ $cuotaList=ArrayHelper::map
             <div class="col-md-3">
             <dl>
               
-               <dd><img class="img-thumbnail" style="width:350px; height:250px;" src="<?= isset ($model->path)? $model->base_url.'/' . $model->path : '/img/clipboard.png'?>" alt="" /></dd>
+               <dd><img class="img-thumbnail" style="width:350px; height:250px;" src="<?= isset ($model->path)? Yii::getAlias('@storageUrl').'/source/' . $model->path : '/img/clipboard.png'?>" alt="" /></dd>
                 
               
               </dl>
@@ -82,15 +82,19 @@ $cuotaList=ArrayHelper::map
               <div class="col-md-3">
 				
               <dl>
+              
+               <dt>ID </dt>
+               <dd><?=$model->id;?></dd>
+              
                 <dt>Nombre del taller </dt>
                <dd><?=$model->nombre;?></dd>
                 
                 <dt>Descripción</dt>
                 <dd><?=$model->descripcion;?></dd>
-               <dt>Instructor</dt>
+               <dt><i class="fa fa-black-tie"></i> Instructor</dt>
               
                 <dd><?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?></dd>
-               <dt>Categoría</dt>
+               <dt><i class="fa fa-sitemap"></i> Categoría</dt>
                <dd><?=$model->categoria->nombre;?></dd>
               </dl>
              </div> 
@@ -135,9 +139,9 @@ $cuotaList=ArrayHelper::map
                 <?php endif;?>
                 
                 <dt>Disponible</dt>
-               <dd><?=$model->disponible;?></dd>
+               <dd><?= ($model->disponible)?'Si':'No';?></dd>
                <dt>Fecha de creación</dt>
-               <dd><?=$model->fecha_creacion;?></dd>
+               <dd><?=Yii::$app->formatter->asDate($model->fecha_creacion,'dd/MMM/Y');?></dd>
                
                
               </dl>
@@ -145,8 +149,8 @@ $cuotaList=ArrayHelper::map
             </div>
             <div class="box-footer">
             	
-            	<a href="implement?id=<?php echo $model->id;?>" class="btn btn-primary btn-lg" ><i class="fa fa-star"></i>&nbsp;Impartir taller</a>
-            	 	<a href="update?id=<?php echo $model->id;?>" class="btn btn-primary btn-lg" ><i class="fa fa-star"></i>&nbsp;Actualizar taller base</a>
+            	<a href="implement?id=<?php echo $model->id;?>" class="btn btn-success btn-lg" ><i class="fa fa-arrow-circle-right"></i>&nbsp;Impartir taller</a>
+            	 	<a href="update?id=<?php echo $model->id;?>" class="btn btn-primary btn-lg" ><i class="fa fa-pencil"></i>&nbsp;Actualizar taller base</a>
             	
             </div>
             <!-- /.box-body -->

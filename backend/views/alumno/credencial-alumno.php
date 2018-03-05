@@ -23,10 +23,10 @@
 
 
 		<tr >
-    		<th valign="top" style="height: 100%; width: 30%;"  align="left"><img alt="" src="/img/gobtlax.jpg" width="120" height="100"></th>
-    		<td align="center" valign="bottom"> <br><b>"LA LIBERTAD" CENTRO CULTURAL DE APIZACO</b></td>
+    		<td valign="top" style="height: 100%; width: 30%;"  align="left"><img alt="" src="/img/gobtlax.jpg" width="120" height="100"></td>
+    		<td align="center" valign="top"> <br><b>"LA LIBERTAD" CENTRO CULTURAL DE APIZACO</b></td>
     		
-    		<th valign="top" style="height: 100%; width: 30%;"align="right"><img alt="" src="/img/logoLCC.jpg" width="120" height="90"></th>
+    		<td valign="top" style="height: 100%; width: 30%;"align="right"><img alt="" src="/img/logoLCC.jpg" width="120" height="90"></td>
 		</tr>
 		<tr>
     		<td rowspan="3">
@@ -45,7 +45,7 @@
     		
 		</tr>
 			<tr>
-    	<td align="center" colspan="2"><u><?= $model->nombre; ?></u></td>
+    			<td align="center" colspan="2"><?= $model->nombre; ?></td>
     	
     	
 		</tr>
@@ -56,15 +56,15 @@
 		</tr>
 		<tr>
 		<td></td>
-		<td  align="center" colspan="2"><u><?= $model->direccion; ?></u></td>
+		<td  align="center" colspan="2"><?= $model->direccion; ?></td>
 		
 		</tr>
 		
 		<tr>
 		
-		<td><b>FIRMA DEL ALUMNO</b></td>
+		<td><img src="/img/qr.png" style="width: 50px; height: 50px"></td>
 		
-	<td  align="center" colspan="2"><b>TEL. DE EMERGENCIA: </b><u><?= $model->tel_emergencia; ?></u></td>
+		<td  align="center" colspan="2"><b>TEL. DE EMERGENCIA: </b><?= $model->tel_emergencia; ?></td>
 		</tr>
 </table>
 	    </TD>

@@ -10,21 +10,23 @@ $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Alumnos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="alumno-view">
+<div class="row">
 
-    <p>
-        <?php echo Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Credencial', ['imprimir-credencial', 'id' => $model->id], ['class' => 'btn btn-primary', 'target'=>'_blank']) ?>
-        <?php echo Html::a('Ficha personal', ['imprimir-comprobante', 'id' => $model->id], ['class' => 'btn btn-primary','target'=>'_blank']) ?>
+    <div class="col-md-12">
+        <?php echo Html::a('<i class="fa fa-pencil"></i>  Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('<i class="fa fa-id-card"></i>  Generar credencial', ['imprimir-credencial', 'id' => $model->id], ['class' => 'btn btn-primary', 'target'=>'_blank']) ?>
+        <?php echo Html::a('<i class="fa fa-info-circle"></i> Generar ficha personal', ['imprimir-comprobante', 'id' => $model->id], ['class' => 'btn btn-primary','target'=>'_blank']) ?>
       
         <?php echo Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Confirmar borrar eeste alumno ?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
+    <br />
+    <br />
 <div class="col-md-3">
             <dl>
               
@@ -32,7 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 
               
               </dl>
-              </div>
+</div>
+
+<div class="col-md-9">
     <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -75,3 +79,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+</div>
+

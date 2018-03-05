@@ -317,9 +317,20 @@ class TallerController extends Controller
         $model = new Taller();
         
         $model->disponible = 1;
+        
+        $model->fecha_creacion = date('Y-m-d');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class' => 'alert-success'],
+                'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i>Taller creado correctamente</h4><p>
+                                Complete la información del taller y posteriormente podra impartirlo las veces que necesite.
+                            </p>'
+            ]);
+            
             return $this->redirect(['dashboard', 'id' => $model->id]);
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
