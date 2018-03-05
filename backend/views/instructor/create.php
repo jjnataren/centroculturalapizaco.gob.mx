@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Instructor */
 
 $this->title = 'Create Instructor';
-$this->params['breadcrumbs'][] = ['label' => 'Instructors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Instructores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="instructor-create">
