@@ -45,7 +45,8 @@ use yii\bootstrap\ActiveForm;
 				<small> Descripción y detalles de la categoría</small>
 			</div>
 			<div class="col-md-8">
-    <?php echo $form->field($model, 'nombre', [
+    <?php echo $form->field($model, 'descripcion
+', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >

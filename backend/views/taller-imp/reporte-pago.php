@@ -59,7 +59,17 @@ Yii::$app->formatter->locale = 'es-MX';
 		</tr>
 </table>
 <br />
-
+<table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
+		<tr align="center">
+		
+		
+			<th width="18%" align="left"  style="background: #d4d6d8;">Recibimos de:</th>
+			<td  style="border-bottom: 1px solid #000000"><?= $model->alumno->nombre; ?></td>
+			
+						
+    		
+</table>
+<br>
 <table  style="width:100%; font-size: 17px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
 
 <thead>
