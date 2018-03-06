@@ -14,6 +14,7 @@ use yii\log\Logger;
 use yii\widgets\Breadcrumbs;
 use backend\models\Taller;
 use backend\models\Categoria;
+use backend\models\TallerImp;
 
 $bundle = BackendAsset::register($this);
 
@@ -69,7 +70,16 @@ $i= 0;
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
 	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
-	        $val = (strpos($currentUrl,'taller-imp/dashboard?id='.$tallerItem->id) > 0) ||  (strpos($currentUrl,'taller/dashboard?id='.$tallerItem->id) > 0) || (strpos($currentUrl,'taller/implement?id='.$tallerItem->id) > 0);
+	        $val =   ($currentUrl == '/taller/dashboard?id='.$tallerItem->id)  || ($currentUrl=='/taller/implement?id='.$tallerItem->id) ;
+	        
+	        if (strpos($currentUrl, 'taller-imp/dashboard?id=') && isset($_REQUEST['id'])){
+	            
+	               $modelTallerImp = TallerImp::findOne($_REQUEST['id']);
+	               
+	               $val = ($modelTallerImp->id_curso_base === $tallerItem->id);
+	        }
+	        
+	        
 	        $tallerItems[$j]['active'] = $val;
 	        $j++;
 	        
@@ -310,6 +320,18 @@ $i= 0;
                                 'active' => strpos(   $currentUrl   , 'pago-taller-cuota/index')],
                             ['label' => Yii::t('backend', 'Renta aulas'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
                             ]
+                        
+                    ],
+                    
+                    
+                    [
+                        'label' => Yii::t('backend', 'Cuotas'),
+                        'url' => ['/cuota/index'],
+                        'icon' => '<i class="fa fa-calendar-check-o "></i>',
+                        
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['categoria']),
+                        
                         
                     ],
                     

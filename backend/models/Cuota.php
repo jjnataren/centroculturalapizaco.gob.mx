@@ -2,22 +2,26 @@
 
 namespace backend\models;
 
+use backend\models\CuotaTaller;
+use backend\models\CuotaTallerImp;
+use backend\models\PagoTallerCuota;
 use Yii;
 
 /**
  * This is the model class for table "tbl_cuota".
  *
- * @property integer $id
- * @property integer $creado_por
+ * @property int $id
+ * @property int $creado_por
  * @property string $concepto
  * @property string $descripcion
  * @property string $concepto_impresion
  * @property double $monto
  * @property string $fecha_creacion
- * @property integer $disponible
+ * @property int $disponible
  *
  * @property CuotaTaller[] $cuotaTallers
  * @property CuotaTallerImp[] $cuotaTallerImps
+ * @property PagoTallerCuota[] $pagoTallerCuotas
  */
 class Cuota extends \yii\db\ActiveRecord
 {
@@ -35,11 +39,12 @@ class Cuota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['creado_por', 'disponible'], 'integer'],
+            [['creado_por'], 'integer'],
             [['monto'], 'number'],
             [['fecha_creacion'], 'safe'],
             [['concepto'], 'string', 'max' => 45],
             [['descripcion', 'concepto_impresion'], 'string', 'max' => 200],
+            [['disponible'], 'string', 'max' => 4],
         ];
     }
 
@@ -74,5 +79,13 @@ class Cuota extends \yii\db\ActiveRecord
     public function getCuotaTallerImps()
     {
         return $this->hasMany(CuotaTallerImp::className(), ['id_cuota' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagoTallerCuotas()
+    {
+        return $this->hasMany(PagoTallerCuota::className(), ['id_cuota' => 'id']);
     }
 }

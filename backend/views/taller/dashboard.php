@@ -377,7 +377,7 @@ echo GridView::widget([
     
     'toolbar' =>  [
         ['content'=>
-            Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Imartir nuevo'), 'class'=>'btn btn-success', ]) . ' '.
+            Html::a('<i class="glyphicon glyphicon-plus"></i>',  ['implement','id'=>$model->id], ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Imartir nuevo'), 'class'=>'btn btn-success', ]) . ' '.
             Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
         ],
         '{export}',
