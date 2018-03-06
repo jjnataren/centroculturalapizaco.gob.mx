@@ -69,7 +69,7 @@ $i= 0;
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
 	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
-	        $val =  (strpos($currentUrl,'taller/dashboard?id='.$tallerItem->id) > 0) || (strpos($currentUrl,'taller/implement?id='.$tallerItem->id) > 0);
+	        $val = (strpos($currentUrl,'taller-imp/dashboard?id='.$tallerItem->id) > 0) ||  (strpos($currentUrl,'taller/dashboard?id='.$tallerItem->id) > 0) || (strpos($currentUrl,'taller/implement?id='.$tallerItem->id) > 0);
 	        $tallerItems[$j]['active'] = $val;
 	        $j++;
 	        
