@@ -292,8 +292,8 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
-              <h2>Our Featured Courses</h2>
-              <p class="lead">Sed a repudiandae impedit voluptate nam Deleniti dignissimos perspiciatis nostrum porro nesciunt</p>
+              <h2>Nuestros cursos destacados</h2>
+              <p class="lead">Ven y conoce nuestros cursos mas destacados del año, aprenderás y te divertirás mucho, te esperamos  </p>
             </div>
           </div>
           <!-- END row -->
@@ -306,10 +306,10 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
                   </div>
                 </div>
                 <div class="text">
-                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> July 10, 2017</span>
-                  <h3>Application Design</h3>
-                  <p>Laboriosam pariatur modi praesentium deleniti molestiae officiis atque numquam quos quis nisi voluptatum architecto rerum error.</p>
-                  <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">2,928 students enrolled</span></p>
+                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> abril 10, 2018</span>
+                  <h3>Guitarra básica </h3>
+                  <p>Impartimos talleres de gitarra a nivel básico para que comiences a aprender, todos los miércoles de 11:00 a 14:00 horas ven te esperamos.</p>
+                  <p><a href="#" class="btn btn-primary">ver mas</a> <span class="enrolled-count">2,928 estudiantes inscritos</span></p>
                 </div>
               </div>
 
@@ -320,10 +320,10 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
                   </div>
                 </div>
                 <div class="text">
-                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> July 10, 2017</span>
-                  <h3>Chemical Engineering</h3>
-                  <p>Laboriosam pariatur modi praesentium deleniti molestiae officiis atque numquam quos quis nisi voluptatum architecto rerum error.</p>
-                  <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">7,202 students enrolled</span></p>
+                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> abril 1, 2018</span>
+                  <h3>Teatro infantil</h3>
+                  <p>Comenzaremos con cursos de teatro e improvisación para niños, trae a tu hijo a desarrolle su capacidad motora coordinativa y se divierta, no esperes mas¡</p>
+                  <p><a href="#" class="btn btn-primary">ver mas </a> <span class="enrolled-count">7,202 estudiantes inscritos</span></p>
                 </div>
               </div>
 
@@ -336,10 +336,10 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
                   </div>
                 </div>
                 <div class="text">
-                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> July 10, 2017</span>
-                  <h3>Math Major</h3>
-                  <p>Laboriosam pariatur modi praesentium deleniti molestiae officiis atque numquam quos quis nisi voluptatum architecto rerum error.</p>
-                  <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">12,582 students enrolled</span></p>
+                  <span class="probootstrap-meta"><i class="icon-calendar2"></i> marzo 25 2018</span>
+                  <h3>Fotografia</h3>
+                  <p>Desarrolla el amor por la fotografía a un nivel profesional, te esperamos con nuestro curso de fotografía todos los lunes y miércoles de 18:00 a 20:00 horas</p>
+                  <p><a href="#" class="btn btn-primary">ver mas </a> <span class="enrolled-count">12,582 estudiantes inscritos</span></p>
                 </div>
               </div>
 
@@ -351,9 +351,9 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
                 </div>
                 <div class="text">
                   <span class="probootstrap-meta"><i class="icon-calendar2"></i> July 10, 2017</span>
-                  <h3>English Major</h3>
-                  <p>Laboriosam pariatur modi praesentium deleniti molestiae officiis atque numquam quos quis nisi voluptatum architecto rerum error.</p>
-                  <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">9,582 students enrolled</span></p>
+                  <h3>Danza folclórica</h3>
+                  <p>Ven, aprende y diviértete con nuestro curso de danza folclórica y no dejes que se pierdan nuestras raíces  todos los miércoles y viernes de 12:30 a 15:00 horas para personas de la 3ra edad no esperes más te esperamos </p>
+                  <p><a href="#" class="btn btn-primary">ver mas</a> <span class="enrolled-count">9,582 estudiantes inscritos</span></p>
                 </div>
               </div>
 
@@ -368,8 +368,8 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
-              <h2>Meet Our Qualified Teachers</h2>
-              <p class="lead">Sed a repudiandae impedit voluptate nam Deleniti dignissimos perspiciatis nostrum porro nesciunt</p>
+              <h2>Contamos con los mejores profesores¡</h2>
+              <p class="lead">Contamos con los mejores profesores certificados en cada área para mejor formación de los alumnos, están capacitados para fortalecer el aprendizaje, los valores y el trabajo en equipo de los alumnos.</p>
             </div>
           </div>
           <!-- END row -->
@@ -452,8 +452,9 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
-              <h2>Alumni Testimonial</h2>
-              <p class="lead">Sed a repudiandae impedit voluptate nam Deleniti dignissimos perspiciatis nostrum porro nesciunt</p>
+              <h2>
+Testimonio de exalumnos</h2>
+              <p class="lead">Exalumnos satisfechos con nuestro trabajo nos respaldan </p>
             </div>
           </div>
           <!-- END row -->
@@ -498,8 +499,8 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
-              <h2>Why Choose Enlight School</h2>
-              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+              <h2>¿Porque elegirnos a nosotros?</h2>
+              <p class="lead">Somos tu mejor opción, más de 20 años de labores nos respaldan. </p>
             </div>
           </div>
           <div class="row">
@@ -507,47 +508,36 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
               <div class="service left-icon probootstrap-animate">
                 <div class="icon"><i class="icon-checkmark"></i></div>
                 <div class="text">
-                  <h3>Consectetur Adipisicing</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+                  <h3>Formación Profesional</h3>
+                  <p>Contribuimos con la formación profesional y personal de artistas tlaxcaltecas con alto nivel de calidad</p>
                 </div>  
               </div>
               <div class="service left-icon probootstrap-animate">
                 <div class="icon"><i class="icon-checkmark"></i></div>
                 <div class="text">
-                  <h3>Aliquid Dolorum Saepe</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+                  <h3>Formación psicológica
+</h3>
+                  <p> Nuestro propósito es reducir a través del arte las prácticas y conductas antisociales de nuestros alumnos</p>
                 </div>
               </div>
-              <div class="service left-icon probootstrap-animate">
-                <div class="icon"><i class="icon-checkmark"></i></div>
-                <div class="text">
-                  <h3>Eveniet Tempora Anisi</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
-                </div>
-              </div>
+              
             </div>
             <div class="col-md-6">
               <div class="service left-icon probootstrap-animate">
                 <div class="icon"><i class="icon-checkmark"></i></div>
                 <div class="text">
-                  <h3>Laboriosam Quod Dignissimos</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+                  <h3>Formación cultural</h3>
+                  <p>Estimular la sensibilidad al arte y a la cultura de la población tlaxcalteca.</p>
                 </div>  
               </div>
               
-              <div class="service left-icon probootstrap-animate">
-                <div class="icon"><i class="icon-checkmark"></i></div>
-                <div class="text">
-                  <h3>Asperiores Maxime Modi</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
-                </div>
-              </div>
+            
               
               <div class="service left-icon probootstrap-animate">
                 <div class="icon"><i class="icon-checkmark"></i></div>
                 <div class="text">
-                  <h3>Libero Maxime Molestiae</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+                  <h3>Apoyos </h3>
+                  <p>Otorgar apoyos a diversas instituciones y comunidades que lo requieran. .</p>
                 </div>
               </div>
 
@@ -561,7 +551,7 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <h2 class="probootstrap-animate" data-animate-effect="fadeInRight">Get your admission now!</h2>
+              <h2 class="probootstrap-animate" data-animate-effect="fadeInRight">Inscríbete ahora!</h2>
               <a href="#" role="button" class="btn btn-primary btn-lg btn-ghost probootstrap-animate" data-animate-effect="fadeInLeft">Enroll</a>
             </div>
           </div>

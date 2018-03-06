@@ -127,7 +127,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
           <div class="row">
             <div class="col-md-4">
               <div class="probootstrap-footer-widget">
-                <h3>About The School</h3>
+                <h3>Nosotros</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro provident suscipit natus a cupiditate ab minus illum quaerat maxime inventore Ea consequatur consectetur hic provident dolor ab aliquam eveniet alias</p>
                 <h3>Social</h3>
                 <ul class="probootstrap-footer-social">
@@ -144,11 +144,11 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
               <div class="probootstrap-footer-widget">
                 <h3>Links</h3>
                 <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Courses</a></li>
-                  <li><a href="#">Teachers</a></li>
-                  <li><a href="#">News</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Inicio</a></li>
+                  <li><a href="#">Cursos</a></li>
+                  <li><a href="#">Profesores</a></li>
+                  <li><a href="#">Noticias</a></li>
+                  <li><a href="#">Contacto</a></li>
                 </ul>
               </div>
             </div>
