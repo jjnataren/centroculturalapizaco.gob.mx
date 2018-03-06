@@ -178,7 +178,7 @@ $cuotaList2[0] = 'Seleccionar todas';
              	            'attribute'=>'id_cuota',
              	            'header'=>'Tipo cuota',
              	            'content'=>function($data){
-                     	        return  $data->idCuota->concepto;
+             	            return  $data->idCuota->concepto;
              	            },
              	            'filter'=>ArrayHelper::map(Cuota::findAll([ 'disponible'=>1]), 'id','concepto'),
              	            ],
@@ -189,7 +189,7 @@ $cuotaList2[0] = 'Seleccionar todas';
              	                'header'=>'Monto',
              	                'content'=>function($data){
              	                
-             	                return  Yii::$app->formatter->asCurrency($data->idCuota->monto);
+             	                return  Yii::$app->formatter->asCurrency($data->monto);
              	                },
              	                
              	                ],

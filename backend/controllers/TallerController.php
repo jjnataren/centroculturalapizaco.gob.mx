@@ -163,7 +163,7 @@ class TallerController extends Controller
                     
                     $cuotaImp->id_taller_imp = $sModel->id;
                     $cuotaImp->id_cuota = $cuota->id_cuota;
-                    $cuotaImp->concepto_imp = isset($cuota->nombre)?$cuota->nombre:isset($cuota->idCuota->concepto_impresion)?$cuota->idCuota->concepto_impresion:'';
+                    $cuotaImp->concepto_imp = isset($cuota->nombre)?$cuota->nombre:isset($cuota->cuota->concepto_impresion)?$cuota->cuota->concepto_impresion:'';
                     $cuotaImp->obligatoria = $cuota->obligatoria;
                     $cuotaImp->tipo_periodo = $cuota->tipo_periodo;
                     $cuotaImp->monto = $cuota->monto;

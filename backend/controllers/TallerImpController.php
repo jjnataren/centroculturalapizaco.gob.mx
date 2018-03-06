@@ -592,7 +592,7 @@ class TallerImpController extends Controller
                 ]);
             }
             
-            return $this->redirect(['confirmar-inscripcion', 'id' => $modelInscripcion->id]);
+            return $this->redirect(['dashboard', 'id' => $modelTaller->id]);
             
             
             
