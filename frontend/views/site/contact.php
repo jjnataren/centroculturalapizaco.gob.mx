@@ -7,14 +7,16 @@ use yii\captcha\Captcha;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
-$this->title = 'Contact';
+$this->title = 'Contactanos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-5">
+    <div class="col-md-1">
+    </div>
+        <div class="col-md-10">
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                 <?php echo $form->field($model, 'name') ?>
                 <?php echo $form->field($model, 'email') ?>
@@ -28,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             <?php ActiveForm::end(); ?>
         </div>
+    </div>
+     <div class="col-md-1">
     </div>
 
 </div>

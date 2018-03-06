@@ -56,9 +56,9 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
           <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="/site/index">Home</a></li>
-              <li><a href="courses.html">Talleres</a></li>
-              <li><a href="teachers.html">Profesores</a></li>
-              <li><a href="events.html">Eventos</a></li>
+              <li><a href="/site/talleres">Talleres</a></li>
+              <li><a href="/site/profesores">Profesores</a></li>
+              <li><a href="/site/eventos">Eventos</a></li>
              <!-- <li class="dropdown">
                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Paginas</a>
                 <ul class="dropdown-menu">
@@ -70,7 +70,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
                   <li><a href="news.html">Noticias</a></li>
                 </ul>
               </li> -->
-              <li><a href="contact.html">Contacto</a></li>
+              <li><a href="/site/contact">Contacto</a></li>
               <?php if(Yii::$app->user->isGuest): ?>
               <li><a href="/user/sign-in/signup">Registrarse</a></li>
               <li><a href="/user/sign-in/login">Login</a></li>
