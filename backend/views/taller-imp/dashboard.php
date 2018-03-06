@@ -11,7 +11,7 @@ use backend\models\CuotaTallerImp;
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
-$this->title = "Taller:  "  .  $model->nombre;
+$this->title = "Implementación de Taller:  "  .  $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Talleres', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -75,33 +75,42 @@ $cuotaList2[0] = 'Seleccionar todas';
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <div class="col-md-4">
+          
+              <div class="col-md-3">
+				
               <dl>
-                <dt>Nombre</dt>
+              
+               <dt>ID </dt>
+               <dd><?=$model->id;?></dd>
+              
+                <dt>Nombre del taller </dt>
                <dd><?=$model->nombre;?></dd>
                 
                 <dt>Descripción</dt>
                 <dd><?=$model->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$model->duracion_hora;?></dd>
+               <dt><i class="fa fa-black-tie"></i> Instructor</dt>
+              
+                <dd><?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?></dd>
+               <dt><i class="fa fa-sitemap"></i> Categoría</dt>
+                <dd><?=isset($model->cursoBase->categoria->nombre)?$model->cursoBase->categoria->nombre:'?';?></dd>
               </dl>
              </div> 
-              <div class="col-md-4">
+              <div class="col-md-3">
             
               <dl>
-                <dt>Instructor</dt>
-                <dd><?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?></dd>
-                <dt>Descripción</dt>
-                <dd><?=$model->descripcion;?></dd>
+               <dt>Aula preferente</dt>
+               <dd><?=isset($model->cursoBase->aula->nombre) ?$model->cursoBase->aula->nombre:'?';?></dd>
+                <dt>Maximo de personas</dt>
+                 <dd><?=$model->numero_max_personas;?></dd>
+              
                <dt>Duración meses</dt>
                <dd><?=$model->duracion_mes;?></dd>
                <dt>Duración hora</dt>
                <dd><?=$model->duracion_hora;?></dd>
+               
               </dl>
              </div> 
-              <div class="col-md-4">
+              <div class="col-md-3">
               <dl>
                 <dt>Dias preferentes para impartir</dt>
                  <?php if ($model->lunes):?>
@@ -126,13 +135,13 @@ $cuotaList2[0] = 'Seleccionar todas';
                 <dd>Domingo</dd>
                 <?php endif;?>
                 
-                <dt>Descripción</dt>
-                <dd><?=$model->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$model->duracion_hora;?></dd>
+                <dt>Disponible</dt>
+               <dd><?= ($model->disponible)?'Si':'No';?></dd>
+               
+               
+               
               </dl>
+             </div> 
              </div> 
             </div>
             <div class="box-footer no-padding">
@@ -668,4 +677,3 @@ echo GridView::widget([
         </div>
         
 
-</div>

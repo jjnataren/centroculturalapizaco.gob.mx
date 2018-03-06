@@ -21,17 +21,17 @@
 	<table   style="width: 100%; font-size: 15px;  font-family:times new roman; font-style:bold;">		
 			
 		<tr align="center">
-		<th width= "300"> </th >
+		<th > </th >
 			
 			<td align="center" colspan="2">CENTRO CULTURAL DE APIZACO</td>
-			<td width= "300"> </td>				
+			<td > </td>				
 		</tr>
 		
 		<tr align="center">
-			<th width= "300"></th >
+			<th ></th >
 			<td align="center" style="font-size: 10px;" colspan="2" >FICHA PERSONAL DEL ALUMNO(A)</td>
 			
-			<td width= "300"></td>
+			<td ></td>
 			
 		</tr>
 		
