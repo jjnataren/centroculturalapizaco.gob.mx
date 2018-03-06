@@ -8,6 +8,9 @@ use yii\helpers\Html;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Dashboard', 'url' => ['dashboard','id'=>$model->id]];
 $this->params['breadcrumbs'][] = $this->title;
+
+Yii::$app->formatter->locale = 'es-MX';
+
 ?>
 
 
@@ -28,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
           <strong>Alumno</strong> 
           <address>
            <?= isset( $modelPago->alumno)?$modelPago->alumno->nombre : '?' ;?><br>
-           Direccion: <?= isset( $modelPago->alumno)?$modelPago->alumno->direccion : '?' ;?><br>
-            Correo: <?= isset( $modelPago->alumno)?$modelPago->alumno->correo_electronico : '?' ;?><br>
-             Telefono: <?= isset( $modelPago->alumno)?$modelPago->alumno->telefono_casa : '?' ;?><br>
-          Nombre del padre: <?= isset( $modelPago->alumno)?$modelPago->alumno->nombre_padre : '?' ;?>
+           &nbsp;&nbsp;<b>Direccion:</b> <?= isset( $modelPago->alumno)?$modelPago->alumno->direccion : '?' ;?><br>
+            &nbsp;&nbsp;<b>Correo:</b> <?= isset( $modelPago->alumno)?$modelPago->alumno->correo_electronico : '?' ;?><br>
+             &nbsp;&nbsp;<b>Telefono:</b> <?= isset( $modelPago->alumno)?$modelPago->alumno->telefono_casa : '?' ;?><br>
+          &nbsp;&nbsp;<b>Nombre del padre:</b> <?= isset( $modelPago->alumno)?$modelPago->alumno->nombre_padre : '?' ;?>
             
           </address>
         </div>
@@ -51,10 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
           <b>Instructor</b><br>
        <?=isset($model->instructor->nombre)?$model->instructor->nombre:'?';?>
           <br>
-         Direccion: <?=$model->instructor->direccion;?><br>
-         Sexo: <?=$model->instructor->sexo;?><br>
-        Correo Electronico: <?=$model->instructor->correo_electroinico;?><br>
-        Telefono: <?=$model->instructor->telefono;?><br>
+	        Correo Electronico: <?=$model->instructor->correo_electroinico;?><br>
+    	    Telefono: <?=$model->instructor->telefono;?><br>
           
           
          

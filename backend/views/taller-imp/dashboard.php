@@ -329,7 +329,20 @@ $cuotaList2[0] = 'Seleccionar todas';
                             
                             ],
                     
-                
+                            ['class' => 'yii\grid\ActionColumn',
+                                'template' => '{print}',
+                                'buttons' => [
+                                    
+                                    'print' => function ($url, $model, $key) {
+                                    //Html::a('borrar', ['cuota-taller/delete','id'=>$key], ['class' => 'bg-red label']);
+                            return Html::a('', ['confirma-pago', 'id'=>$model->id_taller_imp, 'id_pago'=> $model->id], [
+                            'class' => 'fa fa-print fa-2x',
+                            'target' =>'_blank',
+                            'data-pjax'=>0
+                            ]);
+                                    },]]
+                            
+                            
                             ];
                 
                 
@@ -450,7 +463,31 @@ $cuotaList2[0] = 'Seleccionar todas';
                     'header'=>'Telefono emergencía',
                     ],
                     
-       
+                    ['class' => 'yii\grid\ActionColumn',
+                        'template' => '{print} {reporte}',
+                        'buttons' => [
+                            
+                            'print' => function ($url, $model, $key) {
+                            //Html::a('borrar', ['cuota-taller/delete','id'=>$key], ['class' => 'bg-red label']);
+                    return Html::a('', ['imprimir-anual', 'id'=>$model->id], [
+                    'class' => 'fa fa-print fa-2x',
+                    'target' =>'_blank',
+                    'data-pjax'=>0
+                    ]);
+                            },
+                            'reporte' => function ($url, $model, $key) {
+                            //Html::a('borrar', ['cuota-taller/delete','id'=>$key], ['class' => 'bg-red label']);
+                            return Html::a('', ['imprimir-comprobante', 'id'=>$model->id], [
+                            'class' => 'fa fa-list fa-2x',
+                            'target' =>'_blank',
+                            'data-pjax'=>0
+                            ]);
+                            }
+                            
+                            ]
+                            
+                            
+                            ]
 
             ];
 

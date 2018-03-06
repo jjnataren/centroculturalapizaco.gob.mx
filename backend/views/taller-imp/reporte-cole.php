@@ -1,5 +1,6 @@
 <?php
 
+Yii::$app->formatter->locale = 'es-MX';
 
 
 ?>
@@ -41,6 +42,9 @@
 		</tr>
 	
 </table>
+
+<br />
+<br />
 
 <table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 		<tr align="center">

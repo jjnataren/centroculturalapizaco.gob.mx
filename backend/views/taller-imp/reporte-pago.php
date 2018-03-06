@@ -42,6 +42,9 @@ Yii::$app->formatter->locale = 'es-MX';
 	
 </table>
 
+<br />
+<br />
+<br />
 <table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 		<tr align="center">
 			<tH style=" width: 60%;" rowspan="2"><h3><?=$model->concepto;?></h3></tH>
@@ -64,7 +67,7 @@ Yii::$app->formatter->locale = 'es-MX';
 
 <thead>
 	<tr style="background: #d4d6d8" >
-		<th colspan="2" align="center">Descripcion</th>
+		<th colspan="2" align="center">Descripción</th>
 		<th align="center">Importe</th>
 	</tr>
 </thead>

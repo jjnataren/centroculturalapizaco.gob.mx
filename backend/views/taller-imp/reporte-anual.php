@@ -1,6 +1,5 @@
 <?php
 
-use backend\models\Inscripcion;
 
 Yii::$app->formatter->locale = 'es-MX';
 
@@ -9,22 +8,36 @@ Yii::$app->formatter->locale = 'es-MX';
 
 <div style="width:21cm;height:29.7cm;margin:0; " >
 
-<table border="" style="width: 100%; font-size: 15px;  font-family:times new roman; font-style:bold;">
+<table border="" style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 
 
 		<tr>
-    		<th  width="25%"  rowspan="3" align="right"><img alt="" src="/img/tlaxcalalogo.png" width="180" height="120"></th>
+    		<td     align="center"><img alt="" src="/img/tlaxcalalogo.png" width="120" height="90"></td>
     		
-    		<th width="25%" rowspan="3" align="left"><img alt="" src="/img/LCC.jpg" width="180" height="90"></th>
-    		<td width="50%"align="right">NOMBRE: <?= isset( $model->alumno)?$model->alumno->nombre : '?' ;?></td>
-		</tr>
-			<tr >			
-				<td >TALLER: <?=$model->tallerImp->nombre;?></td >
+    		<td   align="left"><img alt="" src="/img/LCC.jpg" width="120" height="90"></td>
+    		<td align="right" >
+    		<table>
+    		<tr >			
+			<td align="left">
+    			<b>NOMBRE:</b> 
+    		</td>
+    		<td align="left" style="border-bottom: 1px solid; width: 300px">
+    		<?= isset( $model->alumno)?$model->alumno->nombre : '?' ;?>
+    		</td>
+    		</tr>
+    		<tr >			
+				<td align="left"><b>TALLER: </b></td >
+				<td align="left" style="border-bottom: 1px solid; "><?=$model->tallerImp->nombre;?></td >
 			</tr >
 		
-		<tr >			
-				<td >MAESTRO: <?=$model->tallerImp->instructor->nombre;?></td >
+			<tr >			
+				<td align="left"><b>MAESTRO:</b> </td >
+				<td align="left" style="border-bottom: 1px solid; "><?=$model->tallerImp->instructor->nombre;?></td >
+			</tr>
+		</table>
+    		</td>
 		</tr>
+			
 
 			
 </table>
@@ -32,81 +45,32 @@ Yii::$app->formatter->locale = 'es-MX';
 
 <br />
 
-<table  style="width:100%; font-size: 17px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
+<table  style="width:100%; font-size: 12px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
 
 <thead>
 	<tr style="background: #d4d6d8" >
 		<th  align="center">CONCEPTO</th>
-		<th align="center">CUOTA DE RECUPERACION</th>
+		<th align="center">CUOTA DE RECUPERACIÓN</th>
 		<th align="center">FECHA, FIRMA Y SELLO</th>
 	</tr>
 </thead>
 
-<tbody style="border: 3px solid black;">
+<tbody style="border: 1px solid black;">
 			
-		
+		<?php foreach ($model->tallerImp->cuotaTallerImps as $cuota):?>
 	
 		<tr>
-			<td align="center" >ENERO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >FEBRERO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >MARZO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >ABRIL</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >MAYO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >JUNIO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >JULIO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >AGOSTO</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >SEPTIEMBRE</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >OCTUBRE</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >NOVIEMBRE</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
-		</tr>
-		<tr>
-			<td  align="center" >DICIEMBRE</td>
-			<td align="right"> $180.00</td>
-			<td align="right"> </td>
+			<td align="center" ><?=$cuota->concepto_imp;  ?></td>
+			<td align="right"><?= Yii::$app->formatter->asCurrency($cuota->monto);  ?></td>
+			<td align="left">
+			<?php if(count( $cuota->pagoTallerCuotas )):?>
+				<?=   Yii::$app->formatter->asDate($cuota->pagoTallerCuotas[0]->fecha_pago,'dd/MMM/Y'); ?>
+				<img alt="" src="/img/qr.png" style="width: 20; height: 15px">
+			<?php endif;?>
+			 </td>
 		</tr>
 		
+		<?php endforeach;?>
 		
 	</tbody>
 	
@@ -119,21 +83,21 @@ Yii::$app->formatter->locale = 'es-MX';
 
 
 <br />
-<table border="" style="width: 100%; font-size: 15px;  font-family:times new roman; font-style:bold;">
+<table border="" style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 
 
 		<tr>
     		<td  width="25%"   align="right"></td>
     		
-    		<td width="25%"  align="left">FECHA DE INSCRIPCION</td>
+    		<td width="25%"  align="right">FECHA DE INSCRIPCIÓN:</td>
 		
-    		<td width="50%"align="right"> <?= $model->tallerImp->fecha_inicio; ?></td>
+    		<td width="50%"align="right" style="border-bottom: 1px solid;"> <?= Yii::$app->formatter->asDate($model->fecha_inscripcion,'dd/MMM/Y');  ?></td>
     		</tr>
 		<tr>
     		<td  width="25%"   align="right"></td>
     		
-    		<td width="25%"  align="left">FECHA DE REINSCRIPCION</td>
-    		<td width="50%"align="right"> <?= $model->tallerImp->fecha_inicio; ?></td>
+    		<td width="25%"  align="right">FECHA DE REINSCRIPCIÓN:</td>
+    		<td width="50%"align="right" style="border-bottom: 1px solid;"> <?= Yii::$app->formatter->asDate($model->fecha_inscripcion,'dd/MMM/Y');  ?></td>
 		</tr>
 				
 

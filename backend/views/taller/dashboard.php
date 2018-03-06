@@ -16,7 +16,7 @@ use backend\models\constants\Constantes;
 $this->title = 'Taller base.  [' . $model->id . ']  ' .$model->nombre;
 $this->params['breadcrumbs'][] = $this->title;
 
-
+Yii::$app->formatter->locale = 'es-MX';
 
 $cuotaList=ArrayHelper::map
 (Cuota::findBySql('select id,  CONCAT(id, \' - \',concepto ) as concepto from tbl_cuota where disponible = 1')->all(), 'id', 'concepto');

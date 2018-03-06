@@ -1,5 +1,5 @@
 <?php
-
+Yii::$app->formatter->locale = 'es-MX';
 
 ?>
 
@@ -10,14 +10,14 @@
 
 
 		<tr>
-    		<th align="left"><img alt="" src="/img/tlaxcalalogo.png" width="200" height="130"></th>
+    		<th align="left"><img alt="" src="/img/tlaxcalalogo.png" width="120" height="90"></th>
     		<th align="right"></th>
-    		<th align="right"><img alt="" src="/img/LCC.jpg" width="200" height="100"></th>
+    		<th align="right"><img alt="" src="/img/LCC.jpg" width="120" height="90"></th>
 		</tr>
 			<tr ><th ></th ></tr >
 		
 		<tr >
-<th ></th >
+			<th ></th >
 			<th align="center" ><H2>"LA LIBERTAD"</H2></th>
 			
 			</tr>
@@ -40,13 +40,17 @@
 		</tr>
 	
 </table>
-
+<br />
+<br />
+<h2 align="center">FICHA DE INSCRIPCIÓN</h2>
+<br />
+<br />
 <table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 		<tr align="center">
-			<tH style=" width: 60%;" rowspan="2"><h3>FICHA DE INSCRIPCION</h3></tH>
+			<td style=" width: 60%;" rowspan="2"></td>
 		
-			<th align="left"  style="background: #d4d6d8;">Fecha de inscripción</th>
-			<th align="left"  style="background: #d4d6d8;">Folio inscripción</th>
+			<td  align="left"  style="background: #d4d6d8;"><b>Fecha de inscripción</b></td>
+			<td  align="left"  style="background: #d4d6d8;"><b>Folio inscripción</b></td>
 			
 						
 		</tr>
@@ -54,24 +58,18 @@
 			
 		
 			<td align="center"   style="background: #d4d6d8;"><?= Yii::$app->formatter->asDate($model->fecha_inscripcion,'dd/MMM/Y'); ?></td>
-			<td align="center"   style="background: #d4d6d8;"><?= $model->id; ?></td>
+			<td align="center"   style="background: #d4d6d8;"><?=  substr('00000' .  $model->id, -5 ); ?></td>
 		</tr>
 </table>
 <br />
 
-<table  style="width:100%; font-size: 17px; border: 1px solid black; font-family:times new roman;">
-			
-		<tr>
-			<td style=" width: 20%;"></td>
-			<td style=" width: 40%;"></td>
-			<td style=" width: 20%;"></td>
-			<td style=" width: 20%;"></td>
-		</tr>	
+<table  style="width:100%; font-size: 12px; border: 1px solid black; font-family:times new roman;">
+		
 		
 	
 		<tr>
-			<th align="left" style="background: #d4d6d8" >ALUMNO</th>
-			<td align="left"><?= isset( $model->alumno)?$model->alumno->nombre : '?' ;?></td>
+			<td align="right" style="background: #d4d6d8" >ALUMNO</td>
+			<td align="right"><?= isset( $model->alumno)?$model->alumno->nombre : '?' ;?></td>
 			
 			
 	
@@ -79,16 +77,16 @@
 		</tr>
 			<tr>
 			
-			<th align="left" style="background: #d4d6d8;"  >TALLER </th>
-			<td align="left" ><?=$model->tallerImp->nombre;?></td>
+			<td align="right" style="background: #d4d6d8;"  >TALLER </td>
+			<td align="right" ><?=$model->tallerImp->nombre;?></td>
 			
 								
 		</tr>
 		
 			<tr>
 			
-			<th align="left" style="background: #d4d6d8;"  >INSTRUCTOR</th>
-			<td align="left" ><?=$model->tallerImp->instructor->nombre;?></td>
+			<td align="right" style="background: #d4d6d8;"  >INSTRUCTOR</td>
+			<td align="right" ><?=$model->tallerImp->instructor->nombre;?></td>
 			
 								
 		</tr>
@@ -97,15 +95,15 @@
 </table>
 <br>
 <br>
-<H4>DETALLES DEL PAGO</H4>
+
 
 <table style="width: 100%; font-size: 12px;  font-family:times new roman; font-style:bold;">
 		<tr align="center">
 		
-			<tH style=" width: 60%;" rowspan="2"><h3><?=$model->pago->concepto;?></h3></tH>
+			<tH style=" width: 60%;" rowspan="2">Pago de inscripción</tH>
 		
 			<th align="left"  style="background: #d4d6d8;">Fecha de pago</th>
-			<th align="left"  style="background: #d4d6d8;">Folio pago</th>
+			<th align="left"  style="background: #d4d6d8;">Folio de pago</th>
 			
 						
 		</tr>
@@ -120,11 +118,11 @@
 
 <br />
 
-<table  style="width:100%; font-size: 17px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
+<table  style="width:100%; font-size: 12px; border: 3px solid black; font-family:times new roman;" class="table table-bordered">
 
 <thead>
 	<tr style="background: #d4d6d8" >
-		<th colspan="2" align="center">Descripcion</th>
+		<th colspan="2" align="center">Descripción</th>
 		<th align="center">Importe</th>
 	</tr>
 </thead>
@@ -136,8 +134,6 @@
 		<tr>
 			<td colspan="2" align="center"  >
 			
-				<p><?=$model->tallerImp->nombre;?></p>
-				<p><?=$model->tallerImp->instructor->nombre;?></p>
 				<p><?=$model->pago->concepto;?></p>
 			
 			</td>
@@ -146,7 +142,7 @@
 			
 		</tr>
 			<tr>
-				<td align="center"   style="background: #d4d6d8;width: 65%;"></td>
+				<td align="center"   style="width: 65%;"></td>
 				<td  align="right"  > <small> I.V.A 16%</small> </td>
 				<td  align="right"  >$ 0.00</td>
 			
@@ -158,7 +154,7 @@
 	
 	<tfoot>
 		<tr>
-			<td align="left"  style="background: #d4d6d8; width: 65%;"><small></small></td>
+			<td align="left"  style="width: 65%;"><small></small></td>
 			<td align="right">Total $</td>
 			<td align="right"><?= Yii::$app->formatter->asCurrency($model->pago->monto); ?></td>
 		</tr>
@@ -166,6 +162,9 @@
 	
 </table>
 <br />
+<div align="right">
+<img src="/img/qr.png" style="width: 80px; height: 70px;" />
+</div>
 <!-- 
 
 <table border="1"  style="width:100%; font-size: 12px; border: 1px dotted gray; font-family:times new roman;">

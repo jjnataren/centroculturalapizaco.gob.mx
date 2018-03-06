@@ -442,7 +442,7 @@ class TallerImpController extends Controller
     
     public function actionImprimirAnual ($id){
         
-        $model = PagoTallerCuota::findOne($id);
+        $model = Inscripcion::findOne($id);
         
         
         if(!$model){
