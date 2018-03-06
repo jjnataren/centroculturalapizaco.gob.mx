@@ -1,11 +1,12 @@
 <?php
 
 use backend\models\Cuota;
+use kartik\datecontrol\DateControl;
 use kartik\grid\GridView;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use backend\models\CuotaTaller;
+use backend\models\CuotaTaller;  
 use backend\models\constants\Constantes;
 
 
@@ -187,7 +188,7 @@ $cuotaList=ArrayHelper::map
              	            
              	            //   $categoriaproducto = isset(TipoProducto::$categoriaDesc[$data->tipoProducto->categoria]) ? TipoProducto::$categoriaDesc[$data->tipoProducto->categoria] : 'Desconocido';
              	        
-             	        return   isset( $data->idCuota->concepto)?$data->idCuota->concepto:'?';
+             	        return   isset( $data->cuota->concepto)?$data->cuota->concepto:'?';
              	        
              	            },
              	            'filter'=>ArrayHelper::map(Cuota::findAll([ 'disponible'=>1]), 'id','concepto'),
@@ -198,7 +199,7 @@ $cuotaList=ArrayHelper::map
              	                'header'=>'Monto',
              	                'content'=>function($data){
              	                
-             	                return  Yii::$app->formatter->asCurrency($data->idCuota->monto);
+             	                return  Yii::$app->formatter->asCurrency($data->monto);
              	                },
              	                
              	                ],
@@ -472,9 +473,24 @@ echo GridView::widget([
 		      <div> {error}{hint}</div>
    				</div>'])->textInput(['id'=>'cuota_concepto',  'placeholder' => 'Alias para esta cuota','class'=>'form-control input-lg','maxlength' => '16'])->label(false); ?>
       
+        <?php echo $form->field($cuotaModel, 'monto', ['template' => 
+		     		'<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-dollar"></span>
+		          </span>
+		          {input}
+		     		
+		       </div>
+		     			
+		      <div> {error}{hint}</div>
+   				</div>'])->textInput(['placeholder' => 'Monto para esta cuota','class'=>'form-control input-lg','maxlength' => '50', 'id'=>'cuota_monto'])->label(false); ?>
+ 
       
       
       <?php echo $form->field($cuotaModel, 'obligatoria')->checkbox(['class'=>'form']); ?>
+      
+   
       
        <?= $form->field($cuotaModel, 'tipo_periodo',['template' => 
 		     		' <div class="form-group">

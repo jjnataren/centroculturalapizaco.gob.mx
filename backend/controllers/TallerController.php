@@ -160,12 +160,13 @@ class TallerController extends Controller
                 foreach ($model->cuotaTallers as $cuota){
                     
                     $cuotaImp = new CuotaTallerImp();
+                    
                     $cuotaImp->id_taller_imp = $sModel->id;
                     $cuotaImp->id_cuota = $cuota->id_cuota;
                     $cuotaImp->concepto_imp = isset($cuota->nombre)?$cuota->nombre:isset($cuota->idCuota->concepto_impresion)?$cuota->idCuota->concepto_impresion:'';
                     $cuotaImp->obligatoria = $cuota->obligatoria;
                     $cuotaImp->tipo_periodo = $cuota->tipo_periodo;
-                    $cuotaImp->monto = isset( $cuota->idCuota->monto)? $cuota->idCuota->monto: 0 ;
+                    $cuotaImp->monto = $cuota->monto;
                     $cuotaImp->comentario = $cuota->comentario;
                     $cuotaImp->save(false);
                     
@@ -376,7 +377,7 @@ class TallerController extends Controller
     
     /**
      * Prints new  instription
-     * @param unknown $id
+     * @param Integer $id
      */
     public function actionImprimirInfo($id){
         

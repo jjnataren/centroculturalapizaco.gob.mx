@@ -7,16 +7,19 @@ use Yii;
 /**
  * This is the model class for table "tbl_cuota_taller".
  *
- * @property integer $id
- * @property integer $id_cuota
- * @property integer $id_taller
+ * @property int $id
+ * @property int $id_cuota
+ * @property int $id_taller
  * @property string $nombre
- * @property integer $obligatoria
+ * @property int $obligatoria
  * @property string $comentario
- * @property integer $tipo_periodo
+ * @property int $tipo_periodo
+ * @property string $fecha_max_pago
+ * @property double $monto
+ * @property string $concepto_imp
  *
- * @property Cuota $idCuota
- * @property Taller $idTaller
+ * @property Cuota $cuota
+ * @property Taller $taller
  */
 class CuotaTaller extends \yii\db\ActiveRecord
 {
@@ -34,9 +37,13 @@ class CuotaTaller extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_cuota', 'id_taller', 'obligatoria', 'tipo_periodo'], 'integer'],
+            [['id_cuota', 'id_taller'], 'integer'],
+            [['fecha_max_pago'], 'safe'],
+            [['monto'], 'number'],
             [['nombre'], 'string', 'max' => 150],
+            [['obligatoria', 'tipo_periodo'], 'string', 'max' => 4],
             [['comentario'], 'string', 'max' => 300],
+            [['concepto_imp'], 'string', 'max' => 45],
             [['id_cuota'], 'exist', 'skipOnError' => true, 'targetClass' => Cuota::className(), 'targetAttribute' => ['id_cuota' => 'id']],
             [['id_taller'], 'exist', 'skipOnError' => true, 'targetClass' => Taller::className(), 'targetAttribute' => ['id_taller' => 'id']],
         ];
@@ -55,13 +62,16 @@ class CuotaTaller extends \yii\db\ActiveRecord
             'obligatoria' => 'Obligatoria',
             'comentario' => 'Comentario',
             'tipo_periodo' => 'Tipo Periodo',
+            'fecha_max_pago' => 'Fecha Max Pago',
+            'monto' => 'Monto',
+            'concepto_imp' => 'Concepto Imp',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCuota()
+    public function getCuota()
     {
         return $this->hasOne(Cuota::className(), ['id' => 'id_cuota']);
     }
@@ -69,7 +79,7 @@ class CuotaTaller extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdTaller()
+    public function getTaller()
     {
         return $this->hasOne(Taller::className(), ['id' => 'id_taller']);
     }
