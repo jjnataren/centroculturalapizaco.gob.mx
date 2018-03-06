@@ -35,6 +35,21 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    
+    public function actionTalleres()
+    {
+        return $this->render('talleres');
+    }
+    
+    public function actionProfesores()
+    {
+        return $this->render('profesores');
+    }
+    
+    public function actionEventos()
+    {
+        return $this->render('eventos');
+    }
 
     public function actionContact()
     {

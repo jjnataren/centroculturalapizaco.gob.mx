@@ -141,7 +141,7 @@ En 1993 se iniciaron las labores de remodelación del inmueble y, en 1995 culmin
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center section-heading probootstrap-animate">
-              <h2 class="mb0">Prinvipales eventos</h2>
+              <h2 class="mb0">Principales eventos</h2>
             </div>
           </div>
         </div>
