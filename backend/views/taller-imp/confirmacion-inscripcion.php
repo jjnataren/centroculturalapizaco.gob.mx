@@ -20,14 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        
-        <?php echo Html::a('Imprimir comprobante', ['imprimir-comprobante', 'id' => $model->id], [
-            'class' => 'btn btn-success',
-            'data' => [
-                
-                'method' => 'get',
-            ],
-        ]) ?>
+         <?=HTML::a('<i class="fa fa-download"></i> Imprimir comprobante',['imprimir-comprobante','id'=>$model->id],['class' => 'btn btn-success','target'=>'_blank'])
+          ?>
+      
         
         
     </p>
