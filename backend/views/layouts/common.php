@@ -39,12 +39,12 @@ $categorias   = Categoria::findAll(['disponible'=>1]);
  *
  * ['label'=>Yii::t('backend', 'Crear'), 'url'=>['/taller/create'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                 				['label'=>Yii::t('backend', 'Ver totos'), 'url'=>['/taller'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                		
+
  * tedtsss
 */
 
 
-$menuCategorias  =  []; 
+$menuCategorias  =  [];
 
 
 $menuTalleres = [];
@@ -54,59 +54,59 @@ $i= 0;
 	$menuTalleres[$i]['url'] = ['/taller/create'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
 	$menuTalleres[$i++]['active'] = strpos(   $currentUrl   , 'taller/create');
-	
-	
+
+
 	$menuTalleres[$i]['label'] = 'Ver todos';
 	$menuTalleres[$i]['url'] = ['/taller/index'];
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
-	$menuTalleres[$i++]['active'] = strpos(   $currentUrl   , 'taller/index'); 
-	
+	$menuTalleres[$i++]['active'] = strpos(   $currentUrl   , 'taller/index');
+
 	foreach ($categorias as $cate){
-	    
+
 	    $tallerItems = [];
 	    $j = 0;
 	    foreach ($cate->tallers as $tallerItem){
-	        
+
 	        $tallerItems[$j]['label'] = $tallerItem->nombre;
 	        $tallerItems[$j]['url'] = '/taller/dashboard?id='.$tallerItem->id;
 	        $tallerItems[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
 	        $val =   ($currentUrl == '/taller/dashboard?id='.$tallerItem->id)  || ($currentUrl=='/taller/implement?id='.$tallerItem->id) ;
-	        
+
 	        if (strpos($currentUrl, 'taller-imp/dashboard?id=') && isset($_REQUEST['id'])){
-	            
+
 	               $modelTallerImp = TallerImp::findOne($_REQUEST['id']);
-	               
+
 	               $val = ($modelTallerImp->id_curso_base === $tallerItem->id);
 	        }
-	        
-	        
+
+
 	        $tallerItems[$j]['active'] = $val;
 	        $j++;
-	        
+
 	    }
-	    
+
 	    $menuTalleres[$i]['label'] = $cate->nombre;
 	    $menuTalleres[$i]['url'] = '#';
 	    $menuTalleres[$i]['icon'] = '<i class="fa fa-sitemap"></i>';
-	    
+
 	    $menuTalleres[$i++]['items'] = $tallerItems;
-	    
+
 	}
 
 
 /*foreach ($talleres as $taller){
-    
+
     $talleresImp = TallerImp::findBySql('select * from tbl_taller_imp where id_curso_base = '.$taller->id.' and  disponible = 1 and estatus ='.Comun::$TALLER_ESTATUS_IMPARTIENDO)->all();
     $j = 0;
     $menuTalleresImp = [];
-    
+
     foreach ($talleresImp as $imp) {
-        
+
         $menuTalleresImp[$j]['label'] = $imp->id;
         $menuTalleresImp[$j]['url'] = '/taller-imp/view?id='.$imp->id;
         $menuTalleresImp[$j]['icon'] = '<i class="fa fa-video-camera"></i>';
         $menuTalleresImp[$j]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
-        $menuTalleresImp[$j++]['items'] =  [    
+        $menuTalleresImp[$j++]['items'] =  [
                                                 ['label' => 'Ver', 'url' => ['/taller-imp/view','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Pagos', 'url' => ['/taller-imp/pagos','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Editar', 'url' => ['/taller-imp/update','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
@@ -114,17 +114,17 @@ $i= 0;
                                                 ['label' => 'Horarios', 'url' => ['/taller-imp/horario','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
                                                 ['label' => 'Alumnos', 'url' => ['/taller-imp/alumnos','id'=>$imp->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')]
                                            ];
-        
+
     }
-	
-    
+
+
     $menuTalleresItems = [];
     $menuTalleresItems[] = ['label' => 'Inicio', 'url' => ['/taller/view','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     //$menuTalleresItems[] = ['label' => 'Editar', 'url' => ['/taller/update','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     //$menuTalleresItems[] = ['label' => 'Cuotas', 'url' => ['/taller/cuota','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')];
     //$menuTalleresItems[] = ['label' => 'Impartir', 'url' => ['/taller/implement','id'=>$taller->id], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-message')];
-    
-    
+
+
     if (count($menuTalleresImp)){
         $tallerImpMenu = [];
         $tallerImpMenu['label'] = 'Impartiendo';
@@ -132,20 +132,20 @@ $i= 0;
         $tallerImpMenu['icon'] = '<i class="fa fa-angle-double-right"></i>';
         $tallerImpMenu['active'] =  (\Yii::$app->controller->id == 'i18n-message');
         $tallerImpMenu['items'] =  $menuTalleresImp;
-        
-        
+
+
         $menuTalleresItems[] =  $tallerImpMenu;
-    } 
-    
-     
-    
+    }
+
+
+
 	$menuTalleres[$i]['label'] = $taller->nombre;
 	$menuTalleres[$i]['url'] = '/taller/update?id='.$taller->id;
 	$menuTalleres[$i]['icon'] = '<i class="fa fa-angle-double-right"></i>';
 	$menuTalleres[$i]['active'] = (\Yii::$app->controller->id == 'widget-carousel');
 	$menuTalleres[$i++]['items'] = $menuTalleresItems;
-	
-	
+
+
 }*/
 
 
@@ -282,59 +282,84 @@ $i= 0;
                         'badge' => TimelineEvent::find()->today()->count(),
                         'badgeBgClass' => 'label-success',
                     ],
-                        [
-                        'label'=>Yii::t('backend', 'Talleres'),
-                        'options'=>['class'=>'header'],
-                        'icon'=>'<i class="fa fa-paint-brush"></i>',
-                        ],
-                    
-                    [
-                        'label' => Yii::t('backend', 'Categorías'),
-                        'url' => ['/categoria/index'],
-                        'icon' => '<i class="fa fa-sitemap"></i>',
-                        
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['categoria']),
-                     
-                        
-                    ],
-                		
+
+
+
                 		[
                 		'label'=>Yii::t('backend', 'Talleres'),
-                		'url' => '#',
+                		    'url' => ['/taller/index'],
                 		'icon'=>'<i class="fa fa-video-camera"></i>',
                 		'options'=>['class'=>'treeview'],
-                		'items'=>$menuTalleres,
+                		//'items'=>$menuTalleres,
                 		],
-                    
+
+
+                    [
+                        'label' => Yii::t('backend', 'Alumnos'),
+                        'url' =>  ['/alumno/index'],
+                        'icon' => '<i class="fa fa-graduation-cap"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['alumno']),
+
+                    ],
+
+
+                    [
+                        'label' => 'Instructores',
+                        'url' =>  ['/instructor/index'],
+                        'icon' => '<i class="fa fa-black-tie"></i>',
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['instructor']),
+
+                    ],
+
                     [
                         'label' => Yii::t('backend', 'Ingresos'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-balance-scale"></i>',
 
-                        'options' => ['class' => 'treeview'],                        
+                        'options' => ['class' => 'treeview'],
                         'items' => [
-                            ['label' => Yii::t('backend', 'Talleres'), 
-                                'url' => ['/pago-taller-cuota/index'], 
-                                'icon' => '<i class="fa fa-angle-double-right"></i>', 
+                            ['label' => Yii::t('backend', 'Talleres'),
+                                'url' => ['/pago-taller-cuota/index'],
+                                'icon' => '<i class="fa fa-angle-double-right"></i>',
                                 'active' => strpos(   $currentUrl   , 'pago-taller-cuota/index')],
                             ['label' => Yii::t('backend', 'Renta aulas'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
-                            ]
-                        
+                        ]
+
                     ],
-                    
-                    
+
+
+                    [
+                        'label' => 'Catalogos',
+                        'options' => ['class' => 'header']
+                    ],
+
+                    [
+                        'label' => Yii::t('backend', 'Categorías'),
+                        'url' => ['/categoria/index'],
+                        'icon' => '<i class="fa fa-sitemap"></i>',
+
+                        'options' => ['class' => 'treeview'],
+                        'active' => in_array(\Yii::$app->controller->id,['categoria']),
+
+
+                    ],
+
+
+
+
                     [
                         'label' => Yii::t('backend', 'Cuotas'),
                         'url' => ['/cuota/index'],
                         'icon' => '<i class="fa fa-calendar-check-o "></i>',
-                        
+
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['categoria']),
-                        
-                        
+
+
                     ],
-                    
+
                     [
                         'label' => Yii::t('backend', 'Content'),
                         'url' => '#',
@@ -347,9 +372,9 @@ $i= 0;
                             ['label' => Yii::t('backend', 'Article Categories'), 'url' => ['/article-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article-category')],
                             ['label' => Yii::t('backend', 'Text Widgets'), 'url' => ['/widget-text/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'widget-text')],
                             ['label' => Yii::t('backend', 'Menu Widgets'), 'url' => ['/widget-menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'widget-menu')],
-                            [	'label' => Yii::t('backend', 'Carousel Widgets'), 
-                            	'url' => ['/widget-carousel/index'], 
-                            	'icon' => '<i class="fa fa-angle-double-right"></i>', 
+                            [	'label' => Yii::t('backend', 'Carousel Widgets'),
+                            	'url' => ['/widget-carousel/index'],
+                            	'icon' => '<i class="fa fa-angle-double-right"></i>',
                             	'active' => (\Yii::$app->controller->id == 'widget-carousel'),
                             	'items' => [
                                     ['label' => Yii::t('backend', 'i18n Source Message'), 'url' => ['/i18n/i18n-source-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'i18n-source-message')],
@@ -358,15 +383,7 @@ $i= 0;
                             ],
                         ]
                     ],
-                    
-                    [
-                        'label' => Yii::t('backend', 'Alumnos'),
-                        'url' =>  ['/alumno/index'],
-                        'icon' => '<i class="fa fa-graduation-cap"></i>',
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['alumno']),
-                      
-                    ],
+
                     [
                         'label' => Yii::t('backend', 'Pagos'),
                         'url' =>  ['/pago-taller-cuota/create'],
@@ -376,25 +393,18 @@ $i= 0;
                         'items' => [
                             ['label' => Yii::t('backend', 'Pago inscripción'), 'url' => ['/pago-taller-cuota/create?id=1'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
                         ]
-                        
+
                     ],
-                    [
-                        'label' => Yii::t('backend', 'Instructores'),
-                        'url' =>  ['/instructor/index'],
-                        'icon' => '<i class="fa fa-black-tie"></i>',
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['instructor']),
-                        
-                    ],
+
                     [
                         'label' => Yii::t('backend', 'Aulas'),
                         'url' =>  ['/aula/index'],
                         'icon' => '<i class="fa fa-building"></i>',
                         'options' => ['class' => 'treeview'],
                         'active' => in_array(\Yii::$app->controller->id,['aula']),
-                        
+
                     ],
-                    
+
                     [
                         'label' => Yii::t('backend', 'System'),
                         'options' => ['class' => 'header']

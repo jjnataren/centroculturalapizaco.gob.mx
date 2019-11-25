@@ -41,6 +41,7 @@ class CuotaTallerImp extends \yii\db\ActiveRecord
             [['id_taller_imp', 'id_cuota', 'obligatoria', 'tipo_periodo', 'estatus'], 'integer'],
             [['fecha_max_pago'], 'safe'],
             [['monto'], 'number'],
+            [['monto'], 'required'],
             [['comentario', 'concepto_imp'], 'string', 'max' => 200],
             [['id_cuota'], 'exist', 'skipOnError' => true, 'targetClass' => Cuota::className(), 'targetAttribute' => ['id_cuota' => 'id']],
             [['id_taller_imp'], 'exist', 'skipOnError' => true, 'targetClass' => TallerImp::className(), 'targetAttribute' => ['id_taller_imp' => 'id']],

@@ -7,7 +7,7 @@ use yii\web\View;
 use backend\models\Cuota;
 use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */ 
+/* @var $this yii\web\View */
 /* @var $model backend\models\PagoTallerCuota */
 /* @var $form yii\bootstrap\ActiveForm */
 
@@ -22,19 +22,19 @@ $cuotaList=ArrayHelper::map
 
 
 $this->registerJs("
-    
+
 			/*Pos end function**/
-    
-    
+
+
         $(\"[id^=id_cuota_imp_]\").click(function() {
-    
+
 				alert('hola');
         });
-    
-    
-    
-    
-    
+
+
+
+
+
 		", View::POS_END, 'noneoptions_drop_functions');
 
 
@@ -54,7 +54,7 @@ $this->registerJs("
               <?php echo Html::a('<i class="fa fa-trash"></i>', ['delete', 'id' => $modelTaller->id], [
                     'class' => 'btn',
                     'data' => [
-                        'confirm' => 'Si elimina este curso base se perdera todo el historial de los cursos impartidos y por impartir?',
+                        'confirm' => 'Si elimina este taller base se perdera todo el historial de los talleres impartidos y por impartir?',
                         'method' => 'post',
                     ],
                 ]) ?>
@@ -64,12 +64,12 @@ $this->registerJs("
               </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body"> 
+            <div class="box-body">
             <div class="col-md-4">
               <dl>
                 <dt>Nombre</dt>
                <dd><?=$modelTaller->nombre;?></dd>
-                
+
                 <dt>Descripción</dt>
                 <dd><?=$modelTaller->descripcion;?></dd>
                <dt>Duración meses</dt>
@@ -77,9 +77,9 @@ $this->registerJs("
                <dt>Duración hora</dt>
                <dd><?=$modelTaller->duracion_hora;?></dd>
               </dl>
-             </div> 
+             </div>
               <div class="col-md-4">
-            
+
               <dl>
                 <dt>Instructor</dt>
                 <dd><?=isset($modelTaller->instructor->nombre)?$modelTaller->instructor->nombre:'?';?></dd>
@@ -90,7 +90,7 @@ $this->registerJs("
                <dt>Duración hora</dt>
                <dd><?=$modelTaller->duracion_hora;?></dd>
               </dl>
-             </div> 
+             </div>
               <div class="col-md-4">
               <dl>
                 <dt>Dias preferentes para impartir</dt>
@@ -115,7 +115,7 @@ $this->registerJs("
                 <?php if ($modelTaller->domingo):?>
                 <dd>Domingo</dd>
                 <?php endif;?>
-                
+
                 <dt>Descripción</dt>
                 <dd><?=$modelTaller->descripcion;?></dd>
                <dt>Duración meses</dt>
@@ -123,10 +123,10 @@ $this->registerJs("
                <dt>Duración hora</dt>
                <dd><?=$modelTaller->duracion_hora;?></dd>
               </dl>
-             </div> 
+             </div>
             </div>
             <div class="box-footer no-padding">
-            	
+
             </div>
             <!-- /.box-body -->
           </div>
@@ -135,17 +135,17 @@ $this->registerJs("
 
 
 	<div class="col-md-12 col-xs-12 col-sm-12">
-	
+
 	  <div class="box box-info with-border">
             <div class="box-header with-border">
             	<i class="fa fa-calendar-check-o"></i>
               <h3 class="box-title">Cuota de Inscripción</h3>
 
               <div class="box-tools pull-right">
-              
+
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-               
+
               </div>
             </div>
             <!-- /.box-header -->
@@ -153,11 +153,11 @@ $this->registerJs("
 	<div class="row">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    
+
+
     <?php echo $form->errorSummary($model,['class'=>'panel panel-danger text text-danger']); ?>
-    
-    
+
+
     <div class="col-md-6 col-xs-12 col-sm-12">
     <div class="row">
     <div class="col-md-12 col-xs-12 col-sm-12">
@@ -169,11 +169,11 @@ $this->registerJs("
 				<div class="panel-body">
     			 <?php echo $form->field($model, 'id_alumno')->hiddenInput(['id'=>'selectedAlumno'])->label(false); ?>
     			  <?php echo $form->field($model, 'id_taller_imp')->hiddenInput(['id'=>'selectedTaller','value'=>$modelTaller->id])->label(false); ?>
-    			 
+
     			    <dl class="dl-horizontal">
 						<dt><?= 'Id' ?></dt>
 						<dd>
-							
+
 							<?php echo $form->field($model, 'id_alumno')->textInput(['maxlength' => true,'readonly'=>'readonly','id'=>'alumno_id'])->label(false); ?>
 						</dd>
 
@@ -199,12 +199,12 @@ $this->registerJs("
 				</div>
 
 				<div class="panel-footer">
-    			
-    			<?=	
-    			Html::button('Seleccionar alumno', ['type'=>'button','data-target'=>'#modal-default' , 'data-toggle'=>'modal' , 'title'=>'Nueva cuota', 'class'=>'btn btn-primary', ]); 
+
+    			<?=
+    			Html::button('Seleccionar alumno', ['type'=>'button','data-target'=>'#modal-default' , 'data-toggle'=>'modal' , 'title'=>'Nueva cuota', 'class'=>'btn btn-primary', ]);
         			?>
- 	
-    			
+
+
     		</div>
 			</div>
 
@@ -212,51 +212,51 @@ $this->registerJs("
 		</div>
 
 		<div class="col-md-12 col-xs-12 col-sm-12">
-		
+
 		<div class="panel panel-info">
-            
+
             				<div class="panel-heading">Cuota que desea pagar</div>
-            
+
             				<div class="panel-body">
-               
-                        
-                            <?= $form->field($model, 'id_cuota',['template' => 
+
+
+                            <?= $form->field($model, 'id_cuota',['template' =>
                         		     		'<div class="form-group">
                         		       		 <div class="input-group">
                         		          <span class="input-group-addon" >
                         		             <span class="fa fa-cube"></span>
                         		          </span>
                         		          {input}
-                        		     		
+
                         		       </div>
-                        		     			
+
                         		      <div> {error}{hint}</div>
                            				</div>'])->dropDownList($cuotaList,
                            						[
                            						'id' => 'selectPro',
                            						'onchange'=>'
                         			                $.get( "'.Yii::$app->urlManager->createUrl('taller-imp/get-cuotas?id=').'"+$("#selectedTaller").val()+"&id_cuota="+$(this).val()+"&id_alumno="+$("#selectedAlumno").val(), function( data ) {
-                        			                  
+
 
                                                             $( "#div_cuotas" ).html( data );
-                                                            
+
                                                              if(data==null){
-                                                                          $("#div_cuotas").empty();    
+                                                                          $("#div_cuotas").empty();
                                                                      }else{
                                                                           var obj = eval(data);
-                                                                          var cuotaTable = "<table class=\"table table-hover table-bordered\">"; 
+                                                                          var cuotaTable = "<table class=\"table table-hover table-bordered\">";
                                                                           $("#div_cuotas").empty();
-                                                                          
+
                                                                           cuotaTable +="<thead>";
                                                                           cuotaTable +="<th></th><th>Concepto</th><th>$ monto</th><th>Fecha max pago</th><th>Obligatoría</th>";
                                                                           cuotaTable +="</thead><tbody>";
-                                                                            
+
                                                                            $.each(obj, function(key, value) {
-                                                                                
+
                                                                             var tableClass = (value[\'estatus\'] == "1")? "success":(value[\'obligatoria\'] == "1")?"warning":"";
                                                                             var obligatoria = (value[\'obligatoria\'] == "1")? "Obligatoria":"Opcional";
                                                                            var thumbsStatus = (value[\'estatus\'] == "1")? "fa fa-thumbs-o-up":(value[\'obligatoria\'] == "1")?"fa fa-clock-o":"";
-                                                            
+
                                                                             cuotaTable +="<tr class=\""+tableClass+"\">";
                                                                              cuotaTable += "<td><i class=\""+thumbsStatus+"\"></i></td>";
                                                                              cuotaTable += "<td><div class=\"form-check\"><label class=\"form-check-label\">";
@@ -266,46 +266,46 @@ $this->registerJs("
                                                                           });
 
                                                                             cuotaTable +="</tbody></table>";
-                                                                          $("#div_cuotas").append(cuotaTable);              
+                                                                          $("#div_cuotas").append(cuotaTable);
 
-                                                                    
-                                                                                
+
+
                                                                      }
 
 
                         			                });
                                     			',
-                           						
+
                               ]) ?>
-                  
-                  
+
+
                     <div class="col-md-12 col-xs-12 col-sm-12" id="div_cuotas">
-                    
-                    		
-                    
+
+
+
              	  	</div>
-                  
+
              	 </div>
              	 </div>
 			</div>
 	</div>
     </div>
 	<div class="col-md-6 col-xs-12 col-sm-12">
-	
+
 	<div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
-            
-            			
-             	 
+
+
+
              	 <div class="panel panel-default">
              	 <div class="panel-heading"> <h4><i class="fa fa-credit-card"></i> Información del pago de inscripción</h4></div>
              	 <div class="panel-body">
-             	
+
              	 	 <?php echo $form->field($model, 'monto')->textInput(['maxlength' => true,'id'=>'cuota_monto']) ?>
 
                     <?php echo $form->field($model, 'concepto')->textInput(['maxlength' => true,'id'=>'cuota_concepto']) ?>
-                
-                    	<?php  
+
+                    	<?php
                     	echo $form->field($model, 'fecha_pago')->widget(DateControl::classname(), [
                        		    'type'=>DateControl::FORMAT_DATE,
                        		    'ajaxConversion'=>false,
@@ -313,12 +313,12 @@ $this->registerJs("
                        		    'widgetOptions' => [
                        		        'pluginOptions' => [
                        		               'autoclose' => true,
-                       		            
+
                        		        ]
                        		    ]
                        		]);?>
-                    
-                     <?= $form->field($model, 'metodo_pago',['template' => 
+
+                     <?= $form->field($model, 'metodo_pago',['template' =>
                         		     		'<div class="form-group">
                         		       		 <div class="input-group">
                         		          <span class="input-group-addon" >
@@ -326,30 +326,30 @@ $this->registerJs("
                         		          </span>
                                           {label}
                         		          {input}
-                        		     		
+
                         		       </div>
-                        		     			
+
                         		      <div> {error}{hint}</div>
                            				</div>'])->dropDownList([1=>'Efectivo', 2=>'Tarjeta de credito',3=>'Comprobante bancario'],
                            						[
                            						'id' => 'selectTipoPago',]) ?>
-                
+
                     <?php echo $form->field($model, 'comentario')->textInput(['maxlength' => true]) ?>
              	 </div>
              	 <div class="panel-footer">
              	 	 <?php echo Html::submitButton( 'Inscribir alumno', [ 'class'=>'btn btn-success' ]) ?>
              	 </div>
              	 </div>
-             	 
+
              	 </div>
-             	 
-             	
-     	 
-   </div>  	 
+
+
+
+   </div>
 </div>
 
 
-   
+
 
     <?php ActiveForm::end(); ?>
 </div>
@@ -371,16 +371,16 @@ $this->registerJs("
                 <h4 class="modal-title">Seleccionr alumno</h4>
               </div>
               <div class="modal-body">
-              
-              
-        <div class="table-responsive">	
+
+
+        <div class="table-responsive">
              <?php \yii\widgets\Pjax::begin(['timeout'=>8000,'id'=>'alumno-modal']); ?>
-                                                
+
         	                                        <div class="modal-body">
-        	                                        
-        	                                        
+
+
         	                                           <?php
-                                                    
+
         echo GridView::widget([
                                                         'dataProvider' => $alumnoDataProvider,
                                                         'filterModel' => $alumnoSearchModel,
@@ -388,11 +388,11 @@ $this->registerJs("
                                                             [
                                                                 'class' => 'yii\grid\SerialColumn'
                                                             ],
-                                                            
+
                                                             'id',
                                                             // 'numero_registro',
                                                             'nombre',
-                                                            'fecha_nacimiento',                                                    
+                                                            'fecha_nacimiento',
                                                             'sexo',
                                                             'curp',
                                                             [
@@ -408,77 +408,77 @@ $this->registerJs("
                                                                             'name' => 'seleccionarAlumno',
                                                                             'value' => $data->id,
                                                                             'onclick' => "
-                                                        
-        												$('#alumno_$data->id').fadeIn(300);												
+
+        												$('#alumno_$data->id').fadeIn(300);
         												$('#alumno_$data->id').removeClass('btn btn-primary').addClass('btn btn-success');
                                                         $('.modal.in').modal('hide');
                                                         $('#selectedAlumno').val($data->id);
                                                         $('#alumno_id').val('$data->id');
-                                                        $('#alumno_nombre').html('$data->nombre');                        
+                                                        $('#alumno_nombre').html('$data->nombre');
                                                         $('#alumno_curp').html('$data->curp');
                                                             dob = new Date('$data->fecha_nacimiento');
                                                             var today = new Date();
                                                             var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
                                                         $('#alumno_fecha_nacimiento').html(age+' años');
-        											   
+
         									  " .  '  $.get( "'.Yii::$app->urlManager->createUrl('taller-imp/get-cuotas?id=').'"+$("#selectedTaller").val()+"&id_cuota="+1+"&id_alumno="+$("#selectedAlumno").val(), function( data ) {
-                    
-                    
+
+
                                                             $( "#div_cuotas" ).html( data );
-                    
+
                                                              if(data==null){
                                                                           $("#div_cuotas").empty();
                                                                      }else{
                                                                           var obj = eval(data);
                                                                           var cuotaTable = "<table class=\"table table-hover table-bordered\">";
                                                                           $("#div_cuotas").empty();
-                    
+
                                                                           cuotaTable +="<thead>";
                                                                           cuotaTable +="<th></th><th>Concepto</th><th>$ monto</th><th>Fecha max pago</th><th>Obligatoría</th>";
                                                                           cuotaTable +="</thead><tbody>";
-                    
+
                                                                            $.each(obj, function(key, value) {
-                    
+
                                                                             var tableClass = (value[\'estatus\'] == "1")? "success":(value[\'obligatoria\'] == "1")?"warning":"";
                                                                             var obligatoria = (value[\'obligatoria\'] == "1")? "Obligatoria":"Opcional";
                                                                            var thumbsStatus = (value[\'estatus\'] == "1")? "fa fa-thumbs-o-up":(value[\'obligatoria\'] == "1")?"fa fa-clock-o":"";
-                    
+
                                                                             cuotaTable +="<tr class=\""+tableClass+"\">";
                                                                              cuotaTable += "<td><i class=\""+thumbsStatus+"\"></i></td>";
                                                                              cuotaTable += "<td><div class=\"form-check\"><label class=\"form-check-label\">";
                                                                             cuotaTable +="<input id= \""+"id_cuota_imp_"+value[\'id\']+"\" class=\"form-check-input\" type=\"radio\" name=\"cuota\"  value=\""+value[\'id\']+"\" onclick=\"$(\'#cuota_monto\').val(\'"+value[\'monto\']+"\'); $(\'#cuota_concepto\').val(\'"+value[\'concepto_imp\']+"\'); \" />  ";
                                                                             cuotaTable +=value[\'concepto_imp\']+"</label></div></td><td>"+value[\'monto\']+"</td><td>"+value[\'fecha_max_pago\']+"</td><td>"+obligatoria+"</td></tr>";
-                    
+
                                                                           });
-                    
+
                                                                             cuotaTable +="</tbody></table>";
                                                                           $("#div_cuotas").append(cuotaTable);
-                    
-                    
-                    
+
+
+
                                                                      }
-                    
-                    
+
+
                         			                }); return true'
-                    
+
                                                                         ]);
                                                                     }
-                                                                
+
                                                                 ]
                                                             ]
-                                                        
+
                                                         ]
                                                     ]);
                                                     ?>
-        												
-        												
+
+
         										    </div>
         										    <?php \yii\widgets\Pjax::end(); ?>
-        										    
+
         										    </div>
-        
-                      
+
+
                       </div>
              </div>
              </div>
-    </div> 
+    </div>

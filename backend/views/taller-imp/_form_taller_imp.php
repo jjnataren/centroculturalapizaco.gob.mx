@@ -33,16 +33,18 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
 
 		   <div class="box box-info with-border">
-            <div class="box-header with-border">
-            	<i class="fa fa-file-image-o"></i>
-              <h3 class="box-title">Imagen</h3>
+			<div class="box-header with-border">
+				<i class="fa fa-th"></i>
+				<h3 class="box-title">Imagen del taller</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <!-- /.box-header -->
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool"
+						data-widget="collapse">
+						<i class="fa fa-minus"></i>
+					</button>
+				</div>
+			</div>
+			<!-- /.box-header -->
             <div class="box-body">
 
         		<?php
@@ -61,7 +63,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
   <div class="box box-info with-border">
             <div class="box-header with-border">
             	<i class="fa fa-th"></i>
-              <h3 class="box-title">Datos</h3>
+              <h3 class="box-title">Información del taller </h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -96,52 +98,9 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 
 		</div>
 
-		<div class="col-md-12">
-			<div class="col-md-4">
-				<small>Categoría del taller.</small>
-			</div>
-
-			<div class="col-md-7">
-      <?=$form->field($model, 'id_categoria', ['template' => '<div class="form-group">
-		       		 <div class="input-group">
-		          <span class="input-group-addon" >
-		             <span class="fa fa-building-o"></span>
-		          </span>
-		          {input}
-
-		       </div>
-
-		      <div> {error}{hint}</div>
-   				</div>'])->dropDownList($categoriaList, ['prompt' => '-- Categoría  --'])?>
-
-    </div>
-
-		</div>
 
 
 
-
-		<div class="col-md-12">
-			<div class="col-md-4">
-				<small>Aula donde se impartira el taller.</small>
-			</div>
-
-			<div class="col-md-7">
-      <?=$form->field($model, 'id_aula', ['template' => '<div class="form-group">
-		       		 <div class="input-group">
-		          <span class="input-group-addon" >
-		             <span class="fa fa-building-o"></span>
-		          </span>
-		          {input}
-
-		       </div>
-
-		      <div> {error}{hint}</div>
-   				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
-
-    </div>
-
-		</div>
 
 
 
@@ -226,7 +185,7 @@ echo $form->field($model, 'descripcion', [
 			<div class="col-md-8">
      <?php
 
-echo $form->field($model, 'descripcion_temario', [
+echo $form->field($model, 'temario', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
@@ -264,7 +223,7 @@ echo $form->field($model, 'descripcion_temario', [
 			<div class="col-md-8">
     <?php
 
-echo $form->field($model, 'numero_personas', [
+echo $form->field($model, 'numero_max_personas', [
         'template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
@@ -429,8 +388,6 @@ echo $form->field($model, 'numero_personas', [
 
     <div class="col-md-12">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-  		   <?php echo Html::a('Cancelar',['taller/dashboard','id'=>$model->id], ['class' => 'btn btn-default' ]) ?>
-
     </div>
 
     </div>

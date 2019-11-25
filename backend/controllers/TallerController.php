@@ -34,9 +34,9 @@ class TallerController extends Controller
             ],
         ];
     }
-    
-    
-    
+
+
+
 
     /**
      * (non-PHPdoc)
@@ -87,8 +87,8 @@ class TallerController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-    
-    
+
+
     /**
      * Displays a single Taller model.
      * @param integer $id
@@ -96,32 +96,32 @@ class TallerController extends Controller
      */
     public function actionDashboard($id)
     {
-        
-        
+
+
         $searchModel = new TallerImpSearch();
         $dataProvider = $searchModel->searchByParent(Yii::$app->request->queryParams,$id);
-        
-        
-        
+
+
+
         $searchCuotaModel = new CuotaTallerSearch();
         $dataCuotaProvider = $searchCuotaModel->searchByTaller(Yii::$app->request->queryParams,$id);
-        
+
         $sModel = new CuotaTaller();
         $sModel->id_taller = $id;
-        
+
         if ($sModel->load(Yii::$app->request->post()) && $sModel->save()) {
-            
+
             Yii::$app->getSession()->setFlash('success', [
                 'body'=>'Se ha creado una nueva cuota.',
                 'options'=>['class'=>'alert-danger']
             ]);
-            
+
             return $this->redirect(['dashboard', 'id' => $model->id]);
         }
-        
-        
-        
-        
+
+
+
+
         return $this->render('dashboard', [
             'model' => $this->findModel($id),
             'searchModel' => $searchModel,
@@ -129,13 +129,13 @@ class TallerController extends Controller
             'searchCuotaModel' => $searchCuotaModel,
             'dataCuotaProvider' => $dataCuotaProvider,
         ]);
-        
-        
-        
+
+
+
     }
-    
-    
-    
+
+
+
     /**
      * Generates Taller implementation.
      * @param integer $id
@@ -143,24 +143,24 @@ class TallerController extends Controller
      */
     public function actionImplement($id)
     {
-        
-        $model = $this->findModel($id);
-        
-        
-        $sModel = new TallerImp();
-        
-        
-        
-        if ($sModel->load(Yii::$app->request->post())) {
-            
-            
-            if ($sModel->save()) { 
 
-                
+        $model = $this->findModel($id);
+
+
+        $sModel = new TallerImp();
+
+
+
+        if ($sModel->load(Yii::$app->request->post())) {
+
+
+            if ($sModel->save()) {
+
+
                 foreach ($model->cuotaTallers as $cuota){
-                    
+
                     $cuotaImp = new CuotaTallerImp();
-                    
+
                     $cuotaImp->id_taller_imp = $sModel->id;
                     $cuotaImp->id_cuota = $cuota->id_cuota;
                     $cuotaImp->concepto_imp = isset($cuota->nombre)?$cuota->nombre:isset($cuota->cuota->concepto_impresion)?$cuota->cuota->concepto_impresion:'';
@@ -169,34 +169,34 @@ class TallerController extends Controller
                     $cuotaImp->monto = $cuota->monto;
                     $cuotaImp->comentario = $cuota->comentario;
                     $cuotaImp->save(false);
-                    
+
                 }
-                
-                return $this->redirect(['taller-imp/dashboard', 'id' => $sModel->id]); 
-            
-            }            
+
+                return $this->redirect(['taller-imp/dashboard', 'id' => $sModel->id]);
+
+            }
                 else   return $this->render('implementation', ['model' => $sModel,  ]);
-            
+
         }else{
-        
-        
+
+
         $sModel->id_curso_base = $id;
-        
+
         $sModel->id_instructor = $model->id_instructor;
-        
+
         $sModel->nombre = $model->nombre;
-        
-        
+
+
         //Calcular
         $sModel->fecha_inicio = date('Y-m-d');
-        
+
         //$sModel->fecha_fin = date('Y-m-d');
-        
+
         $sModel->descripcion = $model->descripcion;
-        
+
         $sModel->numero_max_personas = $model->numero_personas;
-        
-        
+
+
         if($model->aula){
             $sModel->id_aula_lunes = $model->id_aula;
             $sModel->id_aula_martes = $model->id_aula;
@@ -206,61 +206,61 @@ class TallerController extends Controller
             $sModel->id_aula_sabado = $model->id_aula;
             $sModel->id_aula_domingo = $model->id_aula;
         }
-        
+
         if($model->lunes){
-            
+
             $sModel->lunes = $model->hora_inicio;
             //$sModel->lunes_fin = 12;
         }
-        
+
         if($model->martes){
-            
+
             $sModel->martes = $model->hora_inicio;
           //  $sModel->martes_fin = 12;
         }
-        
-        
+
+
         if($model->miercoles){
-            
+
             $sModel->miercoles = $model->hora_inicio;
            // $sModel->miercoles_fin = 12;
         }
-        
+
         if($model->jueves){
-            
+
             $sModel->jueves = $model->hora_inicio;
            // $sModel->jueves_fin = 12;
         }
-        
-        
+
+
         if($model->viernes){
-            
+
             $sModel->viernes = $model->hora_inicio;
             //$sModel->viernes_fin = 12;
         }
-        
+
         if($model->sabado){
-            
+
             $sModel->sabado = $model->hora_inicio;
             //$sModel->sabado_fin = 12;
         }
-        
+
         if($model->domingo){
-            
+
             $sModel->domingo = $model->hora_inicio;
             //$sModel->domingo_fin = 12;
         }
-        
-        
-        
+
+
+
         }
-        
+
         return $this->render('implementation', [
             'model' => $sModel,
         ]);
     }
-    
-    
+
+
     /**
      * Displays Cuotas of  Taller model.
      * @param integer $id
@@ -268,44 +268,44 @@ class TallerController extends Controller
      */
     public function actionCuota($id)
     {
-    	
+
     	$model = $this->findModel($id);
     	$searchModel = new CuotaTallerSearch();
-    	
+
     	$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    	
+
     	$sModel = new CuotaTaller();
     	$sModel->id_taller = $id;
-    	
+
     	if ($sModel->load(Yii::$app->request->post()) && $sModel->save()) {
-    	    
+
     	    Yii::$app->getSession()->setFlash('success', [
     	        'body'=>'Se ha creado una nueva cuota.',
     	        'options'=>['class'=>'alert-danger']
     	    ]);
-    	    
-    	    
+
+
     	} else {
-    	
-    	    
+
+
     	    if($sModel->hasErrors()){
-    	        
+
        	        Yii::$app->getSession()->setFlash('alert', [
     	            'body'=>'El producto seleccionado no es valido',
     	            'options'=>['class'=>'alert-danger']
     	        ]);
-    	        
+
     	    }
-    	    
-    	  
-    	
+
+
+
     	}
-    	
-    	
+
+
     	return $this->redirect(['dashboard', 'id' => $model->id]);
-    	
-    	
-   
+
+
+
     }
 
     /**
@@ -316,22 +316,24 @@ class TallerController extends Controller
     public function actionCreate()
     {
         $model = new Taller();
-        
+
         $model->disponible = 1;
-        
+
         $model->fecha_creacion = date('Y-m-d');
 
+        $model->scenario = Taller::SCENARIO_NEW_TALLER;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
+
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class' => 'alert-success'],
-                'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i>Taller creado correctamente</h4><p>
-                                Complete la informaciÃ³n del taller y posteriormente podra impartirlo las veces que necesite.
+                'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Taller creado correctamente</h4><p>
+                                Complete la información del taller y posteriormente podra impartirlo las veces que necesite.
                             </p>'
             ]);
-            
+
             return $this->redirect(['dashboard', 'id' => $model->id]);
-            
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -349,10 +351,10 @@ class TallerController extends Controller
     {
         $model = $this->findModel($id);
 
-      
-         
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
+
             return $this->redirect(['dashboard', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -374,33 +376,33 @@ class TallerController extends Controller
         return $this->redirect(['index']);
     }
 
-    
+
     /**
      * Prints new  instription
      * @param Integer $id
      */
     public function actionImprimirInfo($id){
-        
+
         //	Yii::$app->response->format = 'pdf';
-        
+
         $model = Taller::findOne($id);
-        
-        
+
+
         if ($model  === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
+
         $content = $this->renderPartial('detalle-taller',['model'=>$model]);
-        
-        
+
+
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
             // A4 paper format
             'format' => Pdf::FORMAT_A4,
-            
-            
-            
+
+
+
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT,
             // stream to browser inline
@@ -423,10 +425,10 @@ class TallerController extends Controller
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
         return $pdf->render();
-        
+
     }
     /**
      * Finds the Taller model based on its primary key value.

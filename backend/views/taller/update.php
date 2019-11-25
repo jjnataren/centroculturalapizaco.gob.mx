@@ -4,9 +4,9 @@
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
 
-$this->title = 'Actualizar taller base. [' . $model->id . '] ' . $model->nombre;
+$this->title = 'Actualizar TALLER BASE: ID ' . $model->id . ' - ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['dashboard',  'id'=>$model->id]];
-$this->params['breadcrumbs'][] = 'Actualizar taller base';
+$this->params['breadcrumbs'][] = 'Actualizar TALLER BASE ';
 ?>
 <div class="taller-update">
 

@@ -4,15 +4,19 @@ namespace backend\controllers;
 
 use Yii;
 use kartik\mpdf\Pdf;
+use Intervention\Image\ImageManagerStatic;
 use backend\models\TallerImp;
 use backend\models\search\AlumnoSearch;
 use backend\models\search\TallerImpSearch;
+use trntv\filekit\actions\DeleteAction;
+use trntv\filekit\actions\UploadAction;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\CuotaTallerImp;
 use backend\models\Cuota;
 use backend\models\Alumno;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use backend\models\PagoTallerCuota;
 use backend\models\Inscripcion;
@@ -34,6 +38,31 @@ class TallerImpController extends Controller
                 ],
             ],
         ];
+    }
+
+
+
+    /**
+     * (non-PHPdoc)
+     * @see \yii\base\Controller::actions()
+     */
+    public function actions()
+    {
+        return [
+            'avatar-upload' => [
+                'class' => UploadAction::className(),
+                'deleteRoute' => 'avatar-delete',
+                'on afterSave' => function ($event) {
+                /* @var $file \League\Flysystem\File */
+        $file = $event->file;
+        $img = ImageManagerStatic::make($file->read())->resize(1024, 768);
+        $file->put($img->encode());
+                }
+                ],
+                'avatar-delete' => [
+                    'class' => DeleteAction::className()
+                ]
+                ];
     }
 
     /**
@@ -62,8 +91,8 @@ class TallerImpController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-    
-    
+
+
     /**
      * Displays a single TallerImp model.
      * @param integer $id
@@ -71,17 +100,17 @@ class TallerImpController extends Controller
      */
     public function actionDashboard($id)
     {
-        
+
         $searchCuotaModel = new CuotaTallerImpSearch();
         $dataCuotaProvider = $searchCuotaModel->searchByTaller(Yii::$app->request->queryParams,$id);
-        
+
         $pagoSearchModel = new PagoTallerCuotaSearch();
         $pagoDataProvider = $pagoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
-        
+
         $alumnoSearchModel = new AlumnoSearch();
         $alumnoDataProvider = $alumnoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
-        
-        
+
+
         return $this->render('dashboard', [
             'model' => $this->findModel($id),
             'searchCuotaModel' => $searchCuotaModel,
@@ -90,7 +119,7 @@ class TallerImpController extends Controller
             'pagoDataProvider'=>$pagoDataProvider,
             'alumnoSearchModel'=>$alumnoSearchModel,
             'alumnoDataProvider'=>$alumnoDataProvider,
-            
+
         ]);
     }
 
@@ -111,7 +140,7 @@ class TallerImpController extends Controller
             ]);
         }
     }
-    
+
     /**
      * Displays Cuotas of  Taller model.
      * @param integer $id
@@ -119,45 +148,45 @@ class TallerImpController extends Controller
      */
     public function actionCuota($id)
     {
-        
+
         $model = $this->findModel($id);
-        
-        
+
+
         $sModel = new CuotaTallerImp();
         $sModel->id_taller_imp = $id;
-        
+
         if ($sModel->load(Yii::$app->request->post()) ) {
-            
-            
+
+
             if($sModel->save()){
-                
+
                 Yii::$app->getSession()->setFlash('success', [
                     'body'=>'Se ha creado una nueva cuota.',
                     'options'=>['class'=>'alert-danger']
                 ]);
-                
+
             }
          else {
-            
-            
+
+
             if($sModel->hasErrors()){
-                
+
                 Yii::$app->getSession()->setFlash('alert', [
                     'body'=>'Revise los datos',
                     'options'=>['class'=>'alert-danger']
                 ]);
-                
+
             }
-            
-            
-            
+
+
+
         }
         }
-        
+
         return $this->redirect(['dashboard', 'id' => $model->id]);
-        
-        
-        
+
+
+
     }
 
     /**
@@ -170,16 +199,41 @@ class TallerImpController extends Controller
     {
         $model = $this->findModel($id);
 
+
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['dashboard', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
-    
-    
+
+
+
+    /**
+     * Updates horarios of an existing TallerImp model.
+     * If update is successful, the browser will be redirected to the 'dashboard' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionHorario($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario  = TallerImp::SCENARIO_HORARIOS;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['dashboard', 'id' => $model->id]);
+        } else {
+            return $this->render('horario', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
     /**
      * Updates an existing TallerImpCuota model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -189,15 +243,15 @@ class TallerImpController extends Controller
     public function actionCuotaIndex($id)
     {
        $model = $this->findModel($id);
-        
+
 
             return $this->render('cuota', [
                 'model' => $model,
             ]);
-        
+
     }
-    
-    
+
+
     /**
      * Updates an existing TallerImpCuota model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -206,55 +260,101 @@ class TallerImpController extends Controller
      */
     public function actionUpdateCuota($id)
     {
-        
-        
+
+
         if (($model = CuotaTallerImp::findOne($id)) !== null   && $model->load(Yii::$app->request->post()) && $model->save() ) {
-        
-            
+
+
             Yii::$app->getSession()->setFlash($id, [
                 'body'=>'Se ha actualizado el registro correctamente.',
                 'options'=>['class'=>'alert-danger']
             ]);
-            
+
             return $this->redirect(['cuota', 'id' => $model->id_taller_imp]);
-            
-            
+
+
         } else {
-            
-            
+
+
             Yii::$app->getSession()->setFlash($id, [
                 'body'=>'Ocurrio un error al guardar la cuota.',
                 'options'=>['class'=>'alert-danger']
             ]);
-            
+
             return $this->redirect(['cuota', 'id' => $model->id_taller_imp]);
         }
-        
-        
-   
-        
+
+
+
+
     }
-    
-    
-    
+
+
+
     /**
-     * Prints new  instription 
+     * Updates an existing TallerImpCuota model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdateCuotaTaller($id)
+    {
+
+
+        if (($model = CuotaTallerImp::findOne(ArrayHelper::getValue(Yii::$app->request->post(), 'CuotaTallerImp.id'))) !== null   && $model->load(Yii::$app->request->post()) ) {
+
+            $laFecha = ArrayHelper::getValue(Yii::$app->request->post(), 'CuotaTallerImp.0.fecha_max_pago');
+
+            $model->fecha_max_pago = $laFecha;
+
+            if ($model->save()){
+
+
+
+
+
+                Yii::$app->session->setFlash('alert', [
+                    'options' => ['class' => 'alert-success'],
+                    'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Cuota actualizada correctamente.</h4>'
+                ]);
+
+
+                return $this->redirect(['dashboard', 'id' => $id]);
+            }
+
+        }
+
+
+            Yii::$app->getSession()->setFlash($id, [
+                'body'=>'Ocurrio un error al guardar la cuota.',
+                'options'=>['class'=>'alert-danger']
+            ]);
+
+            return $this->redirect(['dashboard', 'id' => $id]);
+
+
+
+    }
+
+
+    /**
+     * Prints new  instription
      * @param Integer $id
      */
-    public function actionImprimirComprobante($id){  
-        
+    public function actionImprimirComprobante($id){
+
         //	Yii::$app->response->format = 'pdf';
-        
+
        $model = Inscripcion::findOne($id);
-       
-       
+
+
        if ($model  === null) {
            throw new NotFoundHttpException('The requested page does not exist.');
        }
-         
+
        $content = $this->renderPartial('reporte-inscripcion',['model'=>$model]);
-        
-        
+
+
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
@@ -282,128 +382,128 @@ class TallerImpController extends Controller
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
         return $pdf->render();
-        
+
     }
-    
+
     /**
      *
      * @param integer $id
      */
     public function actionConfirmarInscripcion($id){
-        
-        
+
+
         $model = Inscripcion::findOne($id);
-        
-        
+
+
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
+
         return $this->render('confirmacion-inscripcion',['model'=>$model]);
-        
+
     }
-    
-    
+
+
     /**
      *
      * @param integer $id
      */
     public function actionAlumnos($id){
-        
-        
+
+
         $model = $this->findModel($id);
-        
-        
+
+
         $alumnoSearchModel = new AlumnoSearch();
         $alumnoDataProvider = $alumnoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
-        
+
         return $this->render('alumnos',
             ['model'=>$model,
                 'alumnoSearchModel'=>$alumnoSearchModel,
                 'alumnoDataProvider'=>$alumnoDataProvider,]);
-        
+
     }
-    
-    
+
+
     /**
      *
      * @param integer $id
      */
     public function actionPagos($id){
-        
-        
+
+
         $model = $this->findModel($id);
-        
+
         $pagoSearchModel = new PagoTallerCuotaSearch();
         $pagoDataProvider = $pagoSearchModel->searchTaller(Yii::$app->request->queryParams,$id);
-        
+
         return $this->render('pagos',
             ['model'=>$model,
                 'pagoSearchModel'=>$pagoSearchModel,
                 'pagoDataProvider'=>$pagoDataProvider,]);
-            
+
     }
-    
-    
+
+
     /**
      * Makes a pago
      * @param integer $id
      * @return string
-     */ 
+     */
     public function actionPago($id){
-        
-        
+
+
         $modelTaller = $this->findModel($id);
-        
+
         $pagoTallerCuota = new PagoTallerCuota();
         $pagoTallerCuota->id_taller_imp = $id;
-        
-        
+
+
         $alumnoSearchModel = new AlumnoSearch();
         $alumnoDataProvider = $alumnoSearchModel->searchTallerImp(Yii::$app->request->queryParams,$id);
-        
+
         $pagoTallerCuota->fecha_operacion = date('Y-m-d H:i:s');
-        
+
         if ($pagoTallerCuota->load(Yii::$app->request->post()) && $pagoTallerCuota->save() ) {
-            
-            
+
+
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class' => 'alert-success'],
                 'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Pago realizado correctamente</h4>'
             ]);
-            
+
             return $this->redirect(['confirma-pago', 'id' => $id, 'id_pago'=>$pagoTallerCuota->id]);
         }
-        
+
         return $this->render('pago',
             ['model'=>$pagoTallerCuota,
                 'modelTaller'=>$modelTaller,
                 'alumnoSearchModel'=>$alumnoSearchModel,
                 'alumnoDataProvider'=>$alumnoDataProvider,]);
-            
+
     }
-    
-    
+
+
     /**
      * Prints particular pago cuota taller
      * @param integer $id
      */
     public function actionImprimirCole ($id){
-        
+
         $model = PagoTallerCuota::findOne($id);
-        
+
         if(!$model){
-            
+
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
-        
+
+
         $content = $this->renderPartial('reporte-pago',['model'=>$model]);
-        
-        
+
+
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
@@ -431,29 +531,29 @@ class TallerImpController extends Controller
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
         return $pdf->render();
-        
-        
-        
+
+
+
     }
-    
-    
+
+
     public function actionImprimirAnual ($id){
-        
+
         $model = Inscripcion::findOne($id);
-        
-        
+
+
         if(!$model){
-            
+
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
-        
+
+
         $content = $this->renderPartial('reporte-anual',['model'=>$model]);
-        
-        
+
+
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
@@ -481,63 +581,63 @@ class TallerImpController extends Controller
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
         return $pdf->render();
-        
-        
-        
+
+
+
     }
     /**
-     * 
+     *
      * @param integer $id
      * @param integer $id_pago
      */
     public function actionConfirmaPago($id, $id_pago){
-        
-        
+
+
         $model = $this->findModel($id);
-        
+
         $modelPago  = PagoTallerCuota::findOne($id_pago);
-        
-     
-        
+
+
+
         return $this->render('confirma-pago',
             ['model'=>$model,
                 'modelPago'=>$modelPago, ]);
-        
+
     }
-    
-    
+
+
     /**
-     * 
+     *
      * @param integer $id
      */
     public function actionInscripciones($id){
-        
+
         $model = $this->findModel($id);
-        
+
         $modelInscripcion = new Inscripcion();
-        
+
         $alumnoSearchModel = new AlumnoSearch();
         $alumnoDataProvider = $alumnoSearchModel->searchInscripcion(Yii::$app->request->queryParams,$id);
-        
+
         $pagoSearchModel = new PagoTallerCuotaSearch();
         $pagoDataProvider = $pagoSearchModel->searchInscripcion(Yii::$app->request->queryParams,$id);
-        
-        
-        
+
+
+
         if ($modelInscripcion->load(Yii::$app->request->post())) {
-            
+
             $modelInscripcion->fecha_operacion = date('Y-m-d H:i:s');
-            
+
             $modelInscripcion->fecha_inscripcion = date('Y-m-d H:i:s');
-            
+
             $modelInscripcion->save();
-            
+
             return $this->redirect(['confirmar-inscripcion', 'id' => $modelInscripcion->id]);
         }
-        
+
         return $this->render('inscripciones',
                                 ['model'=>$model,
                                  'modelInscripcion'=>$modelInscripcion,
@@ -545,14 +645,14 @@ class TallerImpController extends Controller
                                     'alumnoDataProvider'=>$alumnoDataProvider,
                                     'pagoSearchModel'=>$pagoSearchModel,
                                     'pagoDataProvider'=>$pagoDataProvider
-                                    
+
                                 ]);
-        
-        
-        
+
+
+
     }
-    
-    
+
+
     /**
      * Creates a new PagoTallerCuota model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -561,56 +661,56 @@ class TallerImpController extends Controller
     public function actionCreateInscripcion($id)
     {
         $model = new PagoTallerCuota();
-        
+
         $modelTaller  =  $this->findModel($id);
-        
+
         $alumnoSearchModel = new AlumnoSearch();
         $alumnoDataProvider = $alumnoSearchModel->searchInscripcion(Yii::$app->request->queryParams,$id);
-        
-       $model->fecha_pago  = date('Y-m-d'); 
-        
+
+       $model->fecha_pago  = date('Y-m-d');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            
+
+
             $modelInscripcion =  new Inscripcion();
-            
+
             $modelInscripcion->id_alumno  =  $model->id_alumno;
-            
+
             $modelInscripcion->id_pago  =  $model->id;
-            
+
             $modelInscripcion->id_taller_imp  =  $model->id_taller_imp;
-           
+
             $modelInscripcion->fecha_operacion  = date('Y-m-d');
-            
+
             $modelInscripcion->fecha_inscripcion  = $model->fecha_pago;
-            
+
             if ($modelInscripcion->save() ){
-                
+
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class' => 'alert-success'],
                     'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Inscripción de alumno correcta</h4>'
                 ]);
             }
-            
+
             return $this->redirect(['dashboard', 'id' => $modelTaller->id]);
-            
-            
-            
+
+
+
         } else {
             return $this->render('create-inscripcion', [
                 'model' => $model,
                 'alumnoSearchModel' => $alumnoSearchModel,
                 'alumnoDataProvider' => $alumnoDataProvider,
                 'modelTaller'=>$modelTaller,
-                
-                
+
+
             ]);
         }
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * Gets all avaliable cuotas by taller implementation
      * @param integer $id
@@ -619,74 +719,74 @@ class TallerImpController extends Controller
      */
     public function actionGetCuotas($id,$id_cuota,$id_alumno)
     {
-        
+
         $model = TallerImp::findOne($id);
-        
+
         $modelCuota = Cuota::findOne($id_cuota);
-        
+
         $modelAlumno = Alumno::findOne($id_alumno);
-        
-        
+
+
         if (!$model) {
-       
+
             return '<label class="text text-danger">Primero seleccione taller. </label>';
         }
-        
+
         if (!$modelAlumno) {
-            
+
             return '<label class="text text-danger">Primero seleccione Alumno. </label>';
         }
-        
-        
+
+
         if ($id_cuota === '0'){
-            
+
             $modelCuotas = CuotaTallerImp::findBySql('select * from tbl_cuota_taller_imp where id_taller_imp = '.$id )->all();
-            
+
         }elseif($id_cuota == null) return '';
-        else        
+        else
             $modelCuotas = CuotaTallerImp::findBySql('select * from tbl_cuota_taller_imp where id_taller_imp = '.$id .' and id_cuota = '. $id_cuota )->all();
-        
+
         $cuotasHtml = '';
-        
+
         $modelCuotasEstatus = [];
-        
+
         foreach ($modelCuotas as $cuota){
-            
+
            $pagoModel = PagoTallerCuota::findBySql('select * from tbl_pago_taller_cuota where id_cuota_taller_imp = '.$cuota->id. ' and id_alumno = ' . $id_alumno)->one();
-            
-           $cuota->estatus = ($pagoModel)?1:0; 
-           
+
+           $cuota->estatus = ($pagoModel)?1:0;
+
            $cuota->fecha_max_pago =  Yii::$app->formatter->asDate($cuota->fecha_max_pago,'dd/MMM/Y');
-           
+
             $modelCuotasEstatus[] = $cuota;
         }
-        
-        
+
+
         return Json::encode($modelCuotasEstatus);
-        
+
        /* foreach ($modelCuotas as $cuota){
-            
+
             $cuotasHtml = $cuotasHtml .  '<div class="form-check">
                                           <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="'.$cuota->id.'" /> '.
                                             $cuota->concepto_imp
                                           .'</label>
                                         </div>';
-                                                    
+
         }
-        
+
         $cuotasHtml = $cuotasHtml .  '<div class="form-check">
                                           <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="-1" /> '.
                                             'No asociada al taller (Definir manualmente).'.'</div>';*/
-                                            
-        
-        
-        
+
+
+
+
        // return strlen($cuotasHtml) ? $cuotasHtml : 'No hay cuotas disponibles';
-        
+
     }
-    
+
     /**
      * Deletes an existing TallerImp model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -695,18 +795,18 @@ class TallerImpController extends Controller
      */
     public function actionDeleteCuota($id,$id_taller_imp)
     {
-        
-        
+
+
         if (($model = CuotaTallerImp::findOne($id)) !== null && $model->id_taller_imp == $id_taller_imp) {
-            
+
              $model->delete();
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
+
         return $this->redirect(['dashboard','id'=>$id_taller_imp]);
     }
-    
+
 
     /**
      * Deletes an existing TallerImp model.

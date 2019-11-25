@@ -42,13 +42,26 @@ use trntv\filekit\behaviors\UploadBehavior;
  */
 class Taller extends \yii\db\ActiveRecord
 {
-    
+
+
+
+
+    const SCENARIO_NEW_TALLER = 'new_taller';
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_NEW_TALLER] = ['nombre', 'id_categoria'];
+        return $scenarios;
+    }
+
+
     /**
      * @var
      */
     public $imagen_url;
-    
-    
+
+
     /**
      * @return array
      */
@@ -63,7 +76,7 @@ class Taller extends \yii\db\ActiveRecord
             ]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -85,6 +98,10 @@ class Taller extends \yii\db\ActiveRecord
             [['id_aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['id_aula' => 'id']],
             [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['id_categoria' => 'id']],
             [['id_instructor'], 'exist', 'skipOnError' => true, 'targetClass' => Instructor::className(), 'targetAttribute' => ['id_instructor' => 'id']],
+
+
+            [['nombre', 'id_categoria'], 'required', 'on' => self::SCENARIO_NEW_TALLER],
+
         ];
     }
 

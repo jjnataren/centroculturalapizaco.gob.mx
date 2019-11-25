@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use trntv\filekit\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "tbl_taller_imp".
@@ -43,7 +44,18 @@ use Yii;
  * @property int $id_aula_viernes
  * @property int $id_aula_sabado
  * @property int $id_aula_domingo
- *
+ * @property int $dis_lunes
+ * @property int $dis_martes
+ * @property int $dis_miercoles
+ * @property int $dis_jueves
+ * @property int $dis_viernes
+ * @property int $dis_sabado
+ * @property int $dis_domingo
+ * @property string $base_url
+ * @property string $path
+ * @property string $temario
+ * @property string $imagen_url
+
  * @property CuotaTallerImp[] $cuotaTallerImps
  * @property Inscripcion[] $inscripcions
  * @property PagoTallerCuota[] $pagoTallerCuotas
@@ -59,6 +71,37 @@ use Yii;
  */
 class TallerImp extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var
+     */
+    public $imagen_url;
+
+
+    const SCENARIO_HORARIOS = 'horarios';
+
+    const SCENARIO_NEW_TALLER = 'new_taller';
+
+
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'imagen_url' => [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'imagen_url',
+                'pathAttribute' => 'path',
+                'baseUrlAttribute' => 'base'
+            ]
+        ];
+    }
+
+
+
+
     /**
      * @inheritdoc
      */
@@ -67,15 +110,35 @@ class TallerImp extends \yii\db\ActiveRecord
         return 'tbl_taller_imp';
     }
 
+
+
+
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_NEW_TALLER] = ['nombre', 'id_instructor', 'disponible', 'fecha_fin', 'fecha_inicio'];
+        $scenarios[self::SCENARIO_HORARIOS] = ['dis_lunes',
+            'dis_martes',
+            'dis_miercoles',
+            'dis_jueves'  ,
+            'dis_viernes'  ,
+            'dis_sabado' ,
+            'dis_domingo'];
+
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id_curso_base', 'id_instructor', 'numero_max_personas', 'duracion_hora', 'estatus', 'duracion_mes', 'disponible', 'id_aula_lunes', 'id_aula_martes', 'id_aula_miercoles', 'id_aula_jueves', 'id_aula_viernes', 'id_aula_sabado', 'id_aula_domingo'], 'integer'],
+            [['dis_domingo','dis_sabado','dis_viernes','dis_jueves','dis_miercoles','dis_martes','dis_lunes','id_curso_base', 'id_instructor', 'numero_max_personas', 'duracion_hora', 'estatus', 'duracion_mes', 'disponible', 'id_aula_lunes', 'id_aula_martes', 'id_aula_miercoles', 'id_aula_jueves', 'id_aula_viernes', 'id_aula_sabado', 'id_aula_domingo'], 'integer'],
             [['fecha_inicio', 'fecha_fin', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo', 'lunes_fin', 'martes_fin', 'miercoles_fin', 'jueves_fin', 'viernes_fin', 'sabado_fin', 'domingo_fin'], 'safe'],
             [['clave_unica_curso', 'nombre'], 'string', 'max' => 45],
+            [['base_url', 'path','temario',], 'string', 'max' => 450],
             [['descripcion', 'comentarios', 'url_img_publicitaria'], 'string', 'max' => 300],
             [['id_aula_domingo'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['id_aula_domingo' => 'id']],
             [['id_aula_jueves'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['id_aula_jueves' => 'id']],
@@ -131,6 +194,18 @@ class TallerImp extends \yii\db\ActiveRecord
             'id_aula_viernes' => 'Id Aula Viernes',
             'id_aula_sabado' => 'Id Aula Sabado',
             'id_aula_domingo' => 'Id Aula Domingo',
+            'base_url'=>'Base url',
+            'path'=>'Ruta',
+            'temario'=>'Temario',
+            'imagen_url'=>'Imagen',
+            'dis_lunes'=>'Lunes' ,
+            'dis_martes'=>'Martes' ,
+            'dis_miercoles'=>'Miercoles' ,
+            'dis_jueves'=>'Jueves' ,
+            'dis_viernes'=>'Viernes' ,
+            'dis_sabado'=>'Sabado' ,
+            'dis_domingo'=>'Domingo' ,
+
         ];
     }
 
