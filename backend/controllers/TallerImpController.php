@@ -222,10 +222,31 @@ class TallerImpController extends Controller
     public function actionHorario($id)
     {
         $model = $this->findModel($id);
-        $model->scenario  = TallerImp::SCENARIO_HORARIOS;
+      //  $model->scenario  = TallerImp::SCENARIO_HORARIOS;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['dashboard', 'id' => $model->id]);
+
+
+
+        if (   $model->load(Yii::$app->request->post()) ) {
+
+
+            if  ($model->save()  ) {
+
+                Yii::$app->session->setFlash('alert', [
+                    'options' => ['class' => 'alert-success'],
+                    'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Horario actualizado correctamente.</h4>'
+                ]);
+
+            }else {
+
+                Yii::$app->session->setFlash('alert', [
+                    'options' => ['class' => 'alert-error'],
+                    'body' => '<h4><i class="fa fa-check-circle-o fa-2x"></i> Cuota actualizada correctamente.</h4>'
+                ]);
+
+            }
+
+            return $this->redirect(['horario', 'id' => $model->id]);
         } else {
             return $this->render('horario', [
                 'model' => $model,
@@ -697,7 +718,8 @@ class TallerImpController extends Controller
 
 
         } else {
-            return $this->render('create-inscripcion', [
+
+            return $this->renderPartial('create-inscripcion', [
                 'model' => $model,
                 'alumnoSearchModel' => $alumnoSearchModel,
                 'alumnoDataProvider' => $alumnoDataProvider,

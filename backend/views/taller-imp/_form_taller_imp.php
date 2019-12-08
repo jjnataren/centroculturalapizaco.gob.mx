@@ -5,6 +5,7 @@ use backend\models\Aula;
 use backend\models\Instructor;
 use yii\helpers\ArrayHelper;
 use backend\models\Categoria;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Taller */
@@ -82,7 +83,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
       <?=$form->field($model, 'id_instructor', ['template' => '<div class="form-group">
 		       		 <div class="input-group">
 		          <span class="input-group-addon" >
-		             <span class="fa-user-secret"></span>
+		             <span class="fa fa-black-tie"></span>
 		          </span>
 		              {input}
 		          </div>
@@ -108,7 +109,7 @@ $categoriaList = ArrayHelper::map(Categoria::findBySql('select id,  CONCAT(id, \
 		<div class="col-md-12">
 
 		<div class="col-md-4">
-				<small>Nombre del taller base.</small>
+				<small>Nombre</small>
 			</div>
 			<div class="col-md-8">
     <?php
@@ -137,6 +138,42 @@ echo $form->field($model, 'nombre', [
 	</div>
 
 		</div>
+
+
+
+	<div class="col-md-12">
+
+		<div class="col-md-4">
+				<small>Fecha</small>
+			</div>
+			<div class="col-md-4">
+
+					<?php
+               		echo $form->field($model, 'fecha_inicio')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_DATE,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		]);?>
+			</div>
+
+			<div class="col-md-4">
+
+					<?php
+               		echo $form->field($model, 'fecha_fin')->widget(DateControl::classname(), [
+               		    'type'=>DateControl::FORMAT_DATE,
+               		    'ajaxConversion'=>false,
+               		    'widgetOptions' => [
+               		        'pluginOptions' => [
+               		            'autoclose' => true
+               		        ]
+               		    ]
+               		]);?>
+			</div>
+	</div>
 
 
 		<div class="col-md-12">
@@ -249,108 +286,6 @@ echo $form->field($model, 'numero_max_personas', [
 		</div>
 
 
-
-
-
-
-
-	   <div class="col-md-12">
-	   <div class="col-md-4">
-				<small>¿El taller está disponible?</small>
-			</div>
-			<div class="col-md-8">
-      <?=$form->field($model, 'disponible', ['template' => '<div class="form-group">
-		       		 <div class="input-group">
-		          <span class="input-group-addon" >
-		             <span class="fa fa-info"></span>
-		          </span>
-		          {input}
-
-		       </div>
-
-		      <div> {error}{hint}</div>
-   				</div>'])->dropDownList([0 => 'No esta disponible',1 => 'Disponible'], ['prompt' => '-- Disponibilidad  --'])?>
-
-    </div>
-
-		</div>
-
-		<div class="col-md-12">
-
-
-			<div class="panel panel-default">
-
-			<div class="panel-body">
-			<div class="col-md-4">
-				<small>Defina en que dias se impartira el taller.</small>
-			</div>
-			<div class="col-md-8">
-				<div class="col-md-3">
-					<?php echo $form->field($model, 'lunes')->checkbox(['class'=>'form form-horizontal']); ?>
-				</div>
-				<div class="col-md-3">
-	            	<?php echo $form->field($model, 'martes')->checkbox(['class'=>'form form-horizontal']); ?>
-            	</div>
-				<div class="col-md-3">
-	                <?php echo $form->field($model, 'miercoles')->checkbox(['class'=>'form']); ?>
-                </div>
-				<div class="col-md-3">
-	            	<?php echo $form->field($model, 'jueves')->checkbox(['class'=>'form-vertical']); ?>
-            	</div>
-				<div class="col-md-3">
-	            	<?php echo $form->field($model, 'viernes')->checkbox(['class'=>'form form-horizontal']); ?>
-            	</div>
-
-				<div class="col-md-3">
-	            	<?php echo $form->field($model, 'sabado')->checkbox(['class'=>'form form-horizontal']); ?>
-            	</div>
-				<div class="col-md-3">
-	            	<?php echo $form->field($model, 'domingo')->checkbox(['class'=>'form form-horizontal']); ?>
-            	</div>
-            </div>
-
-	</div>
-			</div>
-
-
-		</div>
-
-   <div class="col-md-12">
-	   <div class="col-md-4">
-				<small>Numero de meses que durara el taller.</small>
-			</div>
-			<div class="col-md-8">
-<?php
-   echo $form->field($model, 'duracion_mes', [
-        'template' => '<div class="form-group">
-		       		 <div class="input-group">
-		          <span class="input-group-addon" >
-		             <span class="fa fa-hourglass"></span>
-		          </span>
-		          {input}
-
-		       </div>
-
-		      <div> {error}{hint}</div>
-   				</div>'
-    ])
-        ->textInput([
-        'placeholder' => 'NUMERO MESES',
-        'class' => 'form-control input-lg',
-        'maxlength' => '16'
-    ])
-        ->label(false);
-
-
-
-
-        ?>
-
-    </div>
-
-    </div>
-
-
      <div class="col-md-12">
 	   <div class="col-md-4">
 				<small>Duración de horas.</small>
@@ -386,8 +321,34 @@ echo $form->field($model, 'numero_max_personas', [
 
     </div>
 
+   <div class="col-md-12">
+	   <div class="col-md-4">
+				<small>¿El taller está disponible?</small>
+			</div>
+			<div class="col-md-8">
+      <?=$form->field($model, 'disponible', ['template' => '<div class="form-group">
+		       		 <div class="input-group">
+		          <span class="input-group-addon" >
+		             <span class="fa fa-info"></span>
+		          </span>
+		          {input}
+
+		       </div>
+
+		      <div> {error}{hint}</div>
+   				</div>'])->dropDownList([0 => 'No esta disponible',1 => 'Disponible'], ['prompt' => '-- Disponibilidad  --'])?>
+
+    </div>
+
+		</div>
+
+
+
     <div class="col-md-12">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+    	        <?php echo Html::a( 'Cancelar',  ['dashboard','id'=>$model->id], ['class' => 'btn btn-default']) ?>
+
     </div>
 
     </div>

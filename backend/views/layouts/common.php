@@ -314,20 +314,16 @@ $i= 0;
                     ],
 
                     [
-                        'label' => Yii::t('backend', 'Ingresos'),
-                        'url' => '#',
-                        'icon' => '<i class="fa fa-balance-scale"></i>',
-
+                        'label' => Yii::t('backend', 'Pagos'),
+                        'url' =>  ['/pago-taller-cuota/index'],
+                        'icon' => '<i class="fa fa-credit-card"></i>',
                         'options' => ['class' => 'treeview'],
-                        'items' => [
-                            ['label' => Yii::t('backend', 'Talleres'),
-                                'url' => ['/pago-taller-cuota/index'],
-                                'icon' => '<i class="fa fa-angle-double-right"></i>',
-                                'active' => strpos(   $currentUrl   , 'pago-taller-cuota/index')],
-                            ['label' => Yii::t('backend', 'Renta aulas'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'article')],
-                        ]
+                        'active' => in_array(\Yii::$app->controller->id,['pago-taller-cuota']),
+
 
                     ],
+
+
 
 
                     [
@@ -384,17 +380,7 @@ $i= 0;
                         ]
                     ],
 
-                    [
-                        'label' => Yii::t('backend', 'Pagos'),
-                        'url' =>  ['/pago-taller-cuota/create'],
-                        'icon' => '<i class="fa fa-credit-card"></i>',
-                        'options' => ['class' => 'treeview'],
-                        'active' => in_array(\Yii::$app->controller->id,['page','article','article-category','widget-text','widget-menu','widget-carousel']),
-                        'items' => [
-                            ['label' => Yii::t('backend', 'Pago inscripción'), 'url' => ['/pago-taller-cuota/create?id=1'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'active' => (\Yii::$app->controller->id == 'pago-taller-cuota')],
-                        ]
 
-                    ],
 
                     [
                         'label' => Yii::t('backend', 'Aulas'),

@@ -19,19 +19,19 @@ $cuotaList[0] = 'Seleccionar todas';
 
 
 $this->registerJs("
-    
+
 			/*Pos end function**/
-    
+
 
         $(\"[id^=id_cuota_imp_]\").click(function() {
-    
-				alert('hola');    
+
+				alert('hola');
         });
-    
-    
-    
-    
-    
+
+
+
+
+
 		", View::POS_END, 'noneoptions_drop_functions');
 
 
@@ -44,9 +44,9 @@ $this->registerJs("
 	<div class="col-md-12 col-xs-12 col-sm-12">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
     <?php echo $form->errorSummary($model); ?>
-    
+
     <div class="col-md-6 col-xs-12 col-sm-12">
 
 			<div class="panel panel-info">
@@ -55,11 +55,11 @@ $this->registerJs("
 
 				<div class="panel-body">
     			 <?php echo $form->field($model, 'id_alumno')->hiddenInput(['id'=>'selectedAlumno'])->label(false); ?>
-    			 
+
     			    <dl class="dl-horizontal">
 						<dt><?= 'Id' ?></dt>
 						<dd>
-							
+
 							<?php echo $form->field($model, 'id_alumno')->textInput(['maxlength' => true,'readonly'=>'readonly','id'=>'alumno_id'])->label(false); ?>
 						</dd>
 
@@ -85,8 +85,8 @@ $this->registerJs("
 				</div>
 
 				<div class="panel-footer">
-    			
-    			
+
+
     			<?php
     Modal::begin([
         'header' => '<h2>Seleccionar alumno</h2>',
@@ -94,26 +94,24 @@ $this->registerJs("
             'label' => 'Agregar'
         ]
     ]);
-    
+
     echo 'Seleccionar alumno';
     ?>
 
-<div class="table-responsive">	
+<div class="table-responsive">
      <?php \yii\widgets\Pjax::begin(['timeout'=>8000,'id'=>'alumno-modal']); ?>
-                                        
+
 	                                        <div class="modal-body">
-	                                        
-	                                        
+
+
 	                                           <?php
-                                            
+
 echo GridView::widget([
                                                 'dataProvider' => $alumnoDataProvider,
                                                 'filterModel' => $alumnoSearchModel,
                                                 'columns' => [
-                                                    [
-                                                        'class' => 'yii\grid\SerialColumn'
-                                                    ],
-                                                    
+
+
                                                     'id',
                                                     // 'numero_registro',
                                                     'nombre',
@@ -157,13 +155,13 @@ echo GridView::widget([
                                                                     'name' => 'seleccionarAlumno',
                                                                     'value' => $data->id,
                                                                     'onclick' => "
-                                                
-												$('#alumno_$data->id').fadeIn(300);												
+
+												$('#alumno_$data->id').fadeIn(300);
 												$('#alumno_$data->id').removeClass('btn btn-primary').addClass('btn btn-success');
                                                 $('.modal.in').modal('hide');
                                                 $('#selectedAlumno').val($data->id);
                                                 $('#alumno_id').val('$data->id');
-                                                $('#alumno_nombre').html('$data->nombre');                        
+                                                $('#alumno_nombre').html('$data->nombre');
                                                 $('#alumno_curp').html('$data->curp');
                                                     dob = new Date('$data->fecha_nacimiento');
                                                     var today = new Date();
@@ -174,18 +172,18 @@ echo GridView::widget([
 									  "
                                                                 ]);
                                                             }
-                                                        
+
                                                         ]
                                                     ]
-                                                
+
                                                 ]
                                             ]);
                                             ?>
-												
-												
+
+
 										    </div>
 										    <?php \yii\widgets\Pjax::end(); ?>
-										    
+
 										    </div>
 
 
@@ -193,8 +191,8 @@ echo GridView::widget([
 Modal::end();
 
 ?>
-    	
-    			
+
+
     		</div>
 			</div>
 
@@ -210,7 +208,7 @@ Modal::end();
 
 				<div class="panel-body">
     			 <?php echo $form->field($model, 'id_alumno')->hiddenInput(['id'=>'selectedTaller'])->label(false); ?>
-    			 
+
     			    <dl class="dl-horizontal">
 						<dt><?= 'Id' ?></dt>
 						<dd>
@@ -245,8 +243,8 @@ Modal::end();
 				</div>
 
 				<div class="panel-footer">
-    			
-    			
+
+
     			<?php
     Modal::begin([
         'header' => '<h2>Seleccionar alumno</h2>',
@@ -254,18 +252,18 @@ Modal::end();
             'label' => 'Agregar'
         ]
     ]);
-    
+
     echo 'Seleccionar taller';
     ?>
 
-<div class="table-responsive">	
+<div class="table-responsive">
      <?php \yii\widgets\Pjax::begin(['timeout'=>8000,'id'=>'taller-modal']); ?>
-                                        
+
 	                                        <div class="modal-body">
-	                                        
-	                                        
+
+
 	    <?php
-    
+
 echo GridView::widget([
         'dataProvider' => $tallerImpDataProvider,
         'filterModel' => $tallerImpSearchModel,
@@ -273,7 +271,7 @@ echo GridView::widget([
             [
                 'class' => 'yii\grid\SerialColumn'
             ],
-            
+
             'id',
             // 'numero_registro',
             'nombre',
@@ -284,17 +282,17 @@ echo GridView::widget([
                 'content' => function ($data) {
                     return ($data->instructor) ? $data->instructor->nombre : '';
                 }
-            
+
             ],
-            
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{select}', // Template de los botones. Aqui se indica que botones apareceran y el orden en el que apareceran
                 'buttons' => [
                     'select' => function ($url, $data, $id) { // Boton actualizar
-                        
+
                         $instructor = isset($data->instructor) ? $data->instructor->nombre : '?';
-                        
+
                         return Html::a('<span class="fa fa-check-circle  fa-2x"></span>', '#', [
                             'title' => 'Seleccionar',
                             'class' => 'btn btn-primary',
@@ -303,32 +301,32 @@ echo GridView::widget([
                             'name' => 'SeleccionarInstructor',
                             'value' => $data->id,
                             'onclick' => "
-												$('#taller_$data->id').fadeIn(300);												
+												$('#taller_$data->id').fadeIn(300);
 												$('#taller_$data->id').removeClass('btn btn-primary').addClass('btn btn-success');
                                                 $('.modal.in').modal('hide');
                                                 $('#selectedTaller').val($data->id);
                                                 $('#taller_id').html('$data->id');
-                                                $('#taller_nombre').html('$data->nombre');                        
+                                                $('#taller_nombre').html('$data->nombre');
                                                 $('#taller_fecha_inicio').html('$data->fecha_inicio');
                                                 $('#taller_fecha_fin').html('$data->fecha_fin');
                                                 $('#taller_instructor').html('$instructor');
-                                                
+
 											    return true;
                                     									  "
                         ]);
                     }
-                
+
                 ]
             ]
-        
+
         ]
     ]);
     ?>
-												
-												
+
+
 										    </div>
 										    <?php \yii\widgets\Pjax::end(); ?>
-										    
+
 										    </div>
 
 
@@ -336,63 +334,63 @@ echo GridView::widget([
 Modal::end();
 
 ?>
-    	
-    			
+
+
     		</div>
 			</div>
 
 
 		</div>
-    
+
 
    <div class="col-md-12 col-xs-12 col-sm-12">
 
             <div class="col-md-6 col-xs-12 col-sm-12">
-            
+
             			<div class="panel panel-info">
-            
+
             				<div class="panel-heading">Cuota que desea pagar</div>
-            
+
             				<div class="panel-body">
-               
-                        
-                            <?= $form->field($model, 'id_cuota',['template' => 
+
+
+                            <?= $form->field($model, 'id_cuota',['template' =>
                         		     		'<div class="form-group">
                         		       		 <div class="input-group">
                         		          <span class="input-group-addon" >
                         		             <span class="fa fa-cube"></span>
                         		          </span>
                         		          {input}
-                        		     		
+
                         		       </div>
-                        		     			
+
                         		      <div> {error}{hint}</div>
                            				</div>'])->dropDownList($cuotaList,
                            						['prompt'=>'-- TIPO DE CUOTA A PAGAR  --',
                            						'id' => 'selectPro',
                            						'onchange'=>'
                         			                $.get( "'.Yii::$app->urlManager->createUrl('taller-imp/get-cuotas?id=').'"+$("#selectedTaller").val()+"&id_cuota="+$(this).val()+"&id_alumno="+$("#selectedAlumno").val(), function( data ) {
-                        			                  
+
 
                                                             $( "#div_cuotas" ).html( data );
-                                                            
+
                                                              if(data==null){
-                                                                          $("#div_cuotas").empty();    
+                                                                          $("#div_cuotas").empty();
                                                                      }else{
                                                                           var obj = eval(data);
-                                                                          var cuotaTable = "<table class=\"table table-hover table-bordered\">"; 
+                                                                          var cuotaTable = "<table class=\"table table-hover table-bordered\">";
                                                                           $("#div_cuotas").empty();
-                                                                          
+
                                                                           cuotaTable +="<thead>";
                                                                           cuotaTable +="<th></th><th>Concepto</th><th>$ monto</th><th>Fecha max pago</th><th>Obligatoría</th>";
                                                                           cuotaTable +="</thead><tbody>";
-                                                                            
+
                                                                            $.each(obj, function(key, value) {
-                                                                                
+
                                                                             var tableClass = (value[\'estatus\'] == "1")? "success":(value[\'obligatoria\'] == "1")?"warning":"";
                                                                             var obligatoria = (value[\'obligatoria\'] == "1")? "Obligatoria":"Opcional";
                                                                            var thumbsStatus = (value[\'estatus\'] == "1")? "fa fa-thumbs-o-up":(value[\'obligatoria\'] == "1")?"fa fa-clock-o":"";
-                                                            
+
                                                                             cuotaTable +="<tr class=\""+tableClass+"\">";
                                                                              cuotaTable += "<td><i class=\""+thumbsStatus+"\"></i></td>";
                                                                              cuotaTable += "<td><div class=\"form-check\"><label class=\"form-check-label\">";
@@ -402,32 +400,32 @@ Modal::end();
                                                                           });
 
                                                                             cuotaTable +="</tbody></table>";
-                                                                          $("#div_cuotas").append(cuotaTable);              
+                                                                          $("#div_cuotas").append(cuotaTable);
 
-                                                                    
-                                                                                
+
+
                                                                      }
 
 
                         			                });
                                     			',
-                           						
+
                               ]) ?>
-                  
+
              	 </div>
              	 </div>
              	 </div>
-             	 
+
              	  <div class="col-md-6 col-xs-12 col-sm-12" id="div_cuotas">
-             	  
+
              	  </div>
-     	 
-   </div>  	 
-      
+
+   </div>
+
 
     <?php echo $form->field($model, 'monto')->textInput(['maxlength' => true,'id'=>'cuota_monto']) ?>
 
-   
+
 
     <?php echo $form->field($model, 'concepto')->textInput(['maxlength' => true,'id'=>'cuota_concepto']) ?>
 

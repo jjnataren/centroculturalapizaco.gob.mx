@@ -3,7 +3,7 @@
 use backend\models\Categoria;
 use kartik\grid\GridView;
 use yii\helpers\Html;
-$this->title = 'Talleres disponibles';
+$this->title = 'Talleres base';
 $this->params['breadcrumbs'][] = $this->title;
 
 $categorias  = Categoria::findAll(['disponible'=>1]);
@@ -11,17 +11,18 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
 ?>
 <div class="row">
 
-<div class="col-md-12">
+<!-- <div class="col-md-12">
 <div class="callout callout-info">
                 <h4>Talleres</h4>
                 <p>En esta sección podras encontrar los talleres base  que imparte el centro cultural.</p>
 </div>
-</div>
+</div> -->
 
 <div class="col-md-12">
 <div class="panel panel-default">
 	<div class="panel-body">
-		<?= Html::a('<i class="fa fa-plus-square"></i>  Agregar nuevo', ['create'], [ 'class' => 'btn btn-primary', 'title'=>'Agregar nuevo']);?>		
+
+		<?= Html::a('<i class="fa fa-plus-square"></i>  Nuevo', ['create'], [ 'class' => 'btn btn-success', 'title'=>'Agregar nuevo taller base']);?>
 	</div>
 </div>
 </div>
@@ -32,18 +33,16 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
 	<div class="box box-info with-border">
         <div class="box-header with-border">
         	<i class="fa fa-sitemap"></i>
-          <h2 class="box-title"><?= $categoria->nombre ?></h2>
-    
+          <h1 class="box-title"><?= $categoria->nombre ?></h1>
+
           <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            
+
          </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <?php foreach ($categoria->tallers as $taller):?>
+
+        <?php $i = 0; foreach ($categoria->tallers as $taller):?>
         <div class="col-md-4">
             <div class="thumbnail">
               <img src="<?php echo $taller->base_url . '/' .$taller->path; ?>" alt="...">
@@ -55,11 +54,19 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
               </div>
             </div>
     	</div>
-    	<?php endforeach;?>
+    	<?php $i++; endforeach;?>
+
+    	<?php if (!$i):?>
+
+    		<h3>No hay talleres en esta categoría</h3>
+
+    	<?php endif;?>
+
+
 	</div>
 </div>
-		
-</div>			
+
+</div>
 <?php endforeach;?>
 
 
@@ -68,12 +75,12 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
         <div class="box-header with-border">
         	<i class="fa fa-sitemap"></i>
           <h2 class="box-title">Todos</h2>
-    
+
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            
+
          </div>
         </div>
         <!-- /.box-header -->
@@ -89,11 +96,11 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-           
-            
+
+
             'nombre',
             [
-                
+
                 'header'=>'Instructor',
                 'attribute'=>'id_instructor',
                 'value'=>function($data){
@@ -113,9 +120,9 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'resizableColumns'=>true,
-        
+
         //    'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
-            
+
             'toolbar' =>  [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class' => 'btn btn-primary', 'title'=>'Agregar nuevo']) . ' '.
@@ -135,12 +142,12 @@ $categorias  = Categoria::findAll(['disponible'=>1]);
             'panel' => [
                 'type' => GridView::TYPE_PRIMARY
             ],
-        
+
     ]); ?>
-    
+
     </div>
     </div>
     </div>
-    
+
 
 </div>

@@ -4,6 +4,7 @@ use backend\models\Aula;
 use backend\models\Categoria;
 use backend\models\Instructor;
 use kartik\datecontrol\DateControl;
+use kartik\time\TimePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -78,27 +79,29 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'lunes')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
+    			echo $form->field($model, 'lunes')->widget(TimePicker::classname(), [
+               		    //'type'=>DateControl::FORMAT_TIME,
+               		   // 'ajaxConversion'=>false,
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
                		])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'lunes_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'lunes_fin')->widget(TimePicker::classname(), [
+    			    //'type'=>DateControl::FORMAT_TIME,
+    			    // 'ajaxConversion'=>false,
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -121,27 +124,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
    				<?php
-               		echo $form->field($model, 'martes')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+   				echo $form->field($model, 'martes')->widget(TimePicker::classname(), [
+
+   				    'pluginOptions' => [ 'showMeridian' => false,],
+   				    'options' => [
+   				        'readonly' => true,
+   				    ],
+
+   				])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'martes_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'martes_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -168,27 +169,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'miercoles')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+    			echo $form->field($model, 'miercoles')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'miercoles_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'miercoles_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -213,27 +212,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'jueves')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+    			echo $form->field($model, 'jueves')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'jueves_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'jueves_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -258,27 +255,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'viernes')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+    			echo $form->field($model, 'viernes')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'viernes_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'viernes_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -303,27 +298,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'sabado')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+    			echo $form->field($model, 'sabado')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'sabado_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'sabado_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>
@@ -348,27 +341,25 @@ Yii::$app->formatter->locale = 'es-MX';
    				</div>'])->dropDownList($aulaList, ['prompt' => '-- Aula/salon  --'])?>
 
     			<?php
-               		echo $form->field($model, 'domingo')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Inicio");?>
+    			echo $form->field($model, 'domingo')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Inicio");?>
 
 
     			<?php
-               		echo $form->field($model, 'domingo_fin')->widget(DateControl::classname(), [
-               		    'type'=>DateControl::FORMAT_TIME,
-               		    'ajaxConversion'=>false,
-               		    'widgetOptions' => [
-               		        'pluginOptions' => [
-               		            'autoclose' => true
-               		        ]
-               		    ]
-               		])->label("Fin");?>
+    			echo $form->field($model, 'domingo_fin')->widget(TimePicker::classname(), [
+
+    			    'pluginOptions' => [ 'showMeridian' => false,],
+    			    'options' => [
+    			        'readonly' => true,
+    			    ],
+
+    			])->label("Fin");?>
 
     		</div>
     		</div>

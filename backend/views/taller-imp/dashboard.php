@@ -11,7 +11,7 @@ use backend\models\CuotaTallerImp;
 /* @var $this yii\web\View */
 /* @var $model backend\models\TallerImp */
 
-$this->title = "Implementación de Taller:  "  .  $model->nombre;
+$this->title = "Taller:  "  .  $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Talleres', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -57,7 +57,7 @@ $cuotaList2[0] = 'Seleccionar todas';
                <div class="box box-info with-border">
             <div class="box-header with-border">
             	<i class="fa fa-th"></i>
-              <h3 class="box-title">Información de taller</h3>
+              <h3 class="box-title">Datos</h3>
 
               <div class="box-tools pull-right">
               <?php echo Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn']) ?>
@@ -81,9 +81,6 @@ $cuotaList2[0] = 'Seleccionar todas';
                <dt>ID </dt>
                <dd><?=$model->id;?></dd>
 
-                <dt>Nombre del taller </dt>
-               <dd><?=$model->nombre;?></dd>
-
                 <dt>Descripción</dt>
                 <dd><?=$model->descripcion;?></dd>
                <dt><i class="fa fa-black-tie"></i> Instructor</dt>
@@ -96,13 +93,16 @@ $cuotaList2[0] = 'Seleccionar todas';
               <div class="col-md-3">
 
               <dl>
-               <dt>Aula preferente</dt>
-               <dd><?=isset($model->cursoBase->aula->nombre) ?$model->cursoBase->aula->nombre:'?';?></dd>
-                <dt>Maximo de personas</dt>
+
+
+                <dt>Nombre del taller </dt>
+               <dd><?=$model->nombre;?></dd>
+
+
+                  <dt>Número de personas</dt>
                  <dd><?=$model->numero_max_personas;?></dd>
 
-               <dt>Duración meses</dt>
-               <dd><?=$model->duracion_mes;?></dd>
+
                <dt>Duración hora</dt>
                <dd><?=$model->duracion_hora;?></dd>
 
@@ -110,31 +110,31 @@ $cuotaList2[0] = 'Seleccionar todas';
              </div>
               <div class="col-md-3">
               <dl>
+               <dt>Fecha inicio  - fin</dt>
+               <dd><?=Yii::$app->formatter->asDate($model->fecha_inicio,'dd/MMM/Y'); ?>  - <?=Yii::$app->formatter->asDate($model->fecha_fin,'dd/MMM/Y'); ?> </dd>
+
                 <dt>Dias preferentes para impartir</dt>
-                 <?php if ($model->lunes):?>
+                 <?php if ($model->dis_lunes):?>
                 <dd>Lunes</dd>
                 <?php endif;?>
-                <?php if ($model->martes):?>
+                <?php if ($model->dis_martes):?>
                 <dd>Martes</dd>
                 <?php endif;?>
-                <?php if ($model->miercoles):?>
+                <?php if ($model->dis_miercoles):?>
                 <dd>Miercoles</dd>
                 <?php endif;?>
-                <?php if ($model->jueves):?>
+                <?php if ($model->dis_jueves):?>
                 <dd>Jueves</dd>
                 <?php endif;?>
-                <?php if ($model->viernes):?>
+                <?php if ($model->dis_viernes):?>
                 <dd>Viernes</dd>
                 <?php endif;?>
-                <?php if ($model->sabado):?>
+                <?php if ($model->dis_sabado):?>
                 <dd>Sabado</dd>
                 <?php endif;?>
-                <?php if ($model->domingo):?>
+                <?php if ($model->dis_domingo):?>
                 <dd>Domingo</dd>
                 <?php endif;?>
-
-                <dt>Disponible</dt>
-               <dd><?= ($model->disponible)?'Si':'No';?></dd>
 
 
 
@@ -174,7 +174,7 @@ $cuotaList2[0] = 'Seleccionar todas';
             <div class="box-body">
             <?php
           $gridColumns = [
-    ['class' => 'kartik\grid\SerialColumn'],
+
     [
 
         'attribute' => 'id',
@@ -274,7 +274,22 @@ echo GridView::widget([
 
     'toolbar' =>  [
         ['content'=>
-            Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create-inscripcion','id'=>$model->id],['type'=>'button', 'title'=>Yii::t('kvgrid', 'Inscribir alumno'), 'class'=>'btn btn-success', ]) . ' '.
+            Html::a('<i class="glyphicon glyphicon-plus"></i>',['agregar-alumno'],  ['data-target'=>'#modal-inscripcion' , 'data-toggle'=>'modal' , 'title'=>'Inscribir alumno', 'class'=>'btn btn-success',
+
+                'onclick'=>"
+                             $.ajax({
+                            type     :'GET',
+                            url  : 'create-inscripcion?id=20',
+                            success  : function(response) {
+                                $('#modal-inscripcion-body').html(response);
+                            }
+                            });return false;",
+
+
+            ])
+
+
+            . ' '.
             Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
         ],
         '{export}',
@@ -586,7 +601,7 @@ echo GridView::widget([
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Crear nueva cuota base</h4>
+                <h4 class="modal-title"><i class="fa fa-dollar"></i> Agregar cuota</h4>
               </div>
               <div class="modal-body">
 
@@ -694,6 +709,31 @@ echo GridView::widget([
         </div>
         </div>
 
+
+
+
+
+	<div class="modal fade" id="modal-inscripcion">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-dollar"></i> Inscribir alumno</h4>
+              </div>
+              <div class="modal-body" id="modal-inscripcion-body">
+
+              <div class="modal-footer">
+               </div>
+            </div>
+
+
+
+          <!-- /.modal-dialog -->
+        </div>
+        </div>
+</div>
 
 
 <!-- Modal para editar -->

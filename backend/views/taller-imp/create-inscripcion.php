@@ -43,111 +43,12 @@ $this->registerJs("
 
 <div class="row">
 
-    <div class="col-md-12">
-               <div class="box box-info with-border">
-            <div class="box-header with-border">
-            	<i class="fa fa-video-camera"></i>
-              <h3 class="box-title">Información de taller</h3>
-
-              <div class="box-tools pull-right">
-              <?php echo Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $modelTaller->id], ['class' => 'btn']) ?>
-              <?php echo Html::a('<i class="fa fa-trash"></i>', ['delete', 'id' => $modelTaller->id], [
-                    'class' => 'btn',
-                    'data' => [
-                        'confirm' => 'Si elimina este taller base se perdera todo el historial de los talleres impartidos y por impartir?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            <div class="col-md-4">
-              <dl>
-                <dt>Nombre</dt>
-               <dd><?=$modelTaller->nombre;?></dd>
-
-                <dt>Descripción</dt>
-                <dd><?=$modelTaller->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$modelTaller->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$modelTaller->duracion_hora;?></dd>
-              </dl>
-             </div>
-              <div class="col-md-4">
-
-              <dl>
-                <dt>Instructor</dt>
-                <dd><?=isset($modelTaller->instructor->nombre)?$modelTaller->instructor->nombre:'?';?></dd>
-                <dt>Descripción</dt>
-                <dd><?=$modelTaller->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$modelTaller->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$modelTaller->duracion_hora;?></dd>
-              </dl>
-             </div>
-              <div class="col-md-4">
-              <dl>
-                <dt>Dias preferentes para impartir</dt>
-                 <?php if ($modelTaller->lunes):?>
-                <dd>Lunes</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->martes):?>
-                <dd>Martes</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->miercoles):?>
-                <dd>Miercoles</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->jueves):?>
-                <dd>Jueves</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->viernes):?>
-                <dd>Viernes</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->sabado):?>
-                <dd>Sabado</dd>
-                <?php endif;?>
-                <?php if ($modelTaller->domingo):?>
-                <dd>Domingo</dd>
-                <?php endif;?>
-
-                <dt>Descripción</dt>
-                <dd><?=$modelTaller->descripcion;?></dd>
-               <dt>Duración meses</dt>
-               <dd><?=$modelTaller->duracion_mes;?></dd>
-               <dt>Duración hora</dt>
-               <dd><?=$modelTaller->duracion_hora;?></dd>
-              </dl>
-             </div>
-            </div>
-            <div class="box-footer no-padding">
-
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
 
 
 	<div class="col-md-12 col-xs-12 col-sm-12">
 
 	  <div class="box box-info with-border">
-            <div class="box-header with-border">
-            	<i class="fa fa-calendar-check-o"></i>
-              <h3 class="box-title">Cuota de Inscripción</h3>
 
-              <div class="box-tools pull-right">
-
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-
-              </div>
-            </div>
             <!-- /.box-header -->
             <div class="box-body">
 	<div class="row">
@@ -158,54 +59,38 @@ $this->registerJs("
     <?php echo $form->errorSummary($model,['class'=>'panel panel-danger text text-danger']); ?>
 
 
-    <div class="col-md-6 col-xs-12 col-sm-12">
-    <div class="row">
     <div class="col-md-12 col-xs-12 col-sm-12">
 
 			<div class="panel panel-info">
 
-				<div   class="panel-heading"><i class="fa fa-graduation-cap"></i> Datos del alumno</div>
+
 
 				<div class="panel-body">
     			 <?php echo $form->field($model, 'id_alumno')->hiddenInput(['id'=>'selectedAlumno'])->label(false); ?>
     			  <?php echo $form->field($model, 'id_taller_imp')->hiddenInput(['id'=>'selectedTaller','value'=>$modelTaller->id])->label(false); ?>
 
-    			    <dl class="dl-horizontal">
-						<dt><?= 'Id' ?></dt>
-						<dd>
 
-							<?php echo $form->field($model, 'id_alumno')->textInput(['maxlength' => true,'readonly'=>'readonly','id'=>'alumno_id'])->label(false); ?>
-						</dd>
+							<label id="alumno_id_label" ></label>
 
-						<dt><?= 'Nombre' ?></dt>
-						<dd>
-							<label id="alumno_nombre"> <?= isset($model->alumno->nombre)?$model->alumno->nombre:'?' ?></label>
-						</dd>
+							<label id="alumno_nombre"></label>
 
-						<dt><?= 'CURP' ?></dt>
-						<dd>
-							<label id="alumno_curp"> <?= isset($model->alumno->curp)?$model->alumno->curp:'?' ?></label>
-						</dd>
+							<label id="alumno_curp"></label>
 
-						<dt><?= 'Edad' ?></dt>
-						<dd>
-							<label id="alumno_fecha_nacimiento"> <?= isset($model->alumno->fecha_nacimiento)?$model->alumno->fecha_nacimiento:'?' ?></label>
-						</dd>
 
-					</dl>
+
+
+
 
 
 
 				</div>
 
-				<div class="panel-footer">
 
     			<?=
-    			Html::button('Seleccionar alumno', ['type'=>'button','data-target'=>'#modal-default' , 'data-toggle'=>'modal' , 'title'=>'Nueva cuota', 'class'=>'btn btn-primary', ]);
+    			Html::button('Seleccionar alumno', ['type'=>'button','data-target'=>'#modal-alumnos' , 'data-toggle'=>'modal' , 'title'=>'Nueva cuota', 'class'=>'btn btn-primary', ]);
         			?>
 
 
-    		</div>
 			</div>
 
 
@@ -215,7 +100,7 @@ $this->registerJs("
 
 		<div class="panel panel-info">
 
-            				<div class="panel-heading">Cuota que desea pagar</div>
+
 
             				<div class="panel-body">
 
@@ -288,9 +173,9 @@ $this->registerJs("
              	 </div>
              	 </div>
 			</div>
-	</div>
-    </div>
-	<div class="col-md-6 col-xs-12 col-sm-12">
+
+
+
 
 	<div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
@@ -346,7 +231,6 @@ $this->registerJs("
 
 
    </div>
-</div>
 
 
 
@@ -362,7 +246,7 @@ $this->registerJs("
 </div>
 
 
-	<div class="modal fade" id="modal-default">
+	<div class="modal fade" id="modal-alumnos">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -411,9 +295,10 @@ $this->registerJs("
 
         												$('#alumno_$data->id').fadeIn(300);
         												$('#alumno_$data->id').removeClass('btn btn-primary').addClass('btn btn-success');
-                                                        $('.modal.in').modal('hide');
+                                                        $('#modal-alumnos').modal('hide');
                                                         $('#selectedAlumno').val($data->id);
                                                         $('#alumno_id').val('$data->id');
+                                                        $('#alumno_id_label').html('$data->id');
                                                         $('#alumno_nombre').html('$data->nombre');
                                                         $('#alumno_curp').html('$data->curp');
                                                             dob = new Date('$data->fecha_nacimiento');

@@ -10,45 +10,47 @@ use backend\models\Instructor;
 /* @var $searchModel backend\models\search\PagoTallerCuotaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ingresos por talleres';
+$this->title = 'Pagos';
 $this->params['breadcrumbs'][] = $this->title;
 Yii::$app->formatter->locale = 'es-MX';
 ?>
 <div class="row">
 
-<div class="col-md-12">
+<!-- <div class="col-md-12">
 <div class="callout callout-info">
                 <h4>Ingresos generados por talleres</h4>
                 <p>Puede genear reportes especificos por taller, por instructor, por  un rango de fecha, y exportarlos para manipularlos.</p>
 </div>
+</div> -->
+
+<div class="col-md-12">
+<div class="panel panel-default">
+	<div class="panel-body">
+
+		<?= Html::a('<i class="fa fa-plus-square"></i>  Nuevo', ['create'], [ 'class' => 'btn btn-success', 'title'=>'Agregar nuevo pago']);?>
+	</div>
+</div>
 </div>
 
 <div class="col-md-12">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?php echo Html::a('Crear nuevo pago de cuota', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    
-    
-    
-    
-    
-    <?php 
+
+
+    <?php
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
-       
+
         'attribute' => 'id',
         'vAlign'=>'middle',
         'header'=>'Folio',
-        
-        
+
+
     ],
-    
-    
+
+
     [
         'attribute' => 'id_taller_imp',
         'vAlign' => 'middle',
@@ -66,8 +68,8 @@ $gridColumns = [
         'filterInputOptions' => ['placeholder' => 'Todos'],
         'format' => 'raw'
         ],
-        
-        
+
+
         [
             'attribute' => 'id_cuota',
             'vAlign' => 'middle',
@@ -79,16 +81,16 @@ $gridColumns = [
             },
             'filterType' => GridView::FILTER_SELECT2,
             'filter' => ArrayHelper::map(TallerImp::findBySql('select id, concepto  from tbl_cuota')->orderBy('concepto')->asArray()->all(), 'id', 'concepto'),
-            
-                
+
+
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true],
             ],
             'filterInputOptions' => ['placeholder' => 'Todas','multiple'=>true],
             'format' => 'raw'
       ],
-    
-      
+
+
       [
           'attribute' => 'id_instructor',
           'vAlign' => 'middle',
@@ -100,8 +102,8 @@ $gridColumns = [
           },
           'filterType' => GridView::FILTER_SELECT2,
           'filter' => ArrayHelper::map(Instructor::findBySql('select id, nombre  from tbl_instructor')->orderBy('nombre')->asArray()->all(), 'id', 'nombre'),
-          
-          
+
+
           'filterWidgetOptions' => [
               'pluginOptions' => ['allowClear' => true],
           ],
@@ -110,33 +112,33 @@ $gridColumns = [
             'pageSummary' => 'Total',
               ],
 
-    
-    
-    
+
+
+
     [
-        
+
         'attribute' => 'monto',
         'vAlign'=>'middle',
         'format' => ['decimal', 2],
         'pageSummary' => true,
         'pageSummaryFunc' => GridView::F_SUM,
         'footer' => true,
-        
-    ],
-    
 
-    
+    ],
+
+
+
     [
-        
+
         'attribute' => 'concepto',
         'vAlign'=>'middle',
-        
-    ],
-    
 
-    
+    ],
+
+
+
     [
-        
+
         'attribute' => 'fecha_pago',
         'filterType'=> \kartik\grid\GridView::FILTER_DATE_RANGE,
         'filterWidgetOptions' => [
@@ -150,11 +152,11 @@ $gridColumns = [
                 ],
 
             ]
-           
+
         ],
         'vAlign'=>'middle',
         'width' => '200px',
-        
+
     ],
     [
         'attribute'=>'id_alumno',
@@ -165,9 +167,9 @@ $gridColumns = [
         'format'=>'raw',
         'header'=>'Alumno',
         ],
-           
-                    
-       
+
+
+
 
             ];
 
@@ -199,7 +201,7 @@ echo GridView::widget([
     'hover' => true,
     'floatHeader' => true,
     'floatHeaderOptions' => ['scrollingTop' => false],
-    
+
     'panel' => [
         'type' => GridView::TYPE_PRIMARY
     ],
@@ -211,6 +213,6 @@ echo GridView::widget([
 
 </div>
 </div>
-    
-    
+
+
 

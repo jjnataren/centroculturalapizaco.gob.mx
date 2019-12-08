@@ -5,8 +5,8 @@
 /* @var $this yii\web\View */
 /* @var $model backend\models\PagoTallerCuota */
 
-$this->title = 'Create Pago Taller Cuota';
-$this->params['breadcrumbs'][] = ['label' => 'Pago Taller Cuotas', 'url' => ['index']];
+$this->title = 'Nuevo pago';
+$this->params['breadcrumbs'][] = ['label' => 'Pagos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pago-taller-cuota-create">
